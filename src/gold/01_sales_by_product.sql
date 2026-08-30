@@ -1,0 +1,3 @@
+-- Gold: sales by product
+-- Business-ready aggregation on validated Silver data.
+-- To be implemented.

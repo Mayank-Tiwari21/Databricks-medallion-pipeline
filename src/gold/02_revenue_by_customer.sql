@@ -1,0 +1,3 @@
+-- Gold: revenue by customer
+-- Business-ready aggregation on validated Silver data.
+-- To be implemented.

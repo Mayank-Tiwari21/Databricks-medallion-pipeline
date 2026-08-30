@@ -1,0 +1,11 @@
+-- Logical schema for source / Bronze tables.
+-- To be expanded when orders and products generators exist.
+
+-- customers
+-- customer_id INT PK
+-- customer_name STRING
+-- email STRING
+-- country STRING
+-- signup_date DATE
+-- customer_segment STRING
+-- lifetime_value DECIMAL(10,2)

@@ -1,0 +1,3 @@
+-- Gold: customer segmentation
+-- Business-ready aggregation on validated Silver data.
+-- To be implemented.

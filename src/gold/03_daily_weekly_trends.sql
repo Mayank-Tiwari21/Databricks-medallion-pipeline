@@ -1,0 +1,3 @@
+-- Gold: daily and weekly sales trends
+-- Business-ready aggregation on validated Silver data.
+-- To be implemented.

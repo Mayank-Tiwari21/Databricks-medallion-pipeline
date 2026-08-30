@@ -1,0 +1,2 @@
+-- Dashboard queries against Gold tables.
+-- To be implemented.
