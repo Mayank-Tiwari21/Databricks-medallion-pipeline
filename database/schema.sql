@@ -1,5 +1,7 @@
 -- Logical schema for source / Bronze tables.
--- To be expanded when orders and products generators exist.
+-- Grain: one row per customer / product / order.
+-- Bronze adds lineage only: _ingested_at TIMESTAMP, _source_file STRING.
+-- No quality_check_result here (that is Silver).
 
 -- customers
 -- customer_id INT PK
@@ -7,5 +9,73 @@
 -- email STRING
 -- country STRING
 -- signup_date DATE
--- customer_segment STRING
+-- customer_segment STRING   -- Premium | Standard | Basic
 -- lifetime_value DECIMAL(10,2)
+
+-- products
+-- product_id INT PK
+-- product_name STRING
+-- category STRING
+-- price DECIMAL(10,2)
+-- cost DECIMAL(10,2)
+-- stock_quantity INT
+-- reorder_level INT
+
+-- orders
+-- order_id INT PK
+-- customer_id INT FK → customers.customer_id
+-- order_date DATE
+-- product_id INT FK → products.product_id
+-- quantity INT
+-- unit_price DECIMAL(10,2)
+-- total_amount DECIMAL(10,2)   -- quantity * unit_price
+-- order_status STRING          -- Pending | Completed | Cancelled
+-- payment_date DATE NULL       -- null iff order_status = 'Pending'
+
+-- Silver (completeness pass)
+-- bronze columns +
+-- quality_check_result ARRAY<STRING>
+--   completeness.email_is_null
+--   completeness.customer_id_is_null
+--   completeness.product_id_is_null
+--   uniqueness.customer_id_duplicate
+--   uniqueness.order_id_duplicate
+--   ri.customer_id_orphan
+--   ri.product_id_orphan
+--   type.total_amount_neq_qty_times_price
+--   business.signup_date_in_future
+--   business.order_date_in_future
+
+-- gold.sales_by_product  (one row per product with qualifying orders)
+-- product_id INT
+-- product_name STRING
+-- category STRING
+-- total_orders BIGINT          -- clean orders with status <> Cancelled
+-- total_revenue DECIMAL        -- SUM(total_amount) on those orders
+-- avg_order_value DECIMAL      -- AVG(total_amount) on those orders
+
+-- gold.revenue_by_customer  (one row per clean customer)
+-- customer_id INT
+-- customer_name STRING
+-- customer_segment STRING
+-- total_orders BIGINT
+-- total_revenue DECIMAL
+-- avg_order_value DECIMAL      -- NULL if the customer has no qualifying orders
+-- lifetime_value_actual DECIMAL  -- SUM of non-cancelled clean orders (same as total_revenue)
+-- lifetime_value DECIMAL         -- source customers.lifetime_value (synthetic; will not match actual)
+
+-- gold.customer_segmentation  (one row per behavioral segment)
+-- segment_type STRING            -- High-Value | Repeat | One-Time | Inactive
+-- customer_count BIGINT
+-- avg_revenue DECIMAL            -- average customer spend in the segment
+-- total_revenue DECIMAL
+
+-- silver.quality_metrics  (one row per table + check)
+-- table_name STRING
+-- check_name STRING
+-- check_group STRING          -- completeness | uniqueness | type | referential_integrity | business | overall
+-- flag_token STRING NULL      -- null for overall.row-passed rollup
+-- total_rows INT
+-- failed_rows INT
+-- passed_rows INT
+-- pass_pct DECIMAL

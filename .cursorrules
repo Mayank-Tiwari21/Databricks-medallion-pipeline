@@ -1,0 +1,83 @@
+You are helping me build a Databricks Medallion Architecture pipeline (Bronze → Silver → Gold →
+Dashboard) for an e-commerce sales use case, as part of an AI-capability exercise.
+
+Stack: PySpark, Delta Lake, SQL, Databricks Community Edition.
+
+Source data: customers.csv (10,000 rows), orders.csv (100,000 rows), products.csv (500 rows).
+Schema:
+- customers: customer_id (PK), customer_name, email, country, signup_date, customer_segment
+  (Premium/Standard/Basic), lifetime_value
+- orders: order_id (PK), customer_id (FK), order_date, product_id (FK), quantity, unit_price,
+  total_amount, order_status (Pending/Completed/Cancelled), payment_date (nullable)
+- products: product_id (PK), product_name, category, price, cost, stock_quantity, reorder_level
+
+Rules for how you help me:
+1. Bronze = raw ingest only, no cleaning or transformation.
+2. Silver = data quality checks that FLAG bad rows in a `quality_check_result` column — never
+   silently drop rows.
+3. Gold = business-ready aggregations only, built on validated Silver data.
+4. Always explain your reasoning before giving code, not just the code.
+5. Prefer readable, commented PySpark/SQL over clever one-liners — this will be reviewed for
+   maintainability.
+6. Don't invent schema fields I haven't given you. Ask if something is ambiguous.
+7. I will test everything you generate before accepting it — flag any assumptions you made so I
+   know what to check.
+8. Never suggest I include real customer PII in sample or test data — everything is synthetic.
+9. repo structure:
+    databricks-medallion-pipeline/
+    ├── README.md
+    ├── candidate-info.md
+    ├── tool-workflow.md ├── requirements-analysis.md
+    ├── design-notes.md
+    ├── data-model.md
+    ├── data-quality-strategy.md
+    │
+    ├── src/
+    │ ├── data_generation/
+    │ │ ├── generate_sample_data.py
+    │ │ └── DATA_GENERATION_NOTES.md
+    │ ├── bronze/
+    │ │ ├── 01_ingest_customers.py
+    │ │ ├── 02_ingest_orders.py
+    │ │ ├── 03_ingest_products.py
+    │ │ └── ingest_all.py
+    │ ├── silver/
+    │ │ ├── 01_quality_completeness.py
+    │ │ ├── 02_quality_uniqueness.py
+    │ │ ├── 03_quality_type_validation.py
+    │ │ ├── 04_quality_referential_integrity.py
+    │ │ ├── 05_quality_business_logic.py
+    │ │ └── create_silver_tables.py
+    │ ├── gold/
+    │ │ ├── 01_sales_by_product.sql
+    │ │ ├── 02_revenue_by_customer.sql
+    │ │ ├── 03_daily_weekly_trends.sql
+    │ │ ├── 04_customer_segmentation.sql
+    │ │ └── create_gold_tables.py
+    │ └── dashboard/
+    │ ├── dashboard_queries.sql
+    │ └── DASHBOARD_GUIDE.md
+    │
+    ├── data/
+    │ ├── customers.csv
+    │ ├── orders.csv
+    │ └── products.csv
+    │
+    ├── database/
+    │ ├── schema.sql
+    │ ├── seed-data-notes.md
+    │ └── setup-notes.md
+    │
+    # Part A: AI Workflow Foundation
+    ├── debugging-notes.md
+    ├── reflection.md
+    ├── final-ai-usage-summary.md
+    │
+    └── ai-prompts/
+    ├── data-generation.md
+    ├── bronze-layer.md
+    ├── silver-layer.md
+    ├── gold-layer.md
+    ├── dashboard.md
+    ├── debugging.md
+    └── documentation.md

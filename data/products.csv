@@ -1,0 +1,501 @@
+product_id,product_name,category,price,cost,stock_quantity,reorder_level
+1,Cascade Monitor Light Bar,Electronics,308.15,226.73,1431,111
+2,Trail Knit Sweater,Clothing,79.75,32.43,763,89
+3,Compact Plush Animal,Toys,10.84,4.74,315,22
+4,Pro Coffee Grinder,Home & Kitchen,23.69,12.68,557,83
+5,Compact Nonstick Pan,Home & Kitchen,13.96,5.88,340,47
+6,Harbor Resistance Band,Sports,197.74,135.4,1331,96
+7,Lumen Laptop Charger,Electronics,253.99,171.55,679,52
+8,Cedar Granola Mix,Grocery,30.29,20.39,0,85
+9,Deluxe Jump Rope,Sports,137.32,58.31,1358,24
+10,Urban Gym Bag,Sports,145.59,60.34,1233,109
+11,Deluxe Running Shorts,Clothing,100.29,70.78,1176,113
+12,Lumen Foam Roller,Sports,93.62,38.69,0,111
+13,Northstar Yoga Leggings,Clothing,12.38,8.3,692,25
+14,Willow Honey Jar,Grocery,30.14,21.1,1459,14
+15,Summit Baseball Cap,Clothing,66.64,42.63,534,86
+16,Classic Yo-Yo,Toys,35.14,16.34,385,100
+17,Orbit Laptop Sleeve,Electronics,98.88,46.05,786,115
+18,Orbit Building Blocks,Toys,44.49,18.75,0,79
+19,Studio Hoodie,Clothing,46.88,20.88,317,41
+20,Lumen Monitor Light Bar,Electronics,97.95,58.59,772,64
+21,Apex Running Shorts,Clothing,62.65,32.26,275,79
+22,Orbit Kitchen Scale,Home & Kitchen,36.84,15.91,560,117
+23,Urban Yoga Leggings,Clothing,57.54,29.46,0,36
+24,Northstar Dark Chocolate Bar,Grocery,21.64,12.02,910,49
+25,Lite Trail Mix Pack,Grocery,26.43,15.36,438,88
+26,Heritage Oven Mitt,Home & Kitchen,11.02,4.83,1433,21
+27,Summit Face Serum,Beauty,50.79,33.29,525,31
+28,Trail Trail Mix Pack,Grocery,13.2,6.86,547,73
+29,Lumen LED Desk Lamp,Home & Kitchen,51.69,27.28,1431,67
+30,Cascade Desk Planner,Books,14.8,8.32,890,40
+31,Pro Yoga Mat,Sports,190.14,96.22,320,37
+32,Cedar Oven Mitt,Home & Kitchen,122.47,74.22,389,43
+33,Compact Granola Mix,Grocery,34.77,24.05,1056,56
+34,Lumen Storage Bin,Home & Kitchen,45.61,30.33,316,83
+35,Nimbus Yo-Yo,Toys,54.35,33.75,1112,92
+36,Apex Baseball Cap,Clothing,110.45,62.79,0,23
+37,Trail Lip Balm,Beauty,56.05,33.09,382,55
+38,Harbor Laptop Sleeve,Electronics,141.1,58.56,659,33
+39,Deluxe Phone Stand,Electronics,138.82,61.5,24,91
+40,Orbit Denim Jacket,Clothing,139.96,86.06,814,15
+41,Lumen Crew Socks,Clothing,13.69,8.43,1346,96
+42,Willow Body Lotion,Beauty,34.83,16.2,1458,51
+43,Studio Trail Mix Pack,Grocery,33.35,21.58,674,68
+44,Studio Book Ends,Books,13.72,7.59,994,115
+45,Pro Laptop Charger,Electronics,329.99,182.86,366,108
+46,Harbor Rain Jacket,Clothing,20.83,9.1,0,115
+47,Pro Foam Roller,Sports,53.15,35.46,0,50
+48,Lumen Cookbook Stand,Books,9.83,3.97,148,93
+49,Everyday Cotton T-Shirt,Clothing,105.18,49.52,1143,81
+50,Pro Building Blocks,Toys,36.0,25.55,580,95
+51,Lite Building Blocks,Toys,42.81,28.08,0,11
+52,Apex HDMI Cable,Electronics,117.83,81.96,53,55
+53,Cascade Organic Coffee Beans,Grocery,7.86,4.92,556,106
+54,Harbor Sketch Pad,Books,8.44,5.56,853,52
+55,Studio Cookbook Stand,Books,16.31,7.15,383,23
+56,Everyday Trail Mix Pack,Grocery,18.84,9.0,546,43
+57,Everyday Green Tea Box,Grocery,34.03,17.43,1267,75
+58,Lite Honey Jar,Grocery,26.69,17.93,792,109
+59,Nimbus Building Blocks,Toys,59.02,23.91,717,119
+60,Northstar Reading Light,Books,26.76,14.83,16,44
+61,Lite Nail Kit,Beauty,27.73,18.12,0,74
+62,Nimbus Throw Pillow,Home & Kitchen,94.76,42.23,927,105
+63,Willow Desk Planner,Books,28.58,11.72,546,43
+64,Studio Coffee Grinder,Home & Kitchen,129.36,90.91,190,58
+65,Lite Jump Rope,Sports,109.6,68.4,142,57
+66,Deluxe Green Tea Box,Grocery,24.75,14.07,0,24
+67,Northstar Coffee Grinder,Home & Kitchen,58.69,30.62,0,29
+68,Heritage Spice Set,Grocery,13.76,10.01,308,114
+69,Cedar Nail Kit,Beauty,11.92,7.05,1444,91
+70,Compact Webcam,Electronics,369.41,215.54,877,80
+71,Classic RC Car,Toys,58.86,30.12,172,46
+72,Lumen Cookbook Stand #72,Books,29.97,13.29,0,47
+73,Summit Sketch Pad,Books,7.32,4.43,0,83
+74,Nimbus Hardcover Notebook,Books,22.65,15.68,270,17
+75,Deluxe Puzzle Set,Toys,88.62,43.16,58,67
+76,Orbit Hoodie,Clothing,110.57,74.68,864,117
+77,Deluxe Hardcover Notebook,Books,21.36,10.88,722,88
+78,Urban Puzzle Set,Toys,69.55,43.57,426,22
+79,Cascade RC Car,Toys,42.09,28.64,1497,86
+80,Deluxe Yoga Leggings,Clothing,32.98,18.44,1136,51
+81,Classic Plush Animal,Toys,46.23,21.35,241,68
+82,Everyday Wireless Earbuds,Electronics,355.8,225.06,1305,103
+83,Willow Granola Mix,Grocery,28.88,14.89,785,103
+84,Pro Reading Light,Books,19.68,10.2,736,91
+85,Deluxe Water Bottle,Home & Kitchen,101.17,74.17,29,82
+86,Apex Water Bottle,Home & Kitchen,61.21,25.01,226,97
+87,Pro Ceramic Mug,Home & Kitchen,53.91,25.64,305,29
+88,Pro Olive Oil Bottle,Grocery,6.81,3.3,183,21
+89,Cascade Throw Pillow,Home & Kitchen,89.95,51.36,930,57
+90,Deluxe Bluetooth Speaker,Electronics,332.28,133.06,174,98
+91,Willow Moisturizer,Beauty,54.76,27.25,424,13
+92,Summit Hoodie,Clothing,124.08,76.16,1068,43
+93,Nimbus Sketch Pad,Books,9.62,6.21,684,88
+94,Willow Makeup Mirror,Beauty,66.3,43.37,69,120
+95,Trail Cycling Gloves,Sports,90.88,56.91,951,63
+96,Summit Desk Planner,Books,20.33,14.07,1364,95
+97,Compact Desk Planner,Books,12.77,6.15,239,58
+98,Studio Wireless Earbuds,Electronics,189.93,126.08,757,97
+99,Orbit Throw Pillow,Home & Kitchen,22.91,9.65,737,39
+100,Willow Stainless Mixing Bowl,Home & Kitchen,126.53,85.04,0,44
+101,Lumen Organic Coffee Beans,Grocery,14.28,8.63,928,50
+102,Pro Ceramic Mug #102,Home & Kitchen,69.11,44.81,779,101
+103,Cascade Green Tea Box,Grocery,32.44,16.36,457,55
+104,Urban Cookbook Stand,Books,10.82,4.44,1391,26
+105,Trail Dark Chocolate Bar,Grocery,19.5,12.89,786,65
+106,Cascade Building Blocks,Toys,48.85,33.89,42,84
+107,Studio Building Blocks,Toys,14.34,6.6,708,90
+108,Summit Lip Balm,Beauty,43.09,28.74,167,97
+109,Apex Running Shorts #109,Clothing,78.0,41.96,1075,97
+110,Classic Ceramic Mug,Home & Kitchen,13.71,5.95,1161,77
+111,Harbor Crew Socks,Clothing,94.24,61.28,382,90
+112,Apex Knit Sweater,Clothing,84.82,50.83,596,16
+113,Willow Reading Light,Books,9.28,5.08,36,83
+114,Trail Running Shorts,Clothing,27.19,11.67,0,120
+115,Heritage Wool Beanie,Clothing,121.83,83.92,0,80
+116,Cedar Organic Coffee Beans,Grocery,12.92,5.99,666,37
+117,Everyday Wool Beanie,Clothing,128.26,75.86,1097,91
+118,Lite Kitchen Scale,Home & Kitchen,54.64,23.67,566,69
+119,Compact Body Lotion,Beauty,73.62,39.8,569,48
+120,Lumen Running Shorts,Clothing,124.84,65.37,616,54
+121,Trail Mechanical Keyboard,Electronics,338.9,202.12,70,52
+122,Summit Cookbook Stand,Books,12.17,6.09,1096,15
+123,Deluxe Book Ends,Books,16.62,10.04,1197,26
+124,Studio Laptop Charger,Electronics,178.42,102.15,786,21
+125,Apex Lip Balm,Beauty,50.53,21.3,336,66
+126,Urban HDMI Cable,Electronics,354.8,165.74,150,42
+127,Harbor Book Ends,Books,13.72,7.6,588,95
+128,Cascade Denim Jacket,Clothing,70.31,49.14,867,108
+129,Urban Coffee Grinder,Home & Kitchen,78.6,40.78,1281,87
+130,Northstar Gym Bag,Sports,149.19,73.76,69,64
+131,Orbit Hair Brush,Beauty,62.25,44.17,1050,50
+132,Everyday Cotton T-Shirt #132,Clothing,25.62,12.96,1006,112
+133,Willow Nonstick Pan,Home & Kitchen,98.07,54.59,0,103
+134,Apex Sketch Pad,Books,21.5,13.88,502,94
+135,Trail Makeup Mirror,Beauty,47.07,27.49,837,88
+136,Urban Gym Bag #136,Sports,23.7,13.65,36,10
+137,Cascade Webcam,Electronics,388.6,186.81,201,45
+138,Willow Green Tea Box,Grocery,25.08,16.52,746,73
+139,Trail Book Ends,Books,22.72,9.51,1185,108
+140,Cascade Art Kit,Toys,86.12,43.09,145,21
+141,Lite Ceramic Mug,Home & Kitchen,121.28,68.22,800,16
+142,Urban Denim Jacket,Clothing,107.13,76.71,555,27
+143,Cascade Gym Bag,Sports,153.93,75.99,1310,109
+144,Northstar Face Serum,Beauty,75.13,47.28,644,105
+145,Classic Building Blocks,Toys,8.68,6.18,930,51
+146,Harbor Lip Balm,Beauty,58.43,41.91,989,89
+147,Heritage Gym Bag,Sports,176.84,119.33,945,97
+148,Classic LED Desk Lamp,Home & Kitchen,66.07,43.75,1475,113
+149,Apex Laptop Charger,Electronics,189.07,108.28,1115,75
+150,Everyday Trail Mix Pack #150,Grocery,20.48,10.47,711,65
+151,Lumen Power Bank,Electronics,328.78,230.03,0,104
+152,Nimbus Art Kit,Toys,27.23,18.66,1482,56
+153,Cedar Kitchen Scale,Home & Kitchen,42.52,25.42,796,105
+154,Cascade Storage Bin,Home & Kitchen,80.25,53.89,0,25
+155,Pro Coffee Grinder #155,Home & Kitchen,32.96,13.82,170,91
+156,Classic Webcam,Electronics,208.99,112.7,287,73
+157,Compact Gym Bag,Sports,152.99,93.66,174,92
+158,Pro Reading Light #158,Books,18.89,12.9,173,95
+159,Summit Gym Bag,Sports,110.57,48.61,1380,52
+160,Everyday Moisturizer,Beauty,19.55,12.18,155,95
+161,Cedar Sketch Pad,Books,27.58,17.62,102,36
+162,Classic Board Game,Toys,9.08,5.67,398,34
+163,Pro Yoga Leggings,Clothing,90.87,50.89,286,114
+164,Orbit Wireless Earbuds,Electronics,174.01,75.41,815,98
+165,Compact Laptop Charger,Electronics,326.4,197.73,1047,73
+166,Northstar Reading Light #166,Books,13.08,5.45,1015,35
+167,Trail Running Shorts #167,Clothing,69.75,40.71,1339,44
+168,Lite Yoga Leggings,Clothing,132.31,58.81,108,16
+169,Cedar Plush Animal,Toys,89.16,58.02,348,74
+170,Lumen Phone Stand,Electronics,315.39,146.38,902,59
+171,Urban Book Ends,Books,27.68,19.17,1133,86
+172,Everyday Body Lotion,Beauty,15.9,9.29,1099,99
+173,Compact Hair Brush,Beauty,33.25,18.16,907,106
+174,Studio Smart Watch Band,Electronics,279.2,170.42,333,90
+175,Heritage RC Car,Toys,38.39,21.96,654,116
+176,Pro Shower Gel,Beauty,28.58,20.58,1129,115
+177,Cascade Knit Sweater,Clothing,95.67,70.66,1122,68
+178,Willow Tennis Ball Pack,Sports,196.97,86.93,985,53
+179,Cascade Body Lotion,Beauty,9.96,6.93,1325,90
+180,Apex Shower Gel,Beauty,17.17,10.37,685,114
+181,Everyday Nail Kit,Beauty,63.67,44.65,1428,43
+182,Cascade Board Game,Toys,53.36,35.88,561,58
+183,Harbor Olive Oil Bottle,Grocery,34.79,18.77,585,36
+184,Lite Body Lotion,Beauty,46.44,29.95,982,113
+185,Deluxe Green Tea Box #185,Grocery,25.09,13.5,240,84
+186,Compact Nail Kit,Beauty,36.04,24.1,815,38
+187,Lite Foam Roller,Sports,163.2,115.08,785,30
+188,Northstar Spice Set,Grocery,19.65,14.68,777,99
+189,Lumen Sketch Pad,Books,16.49,7.72,1166,20
+190,Summit Green Tea Box,Grocery,30.87,13.68,570,35
+191,Urban RC Car,Toys,46.55,20.55,1010,69
+192,Pro Lip Balm,Beauty,63.03,27.19,811,34
+193,Cascade Yoga Mat,Sports,22.41,16.63,180,53
+194,Compact Board Game,Toys,32.7,23.61,1066,90
+195,Apex Cotton T-Shirt,Clothing,135.33,97.46,676,13
+196,Urban Gym Bag #196,Sports,127.36,70.33,627,85
+197,Cedar Olive Oil Bottle,Grocery,18.35,13.4,1092,83
+198,Cascade Tennis Ball Pack,Sports,9.42,6.68,921,78
+199,Nimbus Plush Animal,Toys,34.91,20.42,0,47
+200,Apex Yo-Yo,Toys,23.29,16.21,1214,101
+201,Willow Resistance Band,Sports,190.81,95.62,263,116
+202,Trail Tennis Ball Pack,Sports,91.87,59.52,74,117
+203,Harbor Wireless Mouse,Electronics,220.59,149.05,1213,61
+204,Heritage Reading Light,Books,8.49,5.07,450,58
+205,Studio Baseball Cap,Clothing,135.43,55.03,1366,36
+206,Classic Storage Bin,Home & Kitchen,92.68,45.77,316,96
+207,Classic Throw Pillow,Home & Kitchen,25.35,11.56,800,90
+208,Apex USB Flash Drive,Electronics,284.1,182.51,53,26
+209,Summit Olive Oil Bottle,Grocery,27.0,13.76,1367,40
+210,Trail Book Ends #210,Books,12.05,8.47,1029,34
+211,Orbit Yo-Yo,Toys,50.43,35.9,1216,71
+212,Lite Olive Oil Bottle,Grocery,32.55,20.04,1206,80
+213,Classic Yo-Yo #213,Toys,74.28,41.74,453,23
+214,Lite Yo-Yo,Toys,52.84,37.52,375,90
+215,Lite Cookbook Stand,Books,7.92,4.13,1336,119
+216,Northstar Hair Brush,Beauty,23.35,13.31,0,63
+217,Everyday Shower Gel,Beauty,57.53,26.94,235,109
+218,Pro Book Ends,Books,8.18,4.92,0,69
+219,Willow Kitchen Scale,Home & Kitchen,40.73,26.08,1372,114
+220,Everyday Gym Bag,Sports,88.25,41.62,1337,37
+221,Apex Building Blocks,Toys,76.83,54.33,1271,84
+222,Apex Book Ends,Books,18.85,9.08,366,83
+223,Harbor Art Kit,Toys,19.13,10.24,1009,86
+224,Deluxe Plush Animal,Toys,89.5,64.75,739,76
+225,Deluxe Hair Brush,Beauty,75.52,42.85,1455,83
+226,Harbor Storage Bin,Home & Kitchen,103.06,61.85,1370,77
+227,Willow Hair Brush,Beauty,47.99,29.08,156,86
+228,Deluxe Moisturizer,Beauty,59.45,37.85,168,93
+229,Heritage USB-C Hub,Electronics,169.01,86.98,1039,43
+230,Urban Wool Beanie,Clothing,23.08,10.04,970,75
+231,Lite Green Tea Box,Grocery,32.37,23.66,1354,74
+232,Studio Wireless Mouse,Electronics,382.01,163.3,1260,36
+233,Everyday Knit Sweater,Clothing,42.34,19.46,1337,54
+234,Lite Yo-Yo #234,Toys,83.96,61.1,534,76
+235,Nimbus Honey Jar,Grocery,4.11,2.97,717,15
+236,Orbit Granola Mix,Grocery,26.89,12.05,697,17
+237,Cascade Throw Pillow #237,Home & Kitchen,88.93,63.67,0,67
+238,Studio Monitor Light Bar,Electronics,139.38,79.99,202,28
+239,Pro Trail Mix Pack,Grocery,16.57,8.49,333,82
+240,Urban LED Desk Lamp,Home & Kitchen,47.8,28.61,594,109
+241,Studio Baseball Cap #241,Clothing,87.59,60.97,688,26
+242,Deluxe Sketch Pad,Books,16.85,12.36,624,19
+243,Trail Foam Roller,Sports,24.92,10.39,0,118
+244,Summit Knit Sweater,Clothing,26.5,16.59,0,75
+245,Northstar Rain Jacket,Clothing,125.24,75.71,74,117
+246,Summit Coffee Grinder,Home & Kitchen,111.81,63.34,0,113
+247,Studio Cycling Gloves,Sports,16.44,9.19,182,53
+248,Cedar Cutting Board,Home & Kitchen,52.91,22.17,442,71
+249,Lite Face Serum,Beauty,73.63,54.64,0,74
+250,Heritage Shower Gel,Beauty,22.63,16.26,832,64
+251,Compact Gym Bag #251,Sports,112.28,67.51,896,84
+252,Willow Plush Animal,Toys,20.12,11.37,0,116
+253,Lite Green Tea Box #253,Grocery,23.81,16.25,535,85
+254,Everyday Lip Balm,Beauty,79.26,57.36,876,108
+255,Apex Art Kit,Toys,65.92,34.79,517,100
+256,Cascade Dark Chocolate Bar,Grocery,13.48,7.71,899,51
+257,Compact Puzzle Set,Toys,70.88,42.91,1234,48
+258,Everyday Hardcover Notebook,Books,31.15,21.05,378,52
+259,Harbor Dumbbell Set,Sports,74.79,43.52,1270,69
+260,Northstar Reading Light #260,Books,28.74,18.94,118,67
+261,Orbit Resistance Band,Sports,104.8,53.49,193,72
+262,Northstar Towel Set,Home & Kitchen,91.22,41.57,1463,91
+263,Deluxe Hardcover Notebook #263,Books,23.86,14.15,528,11
+264,Pro Honey Jar,Grocery,6.25,4.52,1077,49
+265,Everyday Puzzle Set,Toys,75.42,35.27,770,112
+266,Harbor Foam Roller,Sports,30.65,22.61,226,42
+267,Urban Lip Balm,Beauty,78.7,41.04,784,79
+268,Lumen Organic Coffee Beans #268,Grocery,26.29,15.09,0,118
+269,Lumen Moisturizer,Beauty,17.35,11.87,658,14
+270,Everyday Yo-Yo,Toys,81.72,47.44,819,86
+271,Cedar Coffee Grinder,Home & Kitchen,26.25,18.63,742,53
+272,Northstar Jump Rope,Sports,173.28,69.49,0,63
+273,Lumen Jump Rope,Sports,196.77,109.43,860,101
+274,Lumen Stainless Mixing Bowl,Home & Kitchen,22.44,13.74,1402,32
+275,Deluxe Coffee Grinder,Home & Kitchen,80.83,39.23,732,82
+276,Willow Wireless Mouse,Electronics,172.65,125.89,123,27
+277,Summit Oven Mitt,Home & Kitchen,79.01,55.6,932,87
+278,Everyday Hardcover Notebook #278,Books,14.9,7.75,88,70
+279,Everyday Shower Gel #279,Beauty,38.71,21.7,1169,10
+280,Lumen Yo-Yo,Toys,10.34,7.4,1026,102
+281,Cedar Cookbook Stand,Books,12.7,8.55,130,53
+282,Urban Throw Pillow,Home & Kitchen,70.31,43.95,571,61
+283,Studio Hoodie #283,Clothing,132.1,69.01,1191,17
+284,Harbor Body Lotion,Beauty,70.14,43.45,153,38
+285,Studio Rain Jacket,Clothing,91.37,62.93,1405,86
+286,Apex Dumbbell Set,Sports,116.19,70.39,103,56
+287,Studio Dark Chocolate Bar,Grocery,26.73,11.98,1038,66
+288,Deluxe Chino Pants,Clothing,105.13,68.85,851,23
+289,Classic Reading Light,Books,12.6,5.46,562,101
+290,Orbit Face Serum,Beauty,74.28,45.67,0,92
+291,Harbor Nail Kit,Beauty,73.81,35.34,127,94
+292,Trail Desk Planner,Books,21.29,13.82,581,62
+293,Compact Cycling Gloves,Sports,144.85,99.76,380,66
+294,Deluxe Book Ends #294,Books,35.78,23.17,1270,115
+295,Northstar Granola Mix,Grocery,26.1,11.29,1224,108
+296,Everyday Chino Pants,Clothing,118.2,70.53,1083,54
+297,Apex Yoga Mat,Sports,19.32,11.03,488,31
+298,Everyday Stuffed Robot,Toys,52.49,38.67,1359,111
+299,Lite Reading Light,Books,18.92,10.01,1109,75
+300,Studio Olive Oil Bottle,Grocery,18.31,9.72,637,98
+301,Deluxe Wireless Mouse,Electronics,320.87,170.45,819,45
+302,Classic Trail Mix Pack,Grocery,12.77,8.2,800,44
+303,Lumen Building Blocks,Toys,18.09,8.66,1119,96
+304,Summit Board Game,Toys,39.7,16.04,1304,17
+305,Studio Resistance Band,Sports,130.77,63.02,0,92
+306,Summit Olive Oil Bottle #306,Grocery,27.1,18.39,406,65
+307,Willow Linen Shirt,Clothing,90.77,58.02,882,55
+308,Northstar Hardcover Notebook,Books,36.84,19.62,118,46
+309,Cedar Lip Balm,Beauty,15.44,8.2,573,62
+310,Everyday Cookbook Stand,Books,34.13,20.06,993,35
+311,Classic Water Bottle,Home & Kitchen,59.94,44.62,89,74
+312,Cascade Desk Planner #312,Books,29.56,21.91,171,103
+313,Trail Storage Bin,Home & Kitchen,16.54,11.18,1152,32
+314,Harbor Throw Pillow,Home & Kitchen,46.31,26.82,0,98
+315,Harbor Body Lotion #315,Beauty,31.83,17.5,52,26
+316,Deluxe Phone Stand #316,Electronics,324.79,133.79,682,53
+317,Cedar Dumbbell Set,Sports,128.13,58.26,713,38
+318,Everyday Nail Kit #318,Beauty,49.31,30.44,911,42
+319,Summit Oven Mitt #319,Home & Kitchen,19.72,12.8,894,85
+320,Compact Desk Planner #320,Books,25.26,16.0,684,22
+321,Compact Yoga Mat,Sports,192.33,130.84,26,20
+322,Summit Board Game #322,Toys,67.13,41.69,98,40
+323,Cedar Running Shorts,Clothing,100.55,45.18,107,118
+324,Urban Water Bottle,Home & Kitchen,9.54,5.94,1335,35
+325,Studio Dumbbell Set,Sports,73.42,38.88,145,89
+326,Urban Bluetooth Speaker,Electronics,317.88,208.85,766,19
+327,Harbor Dark Chocolate Bar,Grocery,8.83,6.46,0,15
+328,Compact Sketch Pad,Books,26.15,14.57,765,19
+329,Lite Water Bottle,Home & Kitchen,58.65,36.89,1360,83
+330,Orbit Art Kit,Toys,16.61,7.43,446,116
+331,Trail Water Bottle,Home & Kitchen,81.55,34.12,1405,116
+332,Cascade Lip Balm,Beauty,56.26,34.21,934,27
+333,Studio Gym Bag,Sports,189.71,107.96,310,73
+334,Everyday Yoga Mat,Sports,53.9,37.4,415,108
+335,Harbor Oven Mitt,Home & Kitchen,112.67,52.81,65,52
+336,Northstar Yoga Leggings #336,Clothing,28.51,17.51,815,18
+337,Summit Hoodie #337,Clothing,92.32,61.78,0,83
+338,Classic Hair Brush,Beauty,6.07,4.09,985,93
+339,Urban Reading Light,Books,26.97,17.52,1215,92
+340,Apex Throw Pillow,Home & Kitchen,43.72,26.3,674,35
+341,Apex Olive Oil Bottle,Grocery,18.92,8.31,759,59
+342,Northstar Denim Jacket,Clothing,61.61,39.35,217,53
+343,Apex Laptop Charger #343,Electronics,369.91,149.31,1276,56
+344,Deluxe RC Car,Toys,10.49,7.64,1118,21
+345,Urban LED Desk Lamp #345,Home & Kitchen,107.92,79.58,1139,20
+346,Heritage Plush Animal,Toys,64.87,47.49,635,88
+347,Compact Foam Roller,Sports,105.68,70.48,509,94
+348,Lite Wireless Earbuds,Electronics,137.41,61.74,1426,65
+349,Urban Wool Beanie #349,Clothing,139.04,94.23,1199,88
+350,Lumen Face Serum,Beauty,75.92,37.51,1032,60
+351,Compact Yoga Mat #351,Sports,176.22,125.39,1408,72
+352,Lite Resistance Band,Sports,135.03,65.83,101,50
+353,Pro Laptop Sleeve,Electronics,103.91,77.37,1482,95
+354,Nimbus Yo-Yo #354,Toys,77.66,49.91,1265,49
+355,Northstar Knit Sweater,Clothing,109.07,73.42,1446,115
+356,Classic Rain Jacket,Clothing,72.79,35.45,801,20
+357,Everyday Desk Planner,Books,16.73,10.52,1068,70
+358,Orbit Tennis Ball Pack,Sports,118.23,51.1,399,110
+359,Studio Sketch Pad,Books,28.48,14.04,221,64
+360,Nimbus Yoga Mat,Sports,179.74,133.94,89,104
+361,Northstar Trail Mix Pack,Grocery,34.01,24.64,557,48
+362,Compact Moisturizer,Beauty,57.38,33.56,899,74
+363,Studio Olive Oil Bottle #363,Grocery,6.29,3.67,80,33
+364,Deluxe Organic Coffee Beans,Grocery,22.1,11.01,1270,63
+365,Studio Laptop Charger #365,Electronics,336.46,215.99,0,108
+366,Deluxe Gym Bag,Sports,9.17,5.38,441,11
+367,Pro Honey Jar #367,Grocery,8.07,4.58,371,89
+368,Compact Laptop Charger #368,Electronics,193.36,140.66,0,38
+369,Pro Art Kit,Toys,65.9,48.5,122,77
+370,Orbit Laptop Sleeve #370,Electronics,226.58,98.07,1128,79
+371,Heritage Yo-Yo,Toys,84.3,40.41,556,30
+372,Urban Stainless Mixing Bowl,Home & Kitchen,120.4,88.77,55,83
+373,Northstar Resistance Band,Sports,144.92,58.42,551,25
+374,Willow Yoga Mat,Sports,64.98,27.39,512,109
+375,Northstar Phone Stand,Electronics,374.49,243.03,651,23
+376,Lite Yo-Yo #376,Toys,61.96,45.6,1286,101
+377,Nimbus Book Ends,Books,39.98,21.64,362,57
+378,Deluxe Hoodie,Clothing,108.85,54.47,1147,40
+379,Urban Hardcover Notebook,Books,26.28,13.58,368,21
+380,Everyday Honey Jar,Grocery,11.28,6.08,279,67
+381,Deluxe Dark Chocolate Bar,Grocery,13.83,6.84,109,96
+382,Compact Knit Sweater,Clothing,16.52,8.33,1007,53
+383,Trail Hardcover Notebook,Books,22.89,13.82,1494,27
+384,Everyday Trail Mix Pack #384,Grocery,9.78,4.44,388,27
+385,Studio Jump Rope,Sports,130.35,87.2,417,118
+386,Pro Mechanical Keyboard,Electronics,196.87,111.04,1250,120
+387,Lite Desk Planner,Books,29.26,21.78,903,43
+388,Cedar LED Desk Lamp,Home & Kitchen,120.06,82.79,1053,63
+389,Trail Board Game,Toys,53.56,39.19,521,81
+390,Pro Stuffed Robot,Toys,7.91,4.79,475,94
+391,Willow Book Ends,Books,20.69,9.94,1325,118
+392,Northstar Plush Animal,Toys,31.59,15.37,1306,40
+393,Classic Shower Gel,Beauty,19.85,14.63,449,108
+394,Willow Spice Set,Grocery,9.54,6.28,1100,102
+395,Studio Laptop Charger #395,Electronics,343.78,186.14,786,23
+396,Apex Plush Animal,Toys,83.62,36.27,618,77
+397,Summit Board Game #397,Toys,55.58,24.14,1381,21
+398,Compact Hardcover Notebook,Books,16.19,6.9,1138,80
+399,Nimbus Stainless Mixing Bowl,Home & Kitchen,39.01,25.05,1402,28
+400,Lumen Resistance Band,Sports,35.15,16.69,70,92
+401,Harbor Face Serum,Beauty,73.48,52.95,28,114
+402,Summit Makeup Mirror,Beauty,49.9,35.84,814,113
+403,Everyday HDMI Cable,Electronics,260.35,186.55,186,81
+404,Lite Cycling Gloves,Sports,38.13,28.38,70,114
+405,Heritage Laptop Sleeve,Electronics,80.96,53.63,1386,28
+406,Summit Shower Gel,Beauty,16.3,11.21,1331,67
+407,Cascade Laptop Sleeve,Electronics,375.83,209.38,266,57
+408,Heritage Water Bottle,Home & Kitchen,31.13,12.76,576,107
+409,Cedar Tennis Ball Pack,Sports,114.91,63.58,1162,43
+410,Studio Hardcover Notebook,Books,24.3,17.39,54,115
+411,Heritage Sketch Pad,Books,30.31,15.52,610,19
+412,Apex Nail Kit,Beauty,40.21,22.27,514,40
+413,Summit Foam Roller,Sports,130.48,79.31,754,31
+414,Willow Hardcover Notebook,Books,29.76,18.97,0,97
+415,Compact Kitchen Scale,Home & Kitchen,53.34,38.0,1092,113
+416,Cedar Water Bottle,Home & Kitchen,88.66,46.09,1176,56
+417,Cascade Yoga Mat #417,Sports,138.42,55.96,1222,30
+418,Studio Foam Roller,Sports,117.86,69.75,1013,75
+419,Urban Oven Mitt,Home & Kitchen,50.17,34.66,1129,20
+420,Apex Puzzle Set,Toys,61.32,37.62,1422,82
+421,Nimbus HDMI Cable,Electronics,89.18,42.29,91,22
+422,Trail Cutting Board,Home & Kitchen,126.79,90.73,52,88
+423,Nimbus Book Ends #423,Books,28.75,15.79,298,98
+424,Cedar Nail Kit #424,Beauty,73.08,30.74,1110,53
+425,Cascade USB Flash Drive,Electronics,243.74,122.47,80,56
+426,Pro Baseball Cap,Clothing,61.65,28.45,1392,51
+427,Studio Monitor Light Bar #427,Electronics,297.46,214.03,329,19
+428,Studio Sketch Pad #428,Books,28.99,18.39,207,112
+429,Pro Shower Gel #429,Beauty,68.1,29.2,749,95
+430,Cedar Wool Beanie,Clothing,98.66,57.49,1297,20
+431,Classic Desk Planner,Books,25.06,15.52,495,93
+432,Apex Green Tea Box,Grocery,26.15,15.15,1427,43
+433,Northstar Dark Chocolate Bar #433,Grocery,15.83,7.08,746,76
+434,Studio Green Tea Box,Grocery,6.1,2.85,1000,56
+435,Cedar Dumbbell Set #435,Sports,75.11,36.32,1324,39
+436,Compact Nail Kit #436,Beauty,75.35,50.61,0,69
+437,Apex Smart Watch Band,Electronics,203.39,145.31,0,18
+438,Lumen Bluetooth Speaker,Electronics,236.49,159.99,806,22
+439,Orbit LED Desk Lamp,Home & Kitchen,111.97,75.33,678,45
+440,Everyday Storage Bin,Home & Kitchen,107.05,76.53,1267,93
+441,Orbit Puzzle Set,Toys,49.41,30.85,801,70
+442,Summit Cycling Gloves,Sports,54.88,27.1,527,85
+443,Cedar Lip Balm #443,Beauty,33.3,15.33,116,29
+444,Apex Trail Mix Pack,Grocery,8.15,4.03,198,18
+445,Urban Gym Bag #445,Sports,184.73,80.11,703,70
+446,Pro Body Lotion,Beauty,40.59,18.78,1366,73
+447,Nimbus HDMI Cable #447,Electronics,326.51,242.2,780,117
+448,Harbor Plush Animal,Toys,69.39,50.36,1062,103
+449,Lumen Honey Jar,Grocery,29.08,19.27,782,20
+450,Pro Trail Mix Pack #450,Grocery,5.01,2.7,1072,88
+451,Nimbus Sketch Pad #451,Books,18.06,8.85,0,42
+452,Summit Foam Roller #452,Sports,67.82,47.18,881,10
+453,Everyday Nonstick Pan,Home & Kitchen,101.58,64.47,992,100
+454,Heritage Hardcover Notebook,Books,35.66,23.64,1351,39
+455,Lite HDMI Cable,Electronics,251.18,147.39,903,108
+456,Nimbus Body Lotion,Beauty,53.37,30.37,1263,48
+457,Classic Laptop Sleeve,Electronics,334.22,147.22,671,101
+458,Lumen Face Serum #458,Beauty,21.76,10.99,747,82
+459,Lite LED Desk Lamp,Home & Kitchen,108.93,53.2,829,23
+460,Everyday Laptop Charger,Electronics,218.43,135.16,1343,106
+461,Apex Building Blocks #461,Toys,11.84,5.65,1435,48
+462,Everyday Dumbbell Set,Sports,70.49,38.48,993,82
+463,Classic Yoga Mat,Sports,113.74,60.26,239,12
+464,Trail Plush Animal,Toys,15.82,10.91,568,95
+465,Northstar Trail Mix Pack #465,Grocery,16.15,10.66,996,84
+466,Everyday LED Desk Lamp,Home & Kitchen,72.46,35.09,1309,58
+467,Apex Mechanical Keyboard,Electronics,126.31,80.82,657,66
+468,Lumen Storage Bin #468,Home & Kitchen,21.8,12.44,423,51
+469,Pro Puzzle Set,Toys,82.52,33.14,1111,33
+470,Apex Oven Mitt,Home & Kitchen,63.52,37.75,685,79
+471,Studio Book Ends #471,Books,31.94,21.75,1160,99
+472,Lumen Lip Balm,Beauty,54.05,37.31,2,83
+473,Urban Ceramic Mug,Home & Kitchen,110.56,51.32,749,53
+474,Deluxe Denim Jacket,Clothing,142.34,82.23,1098,105
+475,Pro Stainless Mixing Bowl,Home & Kitchen,98.8,72.49,1209,104
+476,Willow Yoga Mat #476,Sports,99.34,51.41,1083,48
+477,Cedar Kitchen Scale #477,Home & Kitchen,110.33,75.36,586,59
+478,Orbit Lip Balm,Beauty,67.66,31.01,610,79
+479,Cedar Reading Light,Books,29.02,11.84,683,67
+480,Nimbus USB Flash Drive,Electronics,150.89,86.13,0,46
+481,Northstar Rain Jacket #481,Clothing,46.21,23.4,688,78
+482,Northstar Laptop Sleeve,Electronics,351.84,261.61,98,108
+483,Trail Foam Roller #483,Sports,172.06,90.87,1180,21
+484,Compact Cookbook Stand,Books,23.5,12.17,937,100
+485,Urban Shower Gel,Beauty,74.7,54.62,224,95
+486,Nimbus Wireless Mouse,Electronics,378.96,254.3,953,108
+487,Trail Storage Bin #487,Home & Kitchen,107.37,56.28,341,97
+488,Lite Reading Light #488,Books,11.98,8.83,1167,60
+489,Cascade Bluetooth Speaker,Electronics,169.33,88.33,1113,57
+490,Orbit Board Game,Toys,81.53,43.13,874,77
+491,Compact Lip Balm,Beauty,60.36,26.97,1388,66
+492,Summit Foam Roller #492,Sports,98.88,67.44,1082,118
+493,Deluxe Board Game,Toys,65.97,31.66,1190,80
+494,Harbor Dumbbell Set #494,Sports,78.8,57.33,1249,32
+495,Lumen Gym Bag,Sports,62.46,30.47,490,17
+496,Trail Book Ends #496,Books,28.06,12.96,1122,98
+497,Everyday Towel Set,Home & Kitchen,127.73,58.89,344,30
+498,Everyday Stainless Mixing Bowl,Home & Kitchen,33.38,19.5,1183,23
+499,Studio Monitor Light Bar #499,Electronics,375.59,239.49,1331,38
+500,Lite Building Blocks #500,Toys,31.94,14.53,1445,39

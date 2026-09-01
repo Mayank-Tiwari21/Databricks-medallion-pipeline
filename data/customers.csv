@@ -17,7 +17,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 16,Connie Lawrence,connie.lawrence16@icloud.com,United States,2023-07-12,Standard,973.73
 17,Abigail Shaffer,abigail.shaffer17@proton.me,Japan,2025-02-22,Premium,1316.63
 18,Noah Rhodes,noah.rhodes18@icloud.com,Australia,2022-12-12,Basic,314.19
-19,Ayushman Chander,ayushman.chander19@outlook.com,India,2022-06-17,Basic,118.37
+19,Ayushman Chander,,India,2022-06-17,Basic,118.37
 20,Aleksandr Weihmann,aleksandr.weihmann20@gmail.com,Germany,2021-03-25,Premium,1391.93
 21,Aurore Maury-Briand,aurore.maury.briand21@icloud.com,France,2020-09-17,Standard,1133.22
 22,Eleni Hauffer,eleni.hauffer22@outlook.com,Germany,2026-03-16,Basic,32.75
@@ -69,7 +69,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 68,Nathaniel Sami,nathaniel.sami68@yahoo.com,India,2024-10-26,Premium,1940.56
 69,Matthew Foster,matthew.foster69@gmail.com,Japan,2024-01-05,Standard,561.72
 70,Judy Baker,judy.baker70@icloud.com,United States,2024-07-22,Basic,530.9
-71,Buenaventura de Bonet,buenaventura.de.bonet71@yahoo.com,Spain,2021-10-27,Basic,572.27
+2119,Buenaventura de Bonet,buenaventura.de.bonet71@yahoo.com,Spain,2021-10-27,Basic,572.27
 72,Justin Baker,justin.baker72@gmail.com,Japan,2022-01-04,Basic,249.23
 73,Ileana Antón-Andrés,ileana.anton.andres73@proton.me,Spain,2022-10-13,Standard,1449.17
 74,Stephanie Ross,stephanie.ross74@gmail.com,United States,2025-04-11,Standard,1497.37
@@ -180,7 +180,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 179,Gerald Hensley,gerald.hensley179@icloud.com,United States,2025-06-06,Standard,1060.66
 180,Holly Wood,holly.wood180@hotmail.com,Canada,2023-08-11,Basic,687.02
 181,Connor West,connor.west181@hotmail.com,United States,2022-08-14,Basic,302.27
-182,Ms Sheila Evans,ms.sheila.evans182@hotmail.com,United Kingdom,2024-04-10,Standard,1245.09
+182,Ms Sheila Evans,,United Kingdom,2024-04-10,Standard,1245.09
 183,Melle van Brenen,melle.van.brenen183@yahoo.com,Netherlands,2025-07-21,Basic,110.22
 184,Fabia Salandra,fabia.salandra184@outlook.com,Italy,2021-02-15,Basic,322.21
 185,Derek Zuniga,derek.zuniga185@hotmail.com,Canada,2020-03-03,Basic,301.74
@@ -465,7 +465,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 464,Eric O'Neill,eric.o.neill464@hotmail.com,United Kingdom,2025-07-02,Standard,1359.07
 465,Charlotte Haynes,charlotte.haynes465@yahoo.com,United Kingdom,2026-02-16,Standard,1662.88
 466,Angelica Tucker,angelica.tucker466@proton.me,Canada,2020-08-28,Standard,1534.46
-467,Michelle Brown,michelle.brown467@proton.me,United States,2020-07-17,Basic,303.36
+2971,Michelle Brown,michelle.brown467@proton.me,United States,2020-07-17,Basic,303.36
 468,Sr. Caleb Garcia,sr.caleb.garcia468@yahoo.com,Brazil,2020-10-05,Basic,31.17
 469,Philip Cannon,philip.cannon469@outlook.com,Canada,2020-09-04,Standard,1250.15
 470,Wriddhish Bhardwaj,wriddhish.bhardwaj470@hotmail.com,India,2025-06-21,Premium,2769.19
@@ -550,16 +550,16 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 549,Joshua Cooke,joshua.cooke549@yahoo.com,United States,2020-08-31,Standard,1028.26
 550,Devika Rastogi,devika.rastogi550@yahoo.com,India,2023-08-18,Basic,222.53
 551,Shannon Jones,shannon.jones551@icloud.com,Canada,2021-01-25,Premium,3575.35
-552,Dr. Uschi Reuter,dr.uschi.reuter552@gmail.com,Germany,2023-02-09,Basic,110.65
+552,Dr. Uschi Reuter,,Germany,2023-02-09,Basic,110.65
 553,Anna Liz Novaes,anna.liz.novaes553@yahoo.com,Brazil,2021-08-22,Basic,584.23
 554,Anthony Rodriguez,anthony.rodriguez554@proton.me,Australia,2024-05-27,Standard,1102.75
 555,Matthew Harrington,matthew.harrington555@hotmail.com,United States,2024-03-16,Standard,1195.49
 556,Nicole Herring,nicole.herring556@gmail.com,Japan,2024-07-08,Standard,609.07
 557,Constanza del Barba,constanza.del.barba557@outlook.com,Spain,2025-02-05,Basic,245.92
-558,Alex Hernandez,alex.hernandez558@proton.me,United States,2021-01-16,Basic,334.45
+558,Alex Hernandez,,United States,2021-01-16,Basic,334.45
 559,Daniel Grégoire-Teixeira,daniel.gregoire.teixeira559@outlook.com,France,2020-09-16,Basic,293.46
 560,Letizia Cuzzocrea-Paganini,letizia.cuzzocrea.paganini560@yahoo.com,Italy,2025-07-19,Standard,1516.77
-561,Kirsty Akhtar,kirsty.akhtar561@icloud.com,United Kingdom,2021-06-18,Standard,950.81
+561,Kirsty Akhtar,,United Kingdom,2021-06-18,Standard,950.81
 562,Harry Gardiner,harry.gardiner562@proton.me,United Kingdom,2020-07-17,Premium,3116.86
 563,Luiz Miguel Oliveira,luiz.miguel.oliveira563@gmail.com,Brazil,2021-05-23,Basic,131.64
 564,Olaf Jockel MBA.,olaf.jockel.mba564@hotmail.com,Germany,2022-04-08,Basic,638.85
@@ -892,7 +892,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 891,Shannon Jones,shannon.jones891@hotmail.com,Australia,2023-12-06,Standard,1373.3
 892,Michael Lewis,michael.lewis892@proton.me,Australia,2026-06-17,Premium,1295.37
 893,Eva Löchel MBA.,eva.lochel.mba893@yahoo.com,Germany,2020-12-09,Standard,1596.66
-894,Donald Hübel-Harloff,donald.hubel.harloff894@yahoo.com,Germany,2020-01-23,Basic,557.86
+894,Donald Hübel-Harloff,,Germany,2020-01-23,Basic,557.86
 895,Mike Allen,mike.allen895@gmail.com,Canada,2025-10-29,Premium,3221.82
 896,Arthur David-Rémy,arthur.david.remy896@outlook.com,France,2024-08-01,Standard,405.38
 897,Yatin Baral,yatin.baral897@outlook.com,India,2022-12-06,Basic,310.9
@@ -1135,7 +1135,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 1134,Daniel Kane,daniel.kane1134@proton.me,United States,2023-07-03,Premium,3606.43
 1135,Prisha Andra,prisha.andra1135@yahoo.com,India,2023-08-07,Standard,622.84
 1136,Sharon Cherry,sharon.cherry1136@hotmail.com,Canada,2021-04-26,Standard,409.87
-1137,Charles Lester,charles.lester1137@icloud.com,United States,2026-04-11,Standard,490.85
+1137,Charles Lester,,United States,2026-04-11,Standard,490.85
 1138,Kenneth Lewis,kenneth.lewis1138@outlook.com,United Kingdom,2023-01-15,Premium,3406.11
 1139,Mr Hugh Cunningham,mr.hugh.cunningham1139@yahoo.com,United Kingdom,2021-12-02,Premium,3069.07
 1140,Mohamed Parkinson,mohamed.parkinson1140@hotmail.com,United Kingdom,2020-07-26,Premium,2541.72
@@ -1491,7 +1491,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 1490,Jason Rhodes,jason.rhodes1490@hotmail.com,United States,2023-05-15,Premium,1272.82
 1491,Jeremy Mitchell,jeremy.mitchell1491@yahoo.com,Japan,2025-11-12,Standard,1088.08
 1492,Angel Perry,angel.perry1492@gmail.com,Canada,2025-10-03,Premium,2372.18
-1493,Joann Ferguson,joann.ferguson1493@proton.me,United States,2026-05-17,Basic,264.93
+1493,Joann Ferguson,,United States,2026-05-17,Basic,264.93
 1494,Ganga Murthy,ganga.murthy1494@icloud.com,India,2020-03-07,Premium,3247.84
 1495,Robert Harrison,robert.harrison1495@yahoo.com,United States,2024-05-28,Premium,2340.13
 1496,Denis Morvan,denis.morvan1496@outlook.com,France,2026-08-02,Basic,536.21
@@ -1517,7 +1517,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 1516,Courtney Hayes,courtney.hayes1516@outlook.com,United States,2024-11-29,Standard,512.51
 1517,Alexander Brown,alexander.brown1517@outlook.com,Japan,2025-04-02,Premium,1885.56
 1518,Claudine Perret-Rodriguez,claudine.perret.rodriguez1518@hotmail.com,France,2024-01-15,Basic,564.83
-1519,Olívia Novaes,olivia.novaes1519@icloud.com,Brazil,2022-04-28,Standard,1386.27
+1519,Olívia Novaes,,Brazil,2022-04-28,Standard,1386.27
 1520,Honoré Marchal,honore.marchal1520@yahoo.com,France,2021-12-10,Premium,3041.27
 1521,Cynthia Vang,cynthia.vang1521@hotmail.com,United States,2025-07-15,Standard,495.56
 1522,Alfred Galvan,alfred.galvan1522@gmail.com,United States,2024-01-09,Basic,266.0
@@ -2011,7 +2011,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2010,Camila Barberá,camila.barbera2010@yahoo.com,Spain,2020-10-06,Standard,749.49
 2011,Brian Martin,brian.martin2011@yahoo.com,United States,2025-03-02,Standard,930.88
 2012,David Lopez,david.lopez2012@hotmail.com,United States,2021-07-29,Basic,680.88
-2013,Dipl.-Ing. Vassilios Eckbauer,dipl.ing.vassilios.eckbauer2013@outlook.com,Germany,2023-03-20,Standard,1564.05
+2013,Dipl.-Ing. Vassilios Eckbauer,,Germany,2023-03-20,Standard,1564.05
 2014,Anita Estevez,anita.estevez2014@yahoo.com,Spain,2024-12-10,Standard,1543.98
 2015,Elena Ligorio,elena.ligorio2015@outlook.com,Italy,2020-12-07,Standard,984.81
 2016,Rachel Bradley,rachel.bradley2016@proton.me,United States,2020-06-23,Standard,1212.38
@@ -2155,7 +2155,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2154,Hector Castro-Marín,hector.castro.marin2154@yahoo.com,Spain,2025-03-25,Standard,1013.26
 2155,Aimee Wright-Roberts,aimee.wright.roberts2155@icloud.com,United Kingdom,2021-10-28,Standard,625.63
 2156,Milan Everts,milan.everts2156@gmail.com,Netherlands,2025-02-02,Premium,1847.16
-2157,Ishwar Gade,ishwar.gade2157@gmail.com,India,2025-06-23,Standard,860.03
+2157,Ishwar Gade,,India,2025-06-23,Standard,860.03
 2158,Georges Maillard Le Julien,georges.maillard.le.julien2158@gmail.com,France,2020-07-23,Standard,727.86
 2159,Kirsty Clark,kirsty.clark2159@icloud.com,United Kingdom,2026-04-15,Premium,1118.21
 2160,Tracy Grant,tracy.grant2160@proton.me,United States,2022-03-16,Standard,1665.13
@@ -2190,7 +2190,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2189,Felicia Krueger,felicia.krueger2189@hotmail.com,United States,2024-10-06,Premium,1848.66
 2190,Timothy Hayden,timothy.hayden2190@hotmail.com,United States,2020-02-15,Standard,206.24
 2191,Charvi Dara,charvi.dara2191@proton.me,India,2024-12-25,Premium,4156.12
-2192,Adelasia Pennetta,adelasia.pennetta2192@hotmail.com,Italy,2025-02-20,Standard,1769.89
+9148,Adelasia Pennetta,adelasia.pennetta2192@hotmail.com,Italy,2025-02-20,Standard,1769.89
 2193,Reece Hewitt-Knight,reece.hewitt.knight2193@icloud.com,United Kingdom,2022-05-13,Standard,1315.27
 2194,Gerald Francis,gerald.francis2194@gmail.com,United Kingdom,2021-12-15,Standard,730.58
 2195,Arthur du Cordier,arthur.du.cordier2195@outlook.com,France,2025-02-25,Basic,556.02
@@ -2297,7 +2297,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2296,Cheyenne Horton,cheyenne.horton2296@outlook.com,Australia,2025-01-12,Basic,450.81
 2297,David Douglas Jr.,david.douglas.jr2297@hotmail.com,Australia,2023-03-30,Basic,497.58
 2298,Patricia Rodriguez,patricia.rodriguez2298@proton.me,Australia,2026-08-11,Basic,657.22
-2299,Anthony Jones,anthony.jones2299@gmail.com,United States,2026-08-28,Standard,1261.95
+2299,Anthony Jones,,United States,2026-08-28,Standard,1261.95
 2300,Univ.Prof. Gundel Bohnbach,univ.prof.gundel.bohnbach2300@outlook.com,Germany,2024-12-01,Premium,3473.37
 2301,Stephanie Elliott,stephanie.elliott2301@gmail.com,United States,2022-08-09,Standard,712.84
 2302,Jessica Gross,jessica.gross2302@icloud.com,Canada,2026-07-02,Standard,1681.27
@@ -2330,7 +2330,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2329,Randy Friedman,randy.friedman2329@hotmail.com,United States,2023-07-30,Standard,723.5
 2330,Trevor Ellis,trevor.ellis2330@yahoo.com,United Kingdom,2025-06-04,Basic,608.21
 2331,Veda Shroff,veda.shroff2331@proton.me,India,2022-08-19,Premium,1791.32
-2332,Raymond Johnson,raymond.johnson2332@hotmail.com,United States,2020-09-06,Standard,683.27
+2332,Raymond Johnson,,United States,2020-09-06,Standard,683.27
 2333,Maggie Laroche,maggie.laroche2333@hotmail.com,France,2024-05-22,Basic,312.01
 2334,Willie Henry,willie.henry2334@gmail.com,United States,2023-01-04,Standard,511.26
 2335,Amrita Naidu,amrita.naidu2335@gmail.com,India,2023-06-17,Standard,515.16
@@ -2604,9 +2604,9 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2603,Mr Graham Jarvis,mr.graham.jarvis2603@outlook.com,United Kingdom,2020-09-24,Standard,1548.88
 2604,Karl Bibi,karl.bibi2604@proton.me,United Kingdom,2020-12-11,Standard,1486.78
 2605,Kimberly Fritz,kimberly.fritz2605@gmail.com,Japan,2023-01-30,Basic,630.7
-2606,Ronald Potter,ronald.potter2606@yahoo.com,United States,2021-12-27,Standard,361.11
+2606,Ronald Potter,,United States,2021-12-27,Standard,361.11
 2607,Zachary Cole,zachary.cole2607@proton.me,United States,2025-04-08,Basic,66.3
-2608,Vincent Hulskes,vincent.hulskes2608@proton.me,Netherlands,2023-04-15,Standard,834.55
+2608,Vincent Hulskes,,Netherlands,2023-04-15,Standard,834.55
 2609,Robert Gonzales,robert.gonzales2609@yahoo.com,United States,2021-12-16,Basic,676.58
 2610,Jason Stein,jason.stein2610@proton.me,Australia,2022-01-13,Standard,1676.17
 2611,Melissa Gates,melissa.gates2611@gmail.com,Australia,2025-07-30,Standard,816.03
@@ -2789,7 +2789,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2788,Giampaolo Tognazzi,giampaolo.tognazzi2788@gmail.com,Italy,2022-04-25,Standard,1250.54
 2789,Jorge Harris,jorge.harris2789@proton.me,United States,2026-04-26,Basic,457.84
 2790,Susan Serrano,susan.serrano2790@yahoo.com,Canada,2021-09-09,Standard,923.16
-2791,Isadora Pacheco,isadora.pacheco2791@yahoo.com,Brazil,2025-06-16,Standard,1689.48
+2791,Isadora Pacheco,,Brazil,2025-06-16,Standard,1689.48
 2792,Yuvraj Dani,yuvraj.dani2792@proton.me,India,2020-05-24,Standard,1448.49
 2793,Kimberly Myers,kimberly.myers2793@gmail.com,United States,2020-08-04,Standard,298.41
 2794,Nazario de Otero,nazario.de.otero2794@outlook.com,Spain,2022-04-11,Basic,671.62
@@ -2809,7 +2809,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2808,Univ.Prof. Sergio Ruppert B.Sc.,univ.prof.sergio.ruppert.b.sc2808@yahoo.com,Germany,2024-02-04,Basic,154.62
 2809,Sean Morris,sean.morris2809@icloud.com,United Kingdom,2020-04-06,Standard,1644.6
 2810,Patrick Yang,patrick.yang2810@yahoo.com,United States,2023-06-09,Standard,1793.65
-2811,Mrs Joan Robson,mrs.joan.robson2811@outlook.com,United Kingdom,2025-02-19,Standard,699.32
+9392,Mrs Joan Robson,mrs.joan.robson2811@outlook.com,United Kingdom,2025-02-19,Standard,699.32
 2812,Michael Miles,michael.miles2812@icloud.com,United States,2020-02-13,Basic,37.97
 2813,Jade Taylor,jade.taylor2813@hotmail.com,United Kingdom,2024-04-05,Standard,1297.23
 2814,Troy Mills,troy.mills2814@hotmail.com,United States,2023-10-06,Standard,995.76
@@ -2942,7 +2942,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2941,Megan Green,megan.green2941@proton.me,United States,2020-10-19,Premium,2474.62
 2942,Amanda Sullivan MD,amanda.sullivan.md2942@outlook.com,United States,2024-07-08,Premium,3010.98
 2943,Barbara Morgan-Wells,barbara.morgan.wells2943@outlook.com,United Kingdom,2022-05-03,Standard,1171.78
-2944,Rufino Campoy Piñeiro,rufino.campoy.pineiro2944@proton.me,Spain,2026-08-27,Premium,2617.93
+2944,Rufino Campoy Piñeiro,,Spain,2026-08-27,Premium,2617.93
 2945,Danielle Murray,danielle.murray2945@outlook.com,United States,2023-12-10,Premium,3392.34
 2946,Letícia Marques,leticia.marques2946@hotmail.com,Brazil,2026-01-16,Basic,310.32
 2947,Naksh Agate,naksh.agate2947@outlook.com,India,2025-07-01,Basic,281.48
@@ -2999,7 +2999,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 2998,Frau Alma Schuchhardt B.A.,frau.alma.schuchhardt.b.a2998@outlook.com,Germany,2021-08-22,Standard,268.88
 2999,Amy Ramirez,amy.ramirez2999@hotmail.com,United States,2026-03-05,Basic,27.21
 3000,Curtis Wilkerson,curtis.wilkerson3000@outlook.com,United States,2025-07-20,Standard,1784.91
-3001,Vivaan Lalla,vivaan.lalla3001@outlook.com,India,2025-09-24,Standard,478.66
+3001,Vivaan Lalla,,India,2025-09-24,Standard,478.66
 3002,Lydia Pham,lydia.pham3002@hotmail.com,United States,2025-06-28,Standard,936.01
 3003,Mr Roger Russell,mr.roger.russell3003@gmail.com,United Kingdom,2021-07-26,Premium,2136.94
 3004,Olivia van Allemanië,olivia.van.allemanie3004@gmail.com,Netherlands,2020-06-17,Basic,212.22
@@ -3022,7 +3022,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 3021,Davi Lucca Ferreira,davi.lucca.ferreira3021@proton.me,Brazil,2024-03-26,Premium,2294.82
 3022,Robert Stark,robert.stark3022@outlook.com,United States,2024-07-17,Standard,1329.64
 3023,Zachary Robinson,zachary.robinson3023@hotmail.com,Japan,2025-04-07,Basic,488.38
-3024,Shannon Rivera,shannon.rivera3024@proton.me,Canada,2020-09-21,Standard,1470.17
+3024,Shannon Rivera,,Canada,2020-09-21,Standard,1470.17
 3025,Emily Brown,emily.brown3025@outlook.com,United Kingdom,2024-01-12,Standard,960.08
 3026,Michèle-Thérèse Lenoir,michele.therese.lenoir3026@hotmail.com,France,2021-01-01,Standard,724.58
 3027,Rebecca Kelly,rebecca.kelly3027@outlook.com,United States,2025-05-14,Premium,1610.81
@@ -3306,7 +3306,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 3305,Puccio Ceravolo,puccio.ceravolo3305@gmail.com,Italy,2024-02-11,Standard,1433.73
 3306,Howard Kelly,howard.kelly3306@hotmail.com,United Kingdom,2024-06-07,Standard,1744.38
 3307,Melissa Brewer,melissa.brewer3307@icloud.com,Australia,2021-01-28,Premium,1276.51
-3308,Ricky Davis II,ricky.davis.ii3308@gmail.com,Australia,2020-06-21,Basic,615.51
+1438,Ricky Davis II,ricky.davis.ii3308@gmail.com,Australia,2020-06-21,Basic,615.51
 3309,Michele Hill,michele.hill3309@yahoo.com,United States,2024-01-19,Standard,1609.49
 3310,Kathy Reid,kathy.reid3310@gmail.com,United States,2024-05-01,Premium,2485.83
 3311,Cameron Wilson,cameron.wilson3311@proton.me,United Kingdom,2022-05-21,Premium,1449.38
@@ -3347,7 +3347,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 3346,Srta. Ísis Andrade,srta.isis.andrade3346@outlook.com,Brazil,2020-06-15,Basic,586.96
 3347,Robert Torres,robert.torres3347@yahoo.com,United States,2020-01-05,Premium,3953.17
 3348,Helfried Geisel,helfried.geisel3348@hotmail.com,Germany,2024-05-13,Premium,1004.06
-3349,Sr. Pedro Cardoso,sr.pedro.cardoso3349@hotmail.com,Brazil,2025-08-25,Standard,284.0
+9881,Sr. Pedro Cardoso,sr.pedro.cardoso3349@hotmail.com,Brazil,2025-08-25,Standard,284.0
 3350,Maria Coleman,maria.coleman3350@icloud.com,United States,2023-10-03,Basic,580.74
 3351,Gregory King,gregory.king3351@gmail.com,United States,2024-03-16,Standard,1159.91
 3352,Michael Holloway,michael.holloway3352@outlook.com,United States,2020-10-26,Basic,241.94
@@ -3777,7 +3777,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 3776,Stephen Hoffman,stephen.hoffman3776@outlook.com,Canada,2026-08-13,Standard,1212.46
 3777,José Ángel Natanael Naranjo Bueno,jose.angel.natanael.naranjo.bueno3777@proton.me,Spain,2020-09-26,Premium,4435.5
 3778,Denise Hall,denise.hall3778@proton.me,United Kingdom,2022-06-04,Basic,546.68
-3779,Jennifer Adkins,jennifer.adkins3779@proton.me,United States,2026-06-29,Premium,1826.51
+3779,Jennifer Adkins,,United States,2026-06-29,Premium,1826.51
 3780,Donna Boone,donna.boone3780@gmail.com,United States,2022-05-28,Standard,985.7
 3781,Frédéric Noël,frederic.noel3781@outlook.com,France,2020-09-20,Premium,1909.6
 3782,Ayush Batra,ayush.batra3782@gmail.com,India,2022-06-25,Basic,252.35
@@ -3886,7 +3886,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 3885,Benedikt Heinz,benedikt.heinz3885@outlook.com,Germany,2025-08-02,Premium,2639.71
 3886,Bhavna Dugar,bhavna.dugar3886@yahoo.com,India,2020-04-13,Standard,828.02
 3887,Hayley Wood-Moss,hayley.wood.moss3887@proton.me,United Kingdom,2021-08-27,Standard,883.77
-3888,Hans-Karl Metz-Koch II,hans.karl.metz.koch.ii3888@icloud.com,Germany,2024-10-27,Standard,684.46
+3888,Hans-Karl Metz-Koch II,,Germany,2024-10-27,Standard,684.46
 3889,Jill Conway,jill.conway3889@hotmail.com,United States,2020-01-14,Premium,4170.8
 3890,Riya Pai,riya.pai3890@gmail.com,India,2024-01-02,Basic,574.23
 3891,Donato Talavera Beltran,donato.talavera.beltran3891@gmail.com,Spain,2020-04-10,Basic,273.05
@@ -4395,7 +4395,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 4394,Xavier-Aimé Turpin,xavier.aime.turpin4394@outlook.com,France,2020-09-28,Standard,1288.65
 4395,Alejandro Martinez,alejandro.martinez4395@outlook.com,United States,2021-08-04,Premium,1003.2
 4396,Tracey Gonzalez,tracey.gonzalez4396@hotmail.com,United States,2023-05-06,Basic,287.17
-4397,Mariah Thompson,mariah.thompson4397@gmail.com,United States,2022-06-10,Premium,971.76
+4397,Mariah Thompson,,United States,2022-06-10,Premium,971.76
 4398,Sig.ra Melissa Piazzi,sig.ra.melissa.piazzi4398@proton.me,Italy,2025-11-10,Basic,627.63
 4399,Heather Nunez,heather.nunez4399@yahoo.com,United States,2021-04-05,Standard,1578.41
 4400,Tracy Burke,tracy.burke4400@outlook.com,Canada,2026-01-28,Basic,364.79
@@ -4494,7 +4494,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 4493,Justin Foster,justin.foster4493@proton.me,Japan,2020-04-14,Basic,312.36
 4494,Hagen Losekann,hagen.losekann4494@yahoo.com,Germany,2020-04-18,Premium,2994.44
 4495,Siya Thakur,siya.thakur4495@icloud.com,India,2023-01-05,Standard,376.76
-4496,Omar Price,omar.price4496@yahoo.com,United States,2021-03-09,Premium,3357.01
+4496,Omar Price,,United States,2021-03-09,Premium,3357.01
 4497,Srta. Liz Guerra,srta.liz.guerra4497@outlook.com,Brazil,2020-02-10,Standard,596.99
 4498,Timothée Lamy Le Pineau,timothee.lamy.le.pineau4498@yahoo.com,France,2021-02-15,Standard,323.36
 4499,Dennis Henderson,dennis.henderson4499@gmail.com,United States,2025-10-20,Basic,352.45
@@ -4586,7 +4586,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 4585,Liliana Alberto Duarte,liliana.alberto.duarte4585@icloud.com,Mexico,2021-10-16,Standard,1077.06
 4586,Prof. Helene Tröst,prof.helene.trost4586@outlook.com,Germany,2022-04-15,Basic,182.53
 4587,Cody Bailey,cody.bailey4587@proton.me,United States,2020-01-25,Standard,1506.89
-4588,Andrew Clarke,andrew.clarke4588@outlook.com,United Kingdom,2021-12-03,Standard,631.7
+4588,Andrew Clarke,,United Kingdom,2021-12-03,Standard,631.7
 4589,Denise Guerra,denise.guerra4589@proton.me,United States,2026-08-19,Standard,1723.57
 4590,Kristen Jones,kristen.jones4590@gmail.com,United States,2022-08-30,Basic,229.18
 4591,Lilia Yolanda Guzmán Jaramillo,lilia.yolanda.guzman.jaramillo4591@icloud.com,Mexico,2020-03-19,Premium,2127.53
@@ -5277,7 +5277,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 5276,Raquel Pires,raquel.pires5276@icloud.com,Brazil,2020-02-15,Standard,1284.85
 5277,Ing. Marija Tschentscher,ing.marija.tschentscher5277@hotmail.com,Germany,2020-12-16,Basic,692.92
 5278,Bruce Griffiths,bruce.griffiths5278@yahoo.com,United Kingdom,2026-03-04,Basic,431.5
-5279,Rebecca Patel,rebecca.patel5279@icloud.com,Japan,2020-01-03,Standard,1108.29
+5279,Rebecca Patel,,Japan,2020-01-03,Standard,1108.29
 5280,Jason Oliver,jason.oliver5280@outlook.com,United States,2026-05-05,Standard,373.71
 5281,Beverley Sinclair,beverley.sinclair5281@hotmail.com,United Kingdom,2025-05-21,Standard,865.83
 5282,Lic. Darío Bravo,lic.dario.bravo5282@hotmail.com,Mexico,2024-04-06,Standard,1055.92
@@ -5669,7 +5669,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 5668,Emilly Aragão,emilly.aragao5668@yahoo.com,Brazil,2024-12-01,Basic,277.94
 5669,Christopher Davis,christopher.davis5669@hotmail.com,Japan,2024-06-27,Basic,353.03
 5670,Sara Ledesma Mora,sara.ledesma.mora5670@outlook.com,Spain,2022-12-05,Standard,1603.24
-5671,Jeremy Marshall,jeremy.marshall5671@icloud.com,United Kingdom,2021-09-23,Basic,52.61
+5671,Jeremy Marshall,,United Kingdom,2021-09-23,Basic,52.61
 5672,Stacie Butler,stacie.butler5672@hotmail.com,Japan,2022-12-30,Basic,581.67
 5673,Manuel Kraushaar,manuel.kraushaar5673@proton.me,Germany,2021-07-18,Standard,229.33
 5674,Charlene Iqbal,charlene.iqbal5674@yahoo.com,United Kingdom,2024-06-06,Basic,600.48
@@ -5995,7 +5995,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 5994,Eduardo da Costa,eduardo.da.costa5994@gmail.com,Brazil,2025-12-23,Premium,1364.25
 5995,Anaïs Parent de Maillard,anais.parent.de.maillard5995@proton.me,France,2026-08-02,Basic,646.06
 5996,Michael Farrell,michael.farrell5996@icloud.com,Australia,2022-10-15,Standard,824.46
-5997,Miss Elaine Atkins,miss.elaine.atkins5997@gmail.com,United Kingdom,2022-12-16,Standard,1441.14
+5997,Miss Elaine Atkins,,United Kingdom,2022-12-16,Standard,1441.14
 5998,Eugene Martinez,eugene.martinez5998@icloud.com,United States,2026-05-14,Basic,108.79
 5999,Cody Hart,cody.hart5999@icloud.com,United States,2021-05-27,Basic,596.72
 6000,Joyce Bishop,joyce.bishop6000@proton.me,United Kingdom,2021-08-08,Basic,515.24
@@ -6077,7 +6077,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6076,Heidemarie Trupp,heidemarie.trupp6076@gmail.com,Germany,2022-09-25,Premium,3691.74
 6077,Louis Joseph-Lefèvre,louis.joseph.lefevre6077@proton.me,France,2026-05-30,Basic,469.55
 6078,Lucía Julio Viera,lucia.julio.viera6078@yahoo.com,Mexico,2025-12-25,Premium,4081.42
-6079,Sjoerd Diesbergen,sjoerd.diesbergen6079@hotmail.com,Netherlands,2021-02-20,Premium,4085.83
+6079,Sjoerd Diesbergen,,Netherlands,2021-02-20,Premium,4085.83
 6080,Steven Taylor,steven.taylor6080@icloud.com,United States,2022-12-01,Standard,1180.62
 6081,Carolyn Connor-Hall,carolyn.connor.hall6081@yahoo.com,United Kingdom,2022-02-02,Standard,1646.55
 6082,Prof. Henny Wilmsen MBA.,prof.henny.wilmsen.mba6082@outlook.com,Germany,2022-11-23,Standard,1008.39
@@ -6195,7 +6195,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6194,Sig.ra Tina Casini,sig.ra.tina.casini6194@yahoo.com,Italy,2023-01-02,Standard,273.48
 6195,Jan-Peter Segebahn,jan.peter.segebahn6195@icloud.com,Germany,2023-09-12,Basic,419.98
 6196,Thierry Jacques,thierry.jacques6196@outlook.com,France,2024-02-16,Standard,894.95
-6197,Jesús Lugo Orellana,jesus.lugo.orellana6197@yahoo.com,Mexico,2020-05-30,Premium,1220.12
+6197,Jesús Lugo Orellana,,Mexico,2020-05-30,Premium,1220.12
 6198,Robert Mclean,robert.mclean6198@yahoo.com,United States,2024-09-08,Basic,204.19
 6199,Geraldo de Mate,geraldo.de.mate6199@outlook.com,Spain,2026-04-27,Standard,925.68
 6200,Damian Carter-Potter,damian.carter.potter6200@yahoo.com,United Kingdom,2021-03-17,Standard,561.31
@@ -6342,7 +6342,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6341,Sofia Trupp,sofia.trupp6341@yahoo.com,Germany,2021-06-12,Basic,599.67
 6342,Nadeschda Kaul,nadeschda.kaul6342@proton.me,Germany,2020-05-29,Premium,2023.19
 6343,Danny Andrews,danny.andrews6343@outlook.com,United Kingdom,2026-07-20,Standard,250.48
-6344,Mark Taylor Jr.,mark.taylor.jr6344@hotmail.com,United States,2022-06-22,Basic,476.71
+6344,Mark Taylor Jr.,,United States,2022-06-22,Basic,476.71
 6345,Barry Gregory,barry.gregory6345@icloud.com,United States,2023-11-11,Basic,571.82
 6346,Angelina Baeza Cordero,angelina.baeza.cordero6346@gmail.com,Spain,2023-07-02,Basic,557.35
 6347,Janet Shelton,janet.shelton6347@proton.me,United States,2021-09-16,Standard,707.29
@@ -6470,7 +6470,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6469,Patricia Hamilton,patricia.hamilton6469@gmail.com,Japan,2023-06-02,Basic,425.89
 6470,Dr Craig Dean,dr.craig.dean6470@outlook.com,United Kingdom,2024-05-04,Standard,693.35
 6471,Lori Boyd,lori.boyd6471@gmail.com,United States,2025-05-03,Basic,496.26
-6472,Marian Bray,marian.bray6472@hotmail.com,United Kingdom,2021-06-18,Standard,428.12
+6472,Marian Bray,,United Kingdom,2021-06-18,Standard,428.12
 6473,Charles Hernandez,charles.hernandez6473@gmail.com,United States,2021-04-04,Standard,1684.86
 6474,Elizabeth Graham,elizabeth.graham6474@proton.me,Japan,2020-09-30,Standard,887.27
 6475,Ronald Brown,ronald.brown6475@hotmail.com,United States,2026-07-03,Standard,619.53
@@ -6503,7 +6503,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6502,Christopher Taylor,christopher.taylor6502@gmail.com,United States,2026-03-22,Basic,396.66
 6503,Robert Hopkins,robert.hopkins6503@yahoo.com,United States,2024-07-21,Standard,1753.12
 6504,Samuel Stuart,samuel.stuart6504@hotmail.com,United States,2024-07-20,Standard,182.22
-6505,Dr. Kelly Hammond DVM,dr.kelly.hammond.dvm6505@outlook.com,Canada,2022-04-12,Standard,504.76
+6505,Dr. Kelly Hammond DVM,,Canada,2022-04-12,Standard,504.76
 6506,William Day,william.day6506@outlook.com,Canada,2025-02-24,Premium,1937.52
 6507,Chad Scott,chad.scott6507@proton.me,Australia,2025-12-09,Premium,1201.14
 6508,Jean Delannoy,jean.delannoy6508@gmail.com,France,2022-02-12,Standard,1379.29
@@ -6664,7 +6664,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6663,Mr Ronald Butler,mr.ronald.butler6663@yahoo.com,United Kingdom,2025-07-31,Basic,579.53
 6664,Joel Frost,joel.frost6664@yahoo.com,United Kingdom,2020-09-14,Basic,579.76
 6665,Univ.Prof. Andrej Säuberlich MBA.,univ.prof.andrej.sauberlich.mba6665@yahoo.com,Germany,2022-04-24,Premium,4269.9
-6666,Dr Stephen Thomson,dr.stephen.thomson6666@outlook.com,United Kingdom,2022-01-04,Basic,254.64
+6666,Dr Stephen Thomson,,United Kingdom,2022-01-04,Basic,254.64
 6667,Dr Duncan Wilson,dr.duncan.wilson6667@proton.me,United Kingdom,2024-05-17,Basic,25.46
 6668,Roy Williams,roy.williams6668@icloud.com,United Kingdom,2023-06-19,Standard,1599.64
 6669,Prof. Magnus Ullmann,prof.magnus.ullmann6669@gmail.com,Germany,2024-01-22,Basic,63.18
@@ -6765,7 +6765,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6764,Melissa Hänel,melissa.hanel6764@proton.me,Germany,2022-01-19,Basic,598.78
 6765,Andrew Anderson,andrew.anderson6765@icloud.com,United States,2024-10-02,Standard,820.4
 6766,Donna Frye,donna.frye6766@icloud.com,Canada,2026-03-04,Standard,253.68
-6767,Severiano Cisneros-Bellido,severiano.cisneros.bellido6767@icloud.com,Spain,2023-11-06,Standard,932.57
+6767,Severiano Cisneros-Bellido,,Spain,2023-11-06,Standard,932.57
 6768,Salvi Stradivari,salvi.stradivari6768@icloud.com,Italy,2024-03-30,Basic,348.22
 6769,Ryan Kunen,ryan.kunen6769@icloud.com,Netherlands,2023-04-16,Basic,665.5
 6770,Celestino Meléndez Malo,celestino.melendez.malo6770@hotmail.com,Spain,2023-01-26,Standard,968.7
@@ -6814,7 +6814,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6813,Nelli Naser,nelli.naser6813@gmail.com,Germany,2025-07-24,Premium,2483.75
 6814,Laurie Silva,laurie.silva6814@icloud.com,United States,2023-05-19,Standard,1355.74
 6815,Emma Owens,emma.owens6815@yahoo.com,Canada,2020-02-13,Standard,1003.95
-6816,Madison Weber,madison.weber6816@hotmail.com,Australia,2022-05-22,Standard,1579.01
+6816,Madison Weber,,Australia,2022-05-22,Standard,1579.01
 6817,Ucchal Jani,ucchal.jani6817@proton.me,India,2020-01-30,Basic,617.41
 6818,Maanas Munshi,maanas.munshi6818@hotmail.com,India,2022-01-26,Standard,1163.66
 6819,Kelly Duncan,kelly.duncan6819@hotmail.com,United States,2026-03-19,Basic,366.58
@@ -6935,7 +6935,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6934,Jesse Brown,jesse.brown6934@outlook.com,Australia,2026-07-05,Basic,299.34
 6935,Wishi Morar,wishi.morar6935@gmail.com,India,2023-09-29,Basic,344.33
 6936,Tristan Leduc,tristan.leduc6936@outlook.com,France,2024-10-24,Premium,1218.34
-6937,Miss Donna Newman,miss.donna.newman6937@outlook.com,United Kingdom,2025-08-25,Basic,55.2
+6937,Miss Donna Newman,,United Kingdom,2025-08-25,Basic,55.2
 6938,Saverio Lercari,saverio.lercari6938@gmail.com,Italy,2025-06-05,Standard,1629.8
 6939,Caroline Mendès,caroline.mendes6939@gmail.com,France,2022-06-23,Premium,1084.2
 6940,Arin Chana,arin.chana6940@yahoo.com,India,2021-07-27,Premium,2834.11
@@ -6989,7 +6989,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 6988,Julian Conner,julian.conner6988@gmail.com,Australia,2022-06-21,Standard,155.33
 6989,Upma Mangal,upma.mangal6989@icloud.com,India,2023-02-14,Basic,27.35
 6990,Angel Gordon,angel.gordon6990@proton.me,Canada,2025-03-29,Premium,4027.72
-6991,Hugo Velásquez Núñez,hugo.velasquez.nunez6991@hotmail.com,Mexico,2024-07-21,Standard,1020.18
+6991,Hugo Velásquez Núñez,,Mexico,2024-07-21,Standard,1020.18
 6992,Derek Smith,derek.smith6992@proton.me,United Kingdom,2025-11-15,Standard,1508.41
 6993,Vitória Ferreira,vitoria.ferreira6993@gmail.com,Brazil,2020-12-12,Standard,1121.3
 6994,Cheryl Turner,cheryl.turner6994@hotmail.com,United States,2025-09-05,Premium,4347.74
@@ -7174,7 +7174,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 7173,Rémy Alves,remy.alves7173@outlook.com,France,2020-03-29,Basic,442.52
 7174,Florentine Freudenberger MBA.,florentine.freudenberger.mba7174@gmail.com,Germany,2021-05-26,Basic,224.16
 7175,Michael Spencer,michael.spencer7175@hotmail.com,United States,2024-02-12,Standard,1036.73
-7176,Patrick Blankenship,patrick.blankenship7176@outlook.com,United States,2021-01-23,Basic,40.52
+7176,Patrick Blankenship,,United States,2021-01-23,Basic,40.52
 7177,Rémy Devaux,remy.devaux7177@outlook.com,France,2026-03-10,Standard,947.73
 7178,Kim Erickson,kim.erickson7178@outlook.com,Canada,2023-01-24,Premium,2403.59
 7179,Jenna Larson,jenna.larson7179@outlook.com,Australia,2025-07-31,Premium,1757.42
@@ -7200,7 +7200,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 7199,Robert Vargas,robert.vargas7199@proton.me,Japan,2021-07-17,Premium,842.85
 7200,Raymond Barber,raymond.barber7200@proton.me,United States,2024-07-04,Standard,486.44
 7201,Emily Bennett,emily.bennett7201@outlook.com,Australia,2021-06-10,Premium,4417.75
-7202,Dr Sarah Cole,dr.sarah.cole7202@yahoo.com,United Kingdom,2024-10-02,Basic,320.47
+7202,Dr Sarah Cole,,United Kingdom,2024-10-02,Basic,320.47
 7203,Mtro. Adán Peres,mtro.adan.peres7203@yahoo.com,Mexico,2024-02-06,Basic,403.36
 7204,Claude de Perrier,claude.de.perrier7204@outlook.com,France,2024-10-04,Premium,3880.32
 7205,Mrs. Amy Watson,mrs.amy.watson7205@proton.me,United States,2023-07-04,Standard,1174.94
@@ -7481,7 +7481,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 7480,Joe Greene,joe.greene7480@yahoo.com,United States,2020-05-15,Basic,60.93
 7481,Viraj Ben,viraj.ben7481@proton.me,India,2025-10-29,Premium,4017.41
 7482,Moisés Correa Valentín,moises.correa.valentin7482@yahoo.com,Spain,2023-03-05,Standard,1087.04
-7483,Michael Lucas,michael.lucas7483@yahoo.com,United States,2021-11-18,Premium,3264.44
+3302,Michael Lucas,michael.lucas7483@yahoo.com,United States,2021-11-18,Premium,3264.44
 7484,John Valenzuela,john.valenzuela7484@outlook.com,United States,2022-05-29,Premium,3382.21
 7485,Jamie Baird,jamie.baird7485@yahoo.com,Canada,2023-12-05,Premium,2468.21
 7486,Jennifer Woodard,jennifer.woodard7486@yahoo.com,United States,2020-06-24,Basic,84.57
@@ -7893,8 +7893,8 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 7892,Lupita Tomé Ochoa,lupita.tome.ochoa7892@yahoo.com,Spain,2021-02-08,Standard,810.63
 7893,Jonathan Jacobson,jonathan.jacobson7893@hotmail.com,Canada,2023-07-14,Premium,3886.64
 7894,Emily Wilson,emily.wilson7894@yahoo.com,Canada,2023-10-17,Standard,786.03
-7895,Brian Hudson,brian.hudson7895@icloud.com,United States,2025-10-11,Standard,1161.91
-7896,Steven Davis,steven.davis7896@icloud.com,United States,2024-01-05,Standard,755.05
+7895,Brian Hudson,,United States,2025-10-11,Standard,1161.91
+5062,Steven Davis,steven.davis7896@icloud.com,United States,2024-01-05,Standard,755.05
 7897,Jason Beck,jason.beck7897@hotmail.com,Australia,2020-06-20,Standard,1036.54
 7898,Georgina Taylor,georgina.taylor7898@yahoo.com,United Kingdom,2026-04-08,Basic,618.77
 7899,Rhys Owen,rhys.owen7899@gmail.com,United Kingdom,2021-01-15,Premium,3091.78
@@ -7926,7 +7926,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 7925,Dr. Traute Riehl B.Sc.,dr.traute.riehl.b.sc7925@hotmail.com,Germany,2021-05-19,Standard,1176.72
 7926,Joshua Mendoza,joshua.mendoza7926@icloud.com,United States,2021-01-26,Standard,653.95
 7927,Troy Glenn,troy.glenn7927@proton.me,United States,2023-01-18,Premium,2444.88
-7928,Siegfried Bruder,siegfried.bruder7928@yahoo.com,Germany,2022-09-03,Basic,696.53
+7928,Siegfried Bruder,,Germany,2022-09-03,Basic,696.53
 7929,Daniel Reynolds,daniel.reynolds7929@hotmail.com,United States,2023-07-03,Basic,52.24
 7930,Katie Mcneil,katie.mcneil7930@icloud.com,Australia,2025-06-14,Premium,2321.16
 7931,Jeanette Harrison,jeanette.harrison7931@yahoo.com,Australia,2026-04-20,Standard,1632.32
@@ -8003,7 +8003,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 8002,David Hunter,david.hunter8002@proton.me,Japan,2020-11-03,Premium,4337.24
 8003,Mrs Carole Blackburn,mrs.carole.blackburn8003@hotmail.com,United Kingdom,2025-01-09,Basic,548.65
 8004,Benjamin Neal,benjamin.neal8004@gmail.com,United States,2021-09-02,Basic,513.76
-8005,Denise King,denise.king8005@icloud.com,United Kingdom,2022-02-17,Standard,411.84
+8005,Denise King,,United Kingdom,2022-02-17,Standard,411.84
 8006,Kathleen Hörle,kathleen.horle8006@outlook.com,Germany,2025-09-16,Basic,553.81
 8007,Jane Reese,jane.reese8007@proton.me,United States,2023-08-07,Standard,1547.94
 8008,Nicholas Baldwin,nicholas.baldwin8008@icloud.com,United Kingdom,2021-08-31,Premium,1629.14
@@ -8176,7 +8176,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 8175,Azad Saini,azad.saini8175@icloud.com,India,2020-03-23,Standard,1795.93
 8176,Joshua Knox,joshua.knox8176@yahoo.com,United States,2021-05-06,Standard,1661.77
 8177,Courtney Smith,courtney.smith8177@icloud.com,Canada,2025-06-25,Basic,244.52
-8178,James Weinhage,james.weinhage8178@proton.me,Germany,2026-03-11,Premium,3395.77
+8178,James Weinhage,,Germany,2026-03-11,Premium,3395.77
 8179,Anka Dippel,anka.dippel8179@yahoo.com,Germany,2025-03-19,Basic,311.82
 8180,Danielle Mcdaniel,danielle.mcdaniel8180@hotmail.com,United States,2025-02-09,Standard,1208.02
 8181,Edwin Nunez,edwin.nunez8181@yahoo.com,Canada,2024-11-26,Basic,303.04
@@ -8397,7 +8397,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 8396,Isaac Verdier,isaac.verdier8396@outlook.com,France,2020-07-18,Standard,156.76
 8397,Samuel Turner,samuel.turner8397@hotmail.com,Canada,2020-03-16,Premium,3566.25
 8398,Renee Melendez,renee.melendez8398@icloud.com,Canada,2024-06-17,Standard,1299.28
-8399,Timothy Galvan,timothy.galvan8399@gmail.com,United States,2024-01-08,Premium,878.61
+8399,Timothy Galvan,,United States,2024-01-08,Premium,878.61
 8400,Élisabeth Ledoux,elisabeth.ledoux8400@proton.me,France,2023-12-22,Premium,2095.37
 8401,Isaac Cabello Cabrera,isaac.cabello.cabrera8401@yahoo.com,Spain,2025-08-18,Premium,1787.53
 8402,Paul Buisson,paul.buisson8402@hotmail.com,France,2024-06-19,Standard,804.6
@@ -8525,7 +8525,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 8524,Mekhala Khatri,mekhala.khatri8524@hotmail.com,India,2025-06-09,Premium,1921.14
 8525,Jennifer Anderson,jennifer.anderson8525@hotmail.com,United States,2025-05-09,Basic,643.77
 8526,Socorro Eric Jaime,socorro.eric.jaime8526@outlook.com,Mexico,2020-05-19,Standard,892.96
-8527,Sr. Nathan Moraes,sr.nathan.moraes8527@gmail.com,Brazil,2021-07-06,Basic,697.31
+8527,Sr. Nathan Moraes,,Brazil,2021-07-06,Basic,697.31
 8528,Brian Fitzgerald,brian.fitzgerald8528@proton.me,Australia,2020-12-16,Standard,1738.47
 8529,Lauren Trujillo,lauren.trujillo8529@outlook.com,United States,2020-05-26,Standard,1443.99
 8530,Auguste Collin du Salmon,auguste.collin.du.salmon8530@icloud.com,France,2023-08-06,Standard,684.22
@@ -8676,7 +8676,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 8675,Annelene Meister-Scheuermann,annelene.meister.scheuermann8675@outlook.com,Germany,2023-07-13,Standard,171.69
 8676,Corinne Carlier,corinne.carlier8676@icloud.com,France,2024-01-17,Premium,3916.18
 8677,Joseph Graves PhD,joseph.graves.phd8677@gmail.com,Japan,2022-02-11,Standard,567.27
-8678,Lisa Mosley,lisa.mosley8678@hotmail.com,United States,2026-03-14,Standard,1259.6
+3598,Lisa Mosley,lisa.mosley8678@hotmail.com,United States,2026-03-14,Standard,1259.6
 8679,Graciela Guillermina Rendón,graciela.guillermina.rendon8679@outlook.com,Mexico,2020-02-25,Basic,107.41
 8680,Eugenia Jaime Villalpando,eugenia.jaime.villalpando8680@icloud.com,Mexico,2021-05-08,Basic,453.69
 8681,Travis Price,travis.price8681@gmail.com,United States,2024-01-09,Basic,579.66
@@ -8684,7 +8684,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 8683,Linda Atkinson,linda.atkinson8683@outlook.com,United States,2024-03-10,Premium,2382.94
 8684,Xalak Nazareth,xalak.nazareth8684@yahoo.com,India,2022-06-04,Basic,128.97
 8685,Prof. Heidrun Reinhardt MBA.,prof.heidrun.reinhardt.mba8685@icloud.com,Germany,2021-08-18,Basic,283.31
-8686,Katherine Stark,katherine.stark8686@icloud.com,Canada,2022-12-22,Standard,993.03
+8686,Katherine Stark,,Canada,2022-12-22,Standard,993.03
 8687,Raquel Campos,raquel.campos8687@yahoo.com,Brazil,2020-06-21,Standard,398.91
 8688,Sylvia Lloyd,sylvia.lloyd8688@yahoo.com,United Kingdom,2020-07-17,Standard,234.54
 8689,Rigo Klingelhöfer,rigo.klingelhofer8689@hotmail.com,Germany,2020-07-04,Standard,395.37
@@ -8907,14 +8907,14 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 8906,Derrick Ramirez,derrick.ramirez8906@hotmail.com,Japan,2020-07-24,Standard,199.17
 8907,Sarah King,sarah.king8907@proton.me,Australia,2023-11-12,Standard,612.22
 8908,Lucas du Guyon,lucas.du.guyon8908@outlook.com,France,2025-05-18,Standard,1278.87
-8909,Salma Fidel Alvarez Bustos,salma.fidel.alvarez.bustos8909@outlook.com,Mexico,2025-06-06,Premium,4494.32
+8909,Salma Fidel Alvarez Bustos,,Mexico,2025-06-06,Premium,4494.32
 8910,Jason Flores,jason.flores8910@gmail.com,United States,2022-03-19,Premium,1038.65
 8911,Krista Martinez,krista.martinez8911@hotmail.com,Australia,2021-01-13,Standard,1122.64
 8912,Shravya Swaminathan,shravya.swaminathan8912@yahoo.com,India,2021-09-15,Standard,1157.78
 8913,Ishani Prashad,ishani.prashad8913@hotmail.com,India,2024-09-13,Standard,1733.5
 8914,Quincy Rai,quincy.rai8914@icloud.com,India,2023-11-19,Basic,654.24
 8915,Andrew Williams,andrew.williams8915@outlook.com,United States,2020-11-04,Standard,212.53
-8916,Christy Kennedy,christy.kennedy8916@hotmail.com,United States,2022-08-09,Standard,1688.24
+8916,Christy Kennedy,,United States,2022-08-09,Standard,1688.24
 8917,Henry Gabriel Camargo,henry.gabriel.camargo8917@yahoo.com,Brazil,2024-12-19,Basic,353.27
 8918,Joseph Shaw,joseph.shaw8918@gmail.com,Australia,2025-12-17,Standard,654.81
 8919,Daniel Paul,daniel.paul8919@hotmail.com,France,2025-09-04,Premium,3082.91
@@ -9216,7 +9216,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 9215,Dr. Yuri Teixeira,dr.yuri.teixeira9215@hotmail.com,Brazil,2020-10-13,Standard,533.51
 9216,Amy Bailey,amy.bailey9216@icloud.com,United States,2024-05-25,Standard,1031.33
 9217,Sharon Fuentes,sharon.fuentes9217@yahoo.com,United States,2021-08-06,Basic,301.8
-9218,Geoffrey Fisher,geoffrey.fisher9218@icloud.com,United Kingdom,2025-10-13,Standard,194.92
+9218,Geoffrey Fisher,,United Kingdom,2025-10-13,Standard,194.92
 9219,Charles Castaneda,charles.castaneda9219@hotmail.com,United States,2024-02-09,Basic,211.84
 9220,Rudolph Haering B.Sc.,rudolph.haering.b.sc9220@gmail.com,Germany,2023-07-05,Standard,639.96
 9221,Gastone Interiano,gastone.interiano9221@yahoo.com,Italy,2022-11-17,Basic,463.64
@@ -9433,7 +9433,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 9432,Barbara Hester,barbara.hester9432@hotmail.com,Australia,2023-11-20,Basic,592.2
 9433,Carlos Anaya,carlos.anaya9433@hotmail.com,Mexico,2022-01-29,Basic,584.06
 9434,Jenna Wilson,jenna.wilson9434@proton.me,Canada,2020-04-02,Standard,1473.57
-9435,Benjamin Sullivan,benjamin.sullivan9435@hotmail.com,United States,2023-03-14,Basic,675.98
+9435,Benjamin Sullivan,,United States,2023-03-14,Basic,675.98
 9436,Hemani Bakshi,hemani.bakshi9436@outlook.com,India,2025-01-02,Standard,392.32
 9437,Michael Savage,michael.savage9437@yahoo.com,Japan,2023-09-14,Standard,1501.81
 9438,Joséphine Wagner,josephine.wagner9438@outlook.com,France,2024-09-23,Standard,1308.63
@@ -9810,7 +9810,7 @@ customer_id,customer_name,email,country,signup_date,customer_segment,lifetime_va
 9809,Lisa Randall,lisa.randall9809@icloud.com,Australia,2020-06-16,Premium,4088.45
 9810,Michael Johnson,michael.johnson9810@proton.me,Australia,2024-02-14,Standard,1701.38
 9811,Dipl.-Ing. Hanno Ullmann,dipl.ing.hanno.ullmann9811@hotmail.com,Germany,2020-11-18,Standard,1779.57
-9812,Steven Mayo,steven.mayo9812@proton.me,United States,2024-05-09,Standard,1717.53
+2033,Steven Mayo,steven.mayo9812@proton.me,United States,2024-05-09,Standard,1717.53
 9813,Shawna Green,shawna.green9813@proton.me,United States,2020-05-06,Premium,4397.96
 9814,Daniel Gosselin,daniel.gosselin9814@proton.me,France,2023-01-11,Basic,376.55
 9815,Ashley Valentine,ashley.valentine9815@proton.me,United States,2022-04-01,Premium,4015.97

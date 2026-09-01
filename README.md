@@ -9,8 +9,8 @@ Bronze → Silver → Gold → Dashboard pipeline for an e-commerce sales use ca
 | File | Rows | Role |
 |---|---|---|
 | `data/customers.csv` | 10,000 | Customers |
-| `data/orders.csv` | 100,000 | Orders (not generated yet) |
-| `data/products.csv` | 500 | Products (not generated yet) |
+| `data/orders.csv` | 100,000 | Orders (FKs → customers, products) |
+| `data/products.csv` | 500 | Products |
 
 ## Layers
 
@@ -21,9 +21,18 @@ Bronze → Silver → Gold → Dashboard pipeline for an e-commerce sales use ca
 ## Current status
 
 - [x] Project folder structure
-- [x] Synthetic `customers.csv` generator (`src/data_generation/generate_sample_data.py`)
-- [ ] Orders / products generators
-- [ ] Bronze ingest
-- [ ] Silver quality checks
-- [ ] Gold aggregations
-- [ ] Dashboard
+- [x] Synthetic generators for customers, products, and orders (`src/data_generation/generate_sample_data.py`)
+- [x] Bronze ingest (`src/bronze/01_ingest_customers.py`, `02_ingest_orders.py`, `03_ingest_products.py`)
+- [x] Silver completeness (`src/silver/01_quality_completeness.py`)
+- [x] Silver uniqueness (`src/silver/02_quality_uniqueness.py`)
+- [x] Silver referential integrity (`src/silver/04_quality_referential_integrity.py`)
+- [x] Silver type validation (`src/silver/03_quality_type_validation.py`)
+- [x] Silver business logic (`src/silver/05_quality_business_logic.py`)
+- [x] Silver orchestrator + metrics (`src/silver/create_silver_tables.py`)
+- [x] Gold sales by product (`src/gold/01_sales_by_product.sql`)
+- [x] Gold revenue by customer (`src/gold/02_revenue_by_customer.sql`)
+- [x] Gold customer segmentation (`src/gold/04_customer_segmentation.sql`)
+- [x] Gold orchestrator (`src/gold/create_gold_tables.py`)
+- [x] Dashboard queries (`src/dashboard/dashboard_queries.sql`)
+- [x] Dashboard guide (`src/dashboard/DASHBOARD_GUIDE.md`)
+- [ ] Gold daily/weekly trends
