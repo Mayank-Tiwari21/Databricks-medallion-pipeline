@@ -166,6 +166,8 @@ def run_pipeline(spark: SparkSession | None = None) -> None:
     spark = spark or SparkSession.builder.getOrCreate()
     src = _find_src_root()
     rt = _load_runtime(src)
+    _get_param("uc_catalog", rt.DEFAULT_UC_CATALOG)
+    _get_param("uc_schema", rt.DEFAULT_UC_SCHEMA)
     source_dir = _get_param("source_dir", rt.DEFAULT_SOURCE_DIR).rstrip("/")
     source_dir = rt.normalize_source_dir(source_dir)
 
@@ -175,6 +177,10 @@ def run_pipeline(spark: SparkSession | None = None) -> None:
 
     print("[pipeline] Bronze → Silver → Gold → dashboard")
     print(f"[pipeline] CSV source_dir = {source_dir}")
+    print(
+        f"[pipeline] tables = {rt.uc_catalog()}.{rt.uc_schema()}."
+        "bronze_* / silver_* / gold_*  (no CREATE SCHEMA)"
+    )
 
     bronze_results: list[dict] = []
 
@@ -200,7 +206,7 @@ def run_pipeline(spark: SparkSession | None = None) -> None:
     print("=" * 72)
     print("SQL Dashboard: paste each query from src/dashboard/dashboard_queries.sql")
     print("into its own widget. Field mappings: src/dashboard/DASHBOARD_GUIDE.md")
-    sql_text = rt.read_text("dashboard/dashboard_queries.sql")
+    sql_text = rt.qualify_sql(rt.read_text("dashboard/dashboard_queries.sql"))
     for title, stmt in _split_dashboard_selects(sql_text):
         print()
         print(title)
@@ -209,9 +215,9 @@ def run_pipeline(spark: SparkSession | None = None) -> None:
 
     print()
     print("[pipeline] complete")
-    print("  bronze.customers / bronze.orders / bronze.products")
-    print("  silver.customers / silver.orders / silver.products / silver.quality_metrics")
-    print("  gold.sales_by_product / gold.revenue_by_customer / gold.customer_segmentation")
+    print(f"  {rt.table_name('bronze.customers')} / {rt.table_name('bronze.orders')} / {rt.table_name('bronze.products')}")
+    print(f"  {rt.table_name('silver.customers')} / {rt.table_name('silver.orders')} / {rt.table_name('silver.products')} / {rt.table_name('silver.quality_metrics')}")
+    print(f"  {rt.table_name('gold.sales_by_product')} / {rt.table_name('gold.revenue_by_customer')} / {rt.table_name('gold.customer_segmentation')}")
 
 
 if __name__ == "__main__":

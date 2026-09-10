@@ -34,10 +34,10 @@ from pyspark.sql.types import (
 FLAG_ORPHAN_CUSTOMER_ID = "ri.customer_id_orphan"
 FLAG_ORPHAN_PRODUCT_ID = "ri.product_id_orphan"
 
-DEFAULT_ORDERS_SOURCE = "silver.orders"
-DEFAULT_CUSTOMERS_SOURCE = "silver.customers"
-DEFAULT_PRODUCTS_SOURCE = "bronze.products"
-DEFAULT_ORDERS_TARGET = "silver.orders"
+DEFAULT_ORDERS_SOURCE = "workspace.default.silver_orders"
+DEFAULT_CUSTOMERS_SOURCE = "workspace.default.silver_customers"
+DEFAULT_PRODUCTS_SOURCE = "workspace.default.bronze_products"
+DEFAULT_ORDERS_TARGET = "workspace.default.silver_orders"
 
 ROW_ID_COL = "_ri_row_id"
 
@@ -224,7 +224,6 @@ def _print_summary(spark: SparkSession, rows: list[dict]) -> DataFrame:
 
 def _write_silver(df: DataFrame, target_table: str) -> None:
     spark = df.sparkSession
-    spark.sql("CREATE DATABASE IF NOT EXISTS silver")
     (
         df.write.format("delta")
         .mode("overwrite")

@@ -33,6 +33,24 @@ from pyspark.sql.types import (
 
 logger = logging.getLogger("gold.create_tables")
 
+
+def _t(logical: str) -> str:
+    try:
+        from databricks_runtime import table_name
+
+        return table_name(logical)
+    except Exception:
+        return "workspace.default." + logical.replace(".", "_")
+
+
+def _qualify(script: str) -> str:
+    try:
+        from databricks_runtime import qualify_sql
+
+        return qualify_sql(script)
+    except Exception:
+        return script.replace("CREATE DATABASE IF NOT EXISTS gold;", "")
+
 GOLD_SQL_JOBS = [
     {
         "filename": "01_sales_by_product.sql",
@@ -206,11 +224,17 @@ def _sql_statements(script: str) -> list[str]:
             continue
         kept.append(line)
     blob = "\n".join(kept)
-    return [part.strip() for part in blob.split(";") if part.strip()]
+    statements = [part.strip() for part in blob.split(";") if part.strip()]
+    skipped = ("CREATE DATABASE", "CREATE SCHEMA")
+    return [
+        stmt
+        for stmt in statements
+        if not stmt.upper().startswith(skipped)
+    ]
 
 
 def _run_sql_file(spark: SparkSession, path: Path) -> None:
-    script = path.read_text(encoding="utf-8")
+    script = _qualify(path.read_text(encoding="utf-8"))
     statements = _sql_statements(script)
     if not statements:
         raise ValueError(f"No SQL statements in {path.name}")
@@ -227,12 +251,12 @@ def create_gold_tables(
 ) -> None:
     sql_dir = _sql_dir(Path(sql_dir) if sql_dir is not None else None)
     print(f"[gold] sql_dir = {sql_dir}")
-    spark.sql("CREATE DATABASE IF NOT EXISTS gold")
+    print("[gold] Free Edition: tables go in workspace.default (no CREATE SCHEMA)")
 
     results: list[tuple] = []
     for job in GOLD_SQL_JOBS:
         path = sql_dir / job["filename"]
-        table = job["target_table"]
+        table = _t(job["target_table"])
         started = time.perf_counter()
         print("-" * 60)
         print(f"[gold] materializing {table} from {job['filename']}")
@@ -264,7 +288,7 @@ def create_gold_tables(
     for check in SPOT_CHECK_QUERIES:
         print()
         print(check["title"])
-        statements = _sql_statements(check["sql"])
+        statements = _sql_statements(_qualify(check["sql"]))
         if not statements:
             print(check["sql"].strip())
             continue

@@ -7,10 +7,10 @@ SELECT
     COUNT(o.order_id)                                       AS silver_orders,
     ROUND(SUM(o.total_amount), 2)                           AS silver_revenue,
     ROUND(g.total_revenue - ROUND(SUM(o.total_amount), 2), 2) AS delta_revenue
-FROM gold.sales_by_product g
-INNER JOIN silver.orders o
+FROM workspace.default.gold_sales_by_product g
+INNER JOIN workspace.default.silver_orders o
     ON g.product_id = o.product_id
-WHERE g.product_id = (SELECT product_id FROM gold.sales_by_product ORDER BY total_revenue DESC LIMIT 1)
+WHERE g.product_id = (SELECT product_id FROM workspace.default.gold_sales_by_product ORDER BY total_revenue DESC LIMIT 1)
   AND size(o.quality_check_result) = 0
   AND o.order_status <> 'Cancelled'
 GROUP BY g.product_id, g.total_orders, g.total_revenue;
@@ -24,11 +24,11 @@ SELECT
     ROUND(SUM(o.total_amount), 2)                           AS silver_sum,
     ROUND(g.lifetime_value_actual - ROUND(SUM(o.total_amount), 2), 2) AS delta_ltv,
     g.lifetime_value                                        AS stated_ltv
-FROM gold.revenue_by_customer g
-INNER JOIN silver.orders o
+FROM workspace.default.gold_revenue_by_customer g
+INNER JOIN workspace.default.silver_orders o
     ON g.customer_id = o.customer_id
 WHERE g.customer_id = (
-        SELECT customer_id FROM gold.revenue_by_customer
+        SELECT customer_id FROM workspace.default.gold_revenue_by_customer
         WHERE total_orders > 0 ORDER BY total_revenue DESC LIMIT 1
     )
   AND size(o.quality_check_result) = 0
@@ -37,10 +37,10 @@ GROUP BY g.customer_id, g.total_orders, g.lifetime_value_actual, g.lifetime_valu
 
 -- Segmentation totals vs clean customers and revenue_by_customer
 SELECT
-    (SELECT SUM(customer_count) FROM gold.customer_segmentation) AS gold_segment_customers,
-    (SELECT COUNT(*) FROM silver.customers WHERE size(quality_check_result) = 0) AS silver_clean_customers,
-    (SELECT ROUND(SUM(total_revenue), 2) FROM gold.customer_segmentation) AS gold_segment_revenue,
-    (SELECT ROUND(SUM(total_revenue), 2) FROM gold.revenue_by_customer) AS gold_customer_revenue;
+    (SELECT SUM(customer_count) FROM workspace.default.gold_customer_segmentation) AS gold_segment_customers,
+    (SELECT COUNT(*) FROM workspace.default.silver_customers WHERE size(quality_check_result) = 0) AS silver_clean_customers,
+    (SELECT ROUND(SUM(total_revenue), 2) FROM workspace.default.gold_customer_segmentation) AS gold_segment_revenue,
+    (SELECT ROUND(SUM(total_revenue), 2) FROM workspace.default.gold_revenue_by_customer) AS gold_customer_revenue;
 
 -- These SELECTs also run automatically at the end of src/gold/create_gold_tables.py
 -- (and therefore from src/run_pipeline.py). Paste here only for ad-hoc SQL notebooks.

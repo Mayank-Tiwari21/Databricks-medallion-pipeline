@@ -45,7 +45,7 @@ PRODUCTS_SCHEMA = StructType(
 )
 
 DEFAULT_SOURCE_PATH = "/Volumes/workspace/default/ecommerce/products.csv"
-DEFAULT_TARGET_TABLE = "bronze.products"
+DEFAULT_TARGET_TABLE = "workspace.default.bronze_products"
 
 
 def _get_param(name: str, default: str) -> str:
@@ -86,7 +86,7 @@ def ingest_products(
         "_source_file", F.input_file_name()
     ).withColumn("_ingested_at", F.current_timestamp())
 
-    spark.sql("CREATE DATABASE IF NOT EXISTS bronze")
+    # Free Edition cannot CREATE SCHEMA on catalog workspace.
 
     (
         bronze_df.write.format("delta")

@@ -20,6 +20,56 @@ from pyspark.sql import SparkSession
 DEFAULT_SOURCE_DIR = "/Volumes/workspace/default/ecommerce"
 LANDING_CSV_NAMES = ("customers.csv", "orders.csv", "products.csv")
 
+# Free Edition: no CREATE SCHEMA on catalog `workspace`. Tables live in the
+# existing `default` schema as bronze_customers, silver_orders, ...
+DEFAULT_UC_CATALOG = "workspace"
+DEFAULT_UC_SCHEMA = "default"
+
+LOGICAL_TABLES = {
+    "bronze.customers": "bronze_customers",
+    "bronze.orders": "bronze_orders",
+    "bronze.products": "bronze_products",
+    "silver.customers": "silver_customers",
+    "silver.orders": "silver_orders",
+    "silver.products": "silver_products",
+    "silver.quality_metrics": "silver_quality_metrics",
+    "gold.sales_by_product": "gold_sales_by_product",
+    "gold.revenue_by_customer": "gold_revenue_by_customer",
+    "gold.customer_segmentation": "gold_customer_segmentation",
+}
+
+
+def uc_catalog() -> str:
+    return get_param("uc_catalog", DEFAULT_UC_CATALOG).strip() or DEFAULT_UC_CATALOG
+
+
+def uc_schema() -> str:
+    return get_param("uc_schema", DEFAULT_UC_SCHEMA).strip() or DEFAULT_UC_SCHEMA
+
+
+def table_name(logical: str) -> str:
+    """bronze.customers → workspace.default.bronze_customers."""
+    suffix = LOGICAL_TABLES.get(logical, logical.replace(".", "_"))
+    return f"{uc_catalog()}.{uc_schema()}.{suffix}"
+
+
+def qualify_sql(script: str) -> str:
+    """Rewrite bronze.* / silver.* / gold.* to UC default-schema tables.
+
+    Also drops CREATE DATABASE / CREATE SCHEMA (Free Edition cannot create
+    schemas on catalog workspace).
+    """
+    kept: list[str] = []
+    for line in script.splitlines():
+        stripped = line.lstrip().upper()
+        if stripped.startswith("CREATE DATABASE") or stripped.startswith("CREATE SCHEMA"):
+            continue
+        kept.append(line)
+    script = "\n".join(kept)
+    for logical in sorted(LOGICAL_TABLES, key=len, reverse=True):
+        script = script.replace(logical, table_name(logical))
+    return script
+
 
 def get_param(name: str, default: str = "") -> str:
     try:

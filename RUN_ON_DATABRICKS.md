@@ -71,12 +71,14 @@ The driver looks for `src/bronze/01_ingest_customers.py` next to
 ## Step 3 — First run (creates widgets)
 
 1. **Run all** (or run the last cell if the file is one cell).
-2. Databricks creates two widgets at the top of the notebook:
+2. Databricks creates widgets at the top of the notebook:
 
 | Widget | Default | Meaning |
-|--------------|----------------------------------------|--------------------------------------|
-| `source_dir` | `/Volumes/workspace/default/ecommerce` | Unity Catalog volume Spark reads     |
-| `src_root`   | empty                                  | Leave empty unless auto-detect fails |
+|---|---|---|
+| `source_dir` | `/Volumes/workspace/default/ecommerce` | Unity Catalog volume Spark reads |
+| `src_root` | empty | Leave empty unless auto-detect fails |
+| `uc_catalog` | `workspace` | Catalog for Delta tables |
+| `uc_schema` | `default` | Existing schema (do not create `bronze`) |
 
 3. If this first run fails with “cannot find `01_ingest_customers.py`”:
    - Set `src_root` to the **Workspace path of `src/`**, for example  
@@ -117,9 +119,9 @@ Watch the notebook output. Layers are separated by `=======` banners.
 | Order | Layer | What runs | Writes |
 |---|---|---|---|
 | 1 | Landing | Copy CSVs to UC volume | Volume files only |
-| 2 | Bronze | `ingest_all.py` → `01` customers, `03` products, `02` orders | `bronze.customers`, `bronze.orders`, `bronze.products` |
-| 3 | Silver | Completeness, uniqueness, type, RI, business flags | `silver.*` + `silver.quality_metrics` |
-| 4 | Gold | SQL `01`, `02`, `04` (not `03_daily_weekly_trends.sql`) | `gold.sales_by_product`, `gold.revenue_by_customer`, `gold.customer_segmentation` |
+| 2 | Bronze | `ingest_all.py` → `01` customers, `03` products, `02` orders | `workspace.default.bronze_customers` / `bronze_orders` / `bronze_products` |
+| 3 | Silver | Completeness, uniqueness, type, RI, business flags | `workspace.default.silver_*` + `silver_quality_metrics` |
+| 4 | Gold | SQL `01`, `02`, `04` (not `03_daily_weekly_trends.sql`) | `workspace.default.gold_sales_by_product`, `gold_revenue_by_customer`, `gold_customer_segmentation` |
 | 5 | Checks | Three Gold vs Silver spot-check queries | Displayed only |
 | 6 | Dashboard | Three SELECTs from `dashboard_queries.sql` | Displayed only |
 
@@ -136,22 +138,22 @@ After a successful run, open a SQL cell (or Catalog Explorer) and run:
 
 ```sql
 -- Bronze (includes seeded defects)
-SELECT COUNT(*) FROM bronze.customers;   -- 10000
-SELECT COUNT(*) FROM bronze.products;     -- 500
-SELECT COUNT(*) FROM bronze.orders;       -- 100000
+SELECT COUNT(*) FROM workspace.default.bronze_customers;   -- 10000
+SELECT COUNT(*) FROM workspace.default.bronze_products;     -- 500
+SELECT COUNT(*) FROM workspace.default.bronze_orders;       -- 100000
 
-SELECT COUNT(*) FROM bronze.customers WHERE email IS NULL;        -- 50
-SELECT COUNT(*) FROM bronze.orders WHERE customer_id IS NULL;     -- 100
-SELECT COUNT(*) FROM bronze.orders WHERE product_id IS NULL;      -- 200
+SELECT COUNT(*) FROM workspace.default.bronze_customers WHERE email IS NULL;        -- 50
+SELECT COUNT(*) FROM workspace.default.bronze_orders WHERE customer_id IS NULL;     -- 100
+SELECT COUNT(*) FROM workspace.default.bronze_orders WHERE product_id IS NULL;      -- 200
 ```
 
 ```sql
 -- Silver keeps every row
-SELECT COUNT(*) FROM silver.customers;    -- 10000
-SELECT COUNT(*) FROM silver.orders;       -- 100000
-SELECT COUNT(*) FROM silver.products;     -- 500
+SELECT COUNT(*) FROM workspace.default.silver_customers;    -- 10000
+SELECT COUNT(*) FROM workspace.default.silver_orders;       -- 100000
+SELECT COUNT(*) FROM workspace.default.silver_products;     -- 500
 
-SELECT * FROM silver.quality_metrics ORDER BY table_name, check_group, check_name;
+SELECT * FROM workspace.default.silver_quality_metrics ORDER BY table_name, check_group, check_name;
 ```
 
 Expected overall pass rates (disjoint seeded defects):
@@ -162,9 +164,9 @@ Expected overall pass rates (disjoint seeded defects):
 
 ```sql
 -- Gold uses only clean Silver rows
-SELECT COUNT(*) FROM gold.sales_by_product;
-SELECT COUNT(*) FROM gold.revenue_by_customer;      -- = clean customers
-SELECT * FROM gold.customer_segmentation;
+SELECT COUNT(*) FROM workspace.default.gold_sales_by_product;
+SELECT COUNT(*) FROM workspace.default.gold_revenue_by_customer;      -- = clean customers
+SELECT * FROM workspace.default.gold_customer_segmentation;
 ```
 
 More checks: `database/queries.sql`.
@@ -208,6 +210,7 @@ Prefer `run_pipeline.py` for a clean end-to-end.
 
 | Symptom | What to do |
 |---|---|
+| `PERMISSION_DENIED: User does not have CREATE SCHEMA` | Do not create `bronze` / `silver` / `gold` databases. Tables are `workspace.default.bronze_customers` etc. Re-run the updated `run_pipeline.py`. |
 | `NameError: __file__` | You pasted a layer script into a notebook. Use `run_pipeline.py` from the Git folder, or set `src_root`. |
 | Cannot find `01_ingest_customers.py` | Set widget `src_root` to the `src/` Workspace path. The notebook is not sitting next to `bronze/`. |
 | `/FileStore` or `dbfs:` error | Free Edition has no DBFS. Leave `source_dir` as `/Volumes/workspace/default/ecommerce`. |
@@ -222,8 +225,9 @@ Prefer `run_pipeline.py` for a clean end-to-end.
 
 ## Assumptions (read these once)
 
-- Tables are two-level Hive-style names (`bronze.customers`) in the **session
-  default catalog** (usually `workspace` on Free Edition).
+- Tables live in **`workspace.default`** (Free Edition cannot `CREATE SCHEMA`
+  on catalog `workspace`). Physical names:
+  `bronze_customers`, `silver_orders`, `gold_sales_by_product`, …
 - Writes are **overwrite**, not append. Re-running the driver replaces Bronze,
   Silver, and Gold snapshots.
 - Cancelled orders are excluded from Gold revenue; Pending is kept.

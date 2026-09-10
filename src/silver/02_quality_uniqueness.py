@@ -35,10 +35,10 @@ FLAG_DUP_ORDER_ID = "uniqueness.order_id_duplicate"
 
 # Read silver so completeness tokens stay on the row. Fall back to bronze
 # if this script is run first (quality_check_result will be created).
-DEFAULT_CUSTOMERS_SOURCE = "silver.customers"
-DEFAULT_ORDERS_SOURCE = "silver.orders"
-DEFAULT_CUSTOMERS_TARGET = "silver.customers"
-DEFAULT_ORDERS_TARGET = "silver.orders"
+DEFAULT_CUSTOMERS_SOURCE = "workspace.default.silver_customers"
+DEFAULT_ORDERS_SOURCE = "workspace.default.silver_orders"
+DEFAULT_CUSTOMERS_TARGET = "workspace.default.silver_customers"
+DEFAULT_ORDERS_TARGET = "workspace.default.silver_orders"
 
 PK_COUNT_COL = "_pk_occurrence_count"
 
@@ -193,7 +193,6 @@ def _print_summary(spark: SparkSession, rows: list[dict]) -> DataFrame:
 
 def _write_silver(df: DataFrame, target_table: str) -> None:
     spark = df.sparkSession
-    spark.sql("CREATE DATABASE IF NOT EXISTS silver")
     (
         df.write.format("delta")
         .mode("overwrite")

@@ -31,10 +31,10 @@ from pyspark.sql.types import (
 FLAG_SIGNUP_IN_FUTURE = "business.signup_date_in_future"
 FLAG_ORDER_IN_FUTURE = "business.order_date_in_future"
 
-DEFAULT_CUSTOMERS_SOURCE = "silver.customers"
-DEFAULT_ORDERS_SOURCE = "silver.orders"
-DEFAULT_CUSTOMERS_TARGET = "silver.customers"
-DEFAULT_ORDERS_TARGET = "silver.orders"
+DEFAULT_CUSTOMERS_SOURCE = "workspace.default.silver_customers"
+DEFAULT_ORDERS_SOURCE = "workspace.default.silver_orders"
+DEFAULT_CUSTOMERS_TARGET = "workspace.default.silver_customers"
+DEFAULT_ORDERS_TARGET = "workspace.default.silver_orders"
 
 SUMMARY_SCHEMA = StructType(
     [
@@ -163,7 +163,6 @@ def _print_summary(spark: SparkSession, rows: list[dict]) -> DataFrame:
 
 def _write_silver(df: DataFrame, target_table: str) -> None:
     spark = df.sparkSession
-    spark.sql("CREATE DATABASE IF NOT EXISTS silver")
     (
         df.write.format("delta")
         .mode("overwrite")

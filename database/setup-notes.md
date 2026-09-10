@@ -105,12 +105,12 @@ and duration.
 
 | Script | Widget `source_path` | Table |
 |---|---|---|
-| `01_ingest_customers.py` | `/Volumes/workspace/default/ecommerce/customers.csv` | `bronze.customers` |
-| `03_ingest_products.py` | `/Volumes/workspace/default/ecommerce/products.csv` | `bronze.products` |
-| `02_ingest_orders.py` | `/Volumes/workspace/default/ecommerce/orders.csv` | `bronze.orders` |
+| `01_ingest_customers.py` | `/Volumes/workspace/default/ecommerce/customers.csv` | `workspace.default.bronze_customers` |
+| `03_ingest_products.py` | `/Volumes/workspace/default/ecommerce/products.csv` | `workspace.default.bronze_products` |
+| `02_ingest_orders.py` | `/Volumes/workspace/default/ecommerce/orders.csv` | `workspace.default.bronze_orders` |
 
-Each script creates database `bronze` if it does not exist, overwrites the
-Delta table, and prints rows read vs rows written. Those two counts must match
+Each script overwrites the Delta table in `workspace.default` (Free Edition
+cannot `CREATE SCHEMA bronze`). Row counts before/after write must match
 (Bronze does not filter).
 
 Expected: ~10,000 customers, 500 products, 100,000 orders — **including**
@@ -119,20 +119,20 @@ seeded nulls and duplicate PKs.
 ## 4. Spot-check
 
 ```sql
-SELECT COUNT(*) FROM bronze.customers;   -- 10000
-SELECT COUNT(*) FROM bronze.products;    -- 500
-SELECT COUNT(*) FROM bronze.orders;      -- 100000
+SELECT COUNT(*) FROM workspace.default.bronze_customers;   -- 10000
+SELECT COUNT(*) FROM workspace.default.bronze_products;    -- 500
+SELECT COUNT(*) FROM workspace.default.bronze_orders;      -- 100000
 
-SELECT COUNT(*) FROM bronze.customers WHERE email IS NULL;           -- 50
-SELECT COUNT(*) FROM bronze.orders WHERE customer_id IS NULL;        -- 100
-SELECT COUNT(*) FROM bronze.orders WHERE product_id IS NULL;         -- 200
+SELECT COUNT(*) FROM workspace.default.bronze_customers WHERE email IS NULL;           -- 50
+SELECT COUNT(*) FROM workspace.default.bronze_orders WHERE customer_id IS NULL;        -- 100
+SELECT COUNT(*) FROM workspace.default.bronze_orders WHERE product_id IS NULL;         -- 200
 ```
 
 ## Assumptions
 
-- Unity Catalog catalog `workspace`, schema `default`, volume `ecommerce`.
-  Three-part names like `workspace.bronze.customers` are valid if you set
-  that as the default catalog; this repo still uses `bronze.customers` and
-  relies on the session default catalog.
+- Unity Catalog catalog `workspace`, schema **`default`** (cannot create
+  schemas `bronze` / `silver` / `gold` on Free Edition).
+  Tables: `workspace.default.bronze_customers`, `silver_orders`,
+  `gold_sales_by_product`, …
 - Write mode is **overwrite** so a re-run replaces the snapshot. Not append.
 - `nullValue=""` treats empty CSV cells as SQL null (matches the generator).

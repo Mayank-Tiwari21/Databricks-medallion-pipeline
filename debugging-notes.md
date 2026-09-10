@@ -93,6 +93,18 @@ overwrite an existing widget value.
 **Fix:** `normalize_source_dir()` rewrites FileStore/dbfs paths to the volume
 default. You can also delete the widget and re-run.
 
+## 8. `PERMISSION_DENIED: User does not have CREATE SCHEMA on Catalog 'workspace'`
+
+**Where:** `spark.sql("CREATE DATABASE IF NOT EXISTS bronze")`.
+
+**Why:** On Unity Catalog that statement is `CREATE SCHEMA workspace.bronze`.
+Free Edition users typically cannot create schemas on catalog `workspace`.
+They **can** write tables in the existing `default` schema.
+
+**Fix:** Do not create `bronze` / `silver` / `gold` databases. Write
+`workspace.default.bronze_customers`, `silver_orders`, `gold_sales_by_product`,
+and so on. Widgets `uc_catalog` / `uc_schema` default to `workspace` / `default`.
+
 ## Open
 
 - `src/gold/03_daily_weekly_trends.sql` is a stub. Not a runtime failure; the

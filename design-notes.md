@@ -77,10 +77,10 @@ No cleaning on the way through the volume.
 
 ## Naming and catalogs
 
-- Two-level names: `bronze.customers`, `silver.orders`, `gold.sales_by_product`.
-- They resolve in the session default catalog (`workspace` on Free Edition).
-- Volume path: `/Volumes/<catalog>/default/ecommerce`. Override with widget
-  `source_dir` if the catalog is not `workspace`.
+- Physical tables: `workspace.default.bronze_customers` (not `bronze.customers`).
+  Free Edition cannot `CREATE SCHEMA` on catalog `workspace`.
+- Override with widgets `uc_catalog` / `uc_schema` if needed.
+- Writes are **overwrite**, not append.
 
 ## What we did not add
 

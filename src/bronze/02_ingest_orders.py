@@ -50,7 +50,7 @@ ORDERS_SCHEMA = StructType(
 )
 
 DEFAULT_SOURCE_PATH = "/Volumes/workspace/default/ecommerce/orders.csv"
-DEFAULT_TARGET_TABLE = "bronze.orders"
+DEFAULT_TARGET_TABLE = "workspace.default.bronze_orders"
 
 
 def _get_param(name: str, default: str) -> str:
@@ -93,7 +93,7 @@ def ingest_orders(
         "_source_file", F.input_file_name()
     ).withColumn("_ingested_at", F.current_timestamp())
 
-    spark.sql("CREATE DATABASE IF NOT EXISTS bronze")
+    # Free Edition cannot CREATE SCHEMA on catalog workspace.
 
     (
         bronze_df.write.format("delta")

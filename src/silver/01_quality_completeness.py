@@ -33,10 +33,10 @@ FLAG_EMAIL_NULL = "completeness.email_is_null"
 FLAG_CUSTOMER_ID_NULL = "completeness.customer_id_is_null"
 FLAG_PRODUCT_ID_NULL = "completeness.product_id_is_null"
 
-DEFAULT_CUSTOMERS_SOURCE = "bronze.customers"
-DEFAULT_ORDERS_SOURCE = "bronze.orders"
-DEFAULT_CUSTOMERS_TARGET = "silver.customers"
-DEFAULT_ORDERS_TARGET = "silver.orders"
+DEFAULT_CUSTOMERS_SOURCE = "workspace.default.bronze_customers"
+DEFAULT_ORDERS_SOURCE = "workspace.default.bronze_orders"
+DEFAULT_CUSTOMERS_TARGET = "workspace.default.silver_customers"
+DEFAULT_ORDERS_TARGET = "workspace.default.silver_orders"
 
 SUMMARY_SCHEMA = StructType(
     [
@@ -161,7 +161,6 @@ def _print_summary(spark: SparkSession, rows: list[dict]) -> DataFrame:
 
 def _write_silver(df: DataFrame, target_table: str) -> None:
     spark = df.sparkSession
-    spark.sql("CREATE DATABASE IF NOT EXISTS silver")
     (
         df.write.format("delta")
         .mode("overwrite")

@@ -33,13 +33,22 @@ from pyspark.sql.types import (
     StructType,
 )
 
-DEFAULT_BRONZE_CUSTOMERS = "bronze.customers"
-DEFAULT_BRONZE_ORDERS = "bronze.orders"
-DEFAULT_BRONZE_PRODUCTS = "bronze.products"
-DEFAULT_SILVER_CUSTOMERS = "silver.customers"
-DEFAULT_SILVER_ORDERS = "silver.orders"
-DEFAULT_SILVER_PRODUCTS = "silver.products"
-DEFAULT_METRICS_TABLE = "silver.quality_metrics"
+def _t(logical: str) -> str:
+    try:
+        from databricks_runtime import table_name
+
+        return table_name(logical)
+    except Exception:
+        return "workspace.default." + logical.replace(".", "_")
+
+
+DEFAULT_BRONZE_CUSTOMERS = _t("bronze.customers")
+DEFAULT_BRONZE_ORDERS = _t("bronze.orders")
+DEFAULT_BRONZE_PRODUCTS = _t("bronze.products")
+DEFAULT_SILVER_CUSTOMERS = _t("silver.customers")
+DEFAULT_SILVER_ORDERS = _t("silver.orders")
+DEFAULT_SILVER_PRODUCTS = _t("silver.products")
+DEFAULT_METRICS_TABLE = _t("silver.quality_metrics")
 
 METRICS_SCHEMA = StructType(
     [
@@ -228,8 +237,7 @@ def _empty_flags():
 
 
 def _write_delta(df: DataFrame, target_table: str) -> None:
-    spark = df.sparkSession
-    spark.sql("CREATE DATABASE IF NOT EXISTS silver")
+    # Free Edition: no CREATE SCHEMA. Tables are workspace.default.silver_*.
     (
         df.write.format("delta")
         .mode("overwrite")

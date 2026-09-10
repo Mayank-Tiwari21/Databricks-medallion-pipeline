@@ -187,25 +187,35 @@ def _load_sibling(filename: str, module_name: str, function_name: str):
     return module
 
 
+def _uc_table(logical: str) -> str:
+    """workspace.default.bronze_customers — no CREATE SCHEMA on Free Edition."""
+    try:
+        from databricks_runtime import table_name as resolve
+
+        return resolve(logical)
+    except Exception:
+        return "workspace.default." + logical.replace(".", "_")
+
+
 def _run_one_table(spark: SparkSession, source_dir: str, job: dict) -> dict:
     """Run a single ingest. Never raises — failures become status=FAILED."""
-    table_name = job["target_table"]
+    target = _uc_table(job["target_table"])
     source_path = f"{source_dir}/{job['csv_name']}"
     started = time.perf_counter()
 
     print("-" * 60)
-    print(f"[bronze] starting {table_name}  ←  {source_path}")
+    print(f"[bronze] starting {target}  ←  {source_path}")
 
     try:
         module = _load_sibling(
             job["filename"], job["module_name"], job["function_name"]
         )
         ingest_fn = getattr(module, job["function_name"])
-        row_count = ingest_fn(spark, source_path, table_name)
+        row_count = ingest_fn(spark, source_path, target)
         duration = round(time.perf_counter() - started, 2)
-        print(f"[bronze] {table_name} SUCCESS  rows={row_count}  duration={duration}s")
+        print(f"[bronze] {target} SUCCESS  rows={row_count}  duration={duration}s")
         return {
-            "table_name": table_name,
+            "table_name": target,
             "row_count": int(row_count) if row_count is not None else None,
             "status": "SUCCESS",
             "duration_seconds": duration,
@@ -216,12 +226,12 @@ def _run_one_table(spark: SparkSession, source_dir: str, job: dict) -> dict:
         # abort products or orders. Log the traceback, then continue.
         duration = round(time.perf_counter() - started, 2)
         err_text = f"{type(exc).__name__}: {exc}"
-        logger.exception("Bronze ingest failed for %s", table_name)
-        print(f"[bronze] {table_name} FAILED  duration={duration}s")
-        print(f"[bronze] {table_name} error: {err_text}")
+        logger.exception("Bronze ingest failed for %s", target)
+        print(f"[bronze] {target} FAILED  duration={duration}s")
+        print(f"[bronze] {target} error: {err_text}")
         print(traceback.format_exc())
         return {
-            "table_name": table_name,
+            "table_name": target,
             "row_count": None,
             "status": "FAILED",
             "duration_seconds": duration,
