@@ -67,4 +67,8 @@ Widgets:
 | `source_dir` | `/Volumes/workspace/default/ecommerce` | UC Volume with the three CSVs |
 | `src_root` | (auto) | Path to `src/` if auto-detect fails |
 
+## Evidence
+
+![Evidence](evidences/Screenshot.png)
+
 ## Important Note: Due to having some problem with the databricks free edition login and workspace access issue had to use a single catalog.schema format for creating the tables and hence the tables are created as schema_table_name this can be altered with enough access.
