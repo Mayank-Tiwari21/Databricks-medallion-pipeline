@@ -7,17 +7,23 @@ partial success still lands the other dimensions.
 
 Databricks:
     Set widget `source_dir` to the folder that holds the three CSVs
-    (DBFS / FileStore / Volume). Then run this file.
+    (DBFS / FileStore / Volume).
 
     Example:
         /FileStore/ecommerce
         /Volumes/main/ecommerce/landing
+
+    Notebooks do not define __file__. Either:
+      - run 01/02/03 in earlier cells so ingest_*() already exist, or
+      - set widget `bronze_src_dir` to the folder that contains those .py files
+        (e.g. /Workspace/Users/<you>/.../src/bronze).
 """
 
 from __future__ import annotations
 
 import importlib.util
 import logging
+import sys
 import time
 import traceback
 from pathlib import Path
@@ -78,9 +84,79 @@ def _get_param(name: str, default: str) -> str:
         return default
 
 
-def _load_sibling(filename: str, module_name: str):
-    """Load 01_*.py etc. by path — names starting with a digit are not importable."""
-    path = Path(__file__).resolve().parent / filename
+def _scripts_dir() -> Path:
+    """Folder that contains 01_ingest_customers.py.
+
+    Databricks notebooks (ipykernel) do not set __file__. Search, in order:
+      1. this file's directory when run as a .py
+      2. widget bronze_src_dir (Workspace / Repo path)
+      3. the driver working directory and a few repo-shaped children
+    """
+    marker = "01_ingest_customers.py"
+    candidates: list[Path] = []
+
+    file_val = globals().get("__file__")
+    if file_val:
+        candidates.append(Path(file_val).resolve().parent)
+
+    widget_dir = _get_param("bronze_src_dir", "")
+    if widget_dir.strip():
+        root = Path(widget_dir.strip())
+        candidates.extend(
+            [
+                root,
+                root / "src" / "bronze",
+                root / "bronze",
+                root / "databricks-medallion-pipeline" / "src" / "bronze",
+            ]
+        )
+
+    cwd = Path.cwd()
+    candidates.extend(
+        [
+            cwd,
+            cwd / "src" / "bronze",
+            cwd / "databricks-medallion-pipeline" / "src" / "bronze",
+        ]
+    )
+
+    seen: set[Path] = set()
+    for directory in candidates:
+        try:
+            directory = directory.resolve()
+        except OSError:
+            continue
+        if directory in seen:
+            continue
+        seen.add(directory)
+        if (directory / marker).is_file():
+            print(f"[bronze] ingest scripts dir = {directory}")
+            return directory
+
+    raise FileNotFoundError(
+        "Cannot find 01_ingest_customers.py. Databricks notebooks have no "
+        "__file__. Either run 01_ingest_customers.py / 03_ingest_products.py / "
+        "02_ingest_orders.py in earlier cells, or set widget bronze_src_dir to "
+        "that folder (Workspace path), e.g. "
+        "/Workspace/Users/<you>/DE-C1-project/databricks-medallion-pipeline/src/bronze"
+    )
+
+
+def _load_sibling(filename: str, module_name: str, function_name: str):
+    """Load an ingest module. Names starting with a digit are not importable.
+
+    Notebook: if ingest_customers() etc. were defined in an earlier cell, use
+    those. Otherwise import the sibling .py from disk.
+    """
+    main = sys.modules.get("__main__")
+    if main is not None and callable(getattr(main, function_name, None)):
+        print(f"[bronze] using {function_name}() from the notebook kernel")
+        return main
+
+    path = _scripts_dir() / filename
+    if not path.is_file():
+        raise FileNotFoundError(f"Ingest script not found: {path}")
+
     spec = importlib.util.spec_from_file_location(module_name, path)
     if spec is None or spec.loader is None:
         raise ImportError(f"Cannot load {path}")
@@ -99,7 +175,9 @@ def _run_one_table(spark: SparkSession, source_dir: str, job: dict) -> dict:
     print(f"[bronze] starting {table_name}  ←  {source_path}")
 
     try:
-        module = _load_sibling(job["filename"], job["module_name"])
+        module = _load_sibling(
+            job["filename"], job["module_name"], job["function_name"]
+        )
         ingest_fn = getattr(module, job["function_name"])
         row_count = ingest_fn(spark, source_path, table_name)
         duration = round(time.perf_counter() - started, 2)

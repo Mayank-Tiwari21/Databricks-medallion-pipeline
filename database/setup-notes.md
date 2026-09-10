@@ -40,12 +40,20 @@ Community Edition: start the playground cluster and attach it to the notebook.
 Import `src/bronze/` as a Databricks Repo, or paste each `01` / `02` / `03`
 script into its own notebook.
 
-**One-shot (Repo / `.py` files, `__file__` available):**
+**One-shot:**
 
 ```python
 # widget source_dir = /FileStore/ecommerce
 # then run src/bronze/ingest_all.py
 ```
+
+Notebooks do **not** define `__file__`. Either:
+
+1. Run `01_ingest_customers.py`, `03_ingest_products.py`, and
+   `02_ingest_orders.py` in earlier cells so `ingest_*()` already exist, or
+2. Set widget `bronze_src_dir` to the Workspace folder that contains those
+   files, for example
+   `/Workspace/Users/<you>/DE-C1-project/databricks-medallion-pipeline/src/bronze`.
 
 `ingest_all.py` runs customers → products → orders. If one table fails, the
 error is logged and the other tables still run. The job ends with a summary
