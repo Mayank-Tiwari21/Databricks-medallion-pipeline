@@ -1,0 +1,357 @@
+{
+  "datasets": [
+    {
+      "name": "2ea21657",
+      "displayName": "Top_10_products_by_revenue",
+      "queryLines": [
+        "SELECT\n",
+        "    product_name,\n",
+        "    category,\n",
+        "    total_revenue AS revenue_usd,\n",
+        "    total_orders  AS order_count\n",
+        "FROM workspace.default.gold_sales_by_product\n",
+        "ORDER BY total_revenue DESC\n",
+        "LIMIT 10;"
+      ]
+    },
+    {
+      "name": "c0b9c350",
+      "displayName": "customer_revenue_distribution",
+      "queryLines": [
+        "SELECT\n",
+        "    revenue_bucket,\n",
+        "    sort_order,\n",
+        "    COUNT(*) AS customer_count\n",
+        "FROM (\n",
+        "    SELECT\n",
+        "        CASE\n",
+        "            WHEN total_revenue = 0                         THEN '$0'\n",
+        "            WHEN total_revenue > 0    AND total_revenue < 100   THEN '$0–$99'\n",
+        "            WHEN total_revenue >= 100 AND total_revenue < 250   THEN '$100–$249'\n",
+        "            WHEN total_revenue >= 250 AND total_revenue < 500   THEN '$250–$499'\n",
+        "            WHEN total_revenue >= 500 AND total_revenue < 1000  THEN '$500–$999'\n",
+        "            WHEN total_revenue >= 1000 AND total_revenue < 2500 THEN '$1,000–$2,499'\n",
+        "            ELSE '$2,500+'\n",
+        "        END AS revenue_bucket,\n",
+        "        CASE\n",
+        "            WHEN total_revenue = 0                         THEN 0\n",
+        "            WHEN total_revenue > 0    AND total_revenue < 100   THEN 1\n",
+        "            WHEN total_revenue >= 100 AND total_revenue < 250   THEN 2\n",
+        "            WHEN total_revenue >= 250 AND total_revenue < 500   THEN 3\n",
+        "            WHEN total_revenue >= 500 AND total_revenue < 1000  THEN 4\n",
+        "            WHEN total_revenue >= 1000 AND total_revenue < 2500 THEN 5\n",
+        "            ELSE 6\n",
+        "        END AS sort_order\n",
+        "    FROM workspace.default.gold_revenue_by_customer\n",
+        ") buckets\n",
+        "GROUP BY revenue_bucket, sort_order\n",
+        "ORDER BY sort_order;"
+      ]
+    },
+    {
+      "name": "2dceed1c",
+      "displayName": "behavioral_segment_mix",
+      "queryLines": [
+        "SELECT\n",
+        "    segment_type,\n",
+        "    customer_count,\n",
+        "    total_revenue AS revenue_usd\n",
+        "FROM workspace.default.gold_customer_segmentation\n",
+        "ORDER BY\n",
+        "    CASE segment_type\n",
+        "        WHEN 'High-Value' THEN 1\n",
+        "        WHEN 'Repeat'     THEN 2\n",
+        "        WHEN 'One-Time'   THEN 3\n",
+        "        WHEN 'Inactive'   THEN 4\n",
+        "    END;"
+      ]
+    },
+    {
+      "name": "revenue_distribution",
+      "displayName": "Revenue Distribution",
+      "queryLines": [
+        "SELECT\n",
+        "  CASE\n",
+        "    WHEN total_revenue < 1000 THEN '$0-$1K'\n",
+        "    WHEN total_revenue < 5000 THEN '$1K-$5K'\n",
+        "    WHEN total_revenue < 10000 THEN '$5K-$10K'\n",
+        "    WHEN total_revenue < 50000 THEN '$10K-$50K'\n",
+        "    ELSE '$50K+'\n",
+        "  END AS revenue_bucket,\n",
+        "  CASE\n",
+        "    WHEN total_revenue < 1000 THEN 1\n",
+        "    WHEN total_revenue < 5000 THEN 2\n",
+        "    WHEN total_revenue < 10000 THEN 3\n",
+        "    WHEN total_revenue < 50000 THEN 4\n",
+        "    ELSE 5\n",
+        "  END AS sort_order,\n",
+        "  COUNT(*) AS customer_count\n",
+        "FROM\n",
+        "  workspace.default.gold_sales_by_product\n",
+        "GROUP BY\n",
+        "  revenue_bucket,\n",
+        "  sort_order\n",
+        "ORDER BY\n",
+        "  sort_order"
+      ]
+    },
+    {
+      "name": "top_products_revenue",
+      "displayName": "Top Products Revenue",
+      "queryLines": [
+        "SELECT\n",
+        "  product_name,\n",
+        "  category,\n",
+        "  total_revenue AS revenue_usd,\n",
+        "  total_orders AS order_count\n",
+        "FROM\n",
+        "  workspace.default.gold_sales_by_product\n",
+        "ORDER BY\n",
+        "  total_revenue DESC\n",
+        "LIMIT 10"
+      ]
+    },
+    {
+      "name": "customer_segments",
+      "displayName": "Customer Segmentation",
+      "queryLines": [
+        "SELECT\n",
+        "  CASE\n",
+        "    WHEN\n",
+        "      total_revenue >= 10000\n",
+        "      AND total_orders >= 10\n",
+        "    THEN\n",
+        "      'High-Value'\n",
+        "    WHEN total_orders >= 5 THEN 'Repeat'\n",
+        "    WHEN total_orders = 1 THEN 'One-Time'\n",
+        "    ELSE 'Inactive'\n",
+        "  END AS segment_type,\n",
+        "  COUNT(*) AS customer_count,\n",
+        "  SUM(total_revenue) AS revenue_usd\n",
+        "FROM\n",
+        "  workspace.default.gold_sales_by_product\n",
+        "GROUP BY\n",
+        "  segment_type"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "74e58dc4",
+      "displayName": "Dashboard",
+      "layout": [
+        {
+          "widget": {
+            "name": "top_products_bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "top_products_revenue",
+                  "fields": [
+                    {
+                      "name": "product_name",
+                      "expression": "`product_name`"
+                    },
+                    {
+                      "name": "sum(revenue_usd)",
+                      "expression": "SUM(`revenue_usd`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "🏆 Top 10 Products by Revenue"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "product_name",
+                  "displayName": "product_name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(revenue_usd)",
+                  "displayName": "revenue_usd",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "product_name",
+                  "displayName": "product_name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 6,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "revenue_distribution_bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "revenue_distribution",
+                  "fields": [
+                    {
+                      "name": "revenue_bucket",
+                      "expression": "`revenue_bucket`"
+                    },
+                    {
+                      "name": "sum(customer_count)",
+                      "expression": "SUM(`customer_count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "💰 Customer Revenue Distribution"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "revenue_bucket",
+                  "displayName": "revenue_bucket",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(customer_count)",
+                  "displayName": "customer_count",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "revenue_bucket",
+                  "displayName": "revenue_bucket",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 6,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "customer_segments_pie",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "customer_segments",
+                  "fields": [
+                    {
+                      "name": "sum(customer_count)",
+                      "expression": "SUM(`customer_count`)"
+                    },
+                    {
+                      "name": "segment_type",
+                      "expression": "`segment_type`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "👥 Customer Behavioral Segments"
+              },
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "sum(customer_count)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "customer_count"
+                },
+                "color": {
+                  "fieldName": "segment_type",
+                  "displayName": "segment_type",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 7,
+            "width": 12,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "header_text",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# 📊 Sales Performance Dashboard\n",
+                "\n",
+                "**Real-time insights into product revenue, customer distribution, and behavioral segments**"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
