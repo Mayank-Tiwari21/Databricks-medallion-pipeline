@@ -75,40 +75,45 @@ The driver looks for `src/bronze/01_ingest_customers.py` next to
 
 | Widget | Default | Meaning |
 |---|---|---|
-| `source_dir` | `/Volumes/workspace/default/ecommerce` | Unity Catalog volume Spark reads |
 | `src_root` | empty | Leave empty unless auto-detect fails |
 | `uc_catalog` | `workspace` | Catalog for Delta tables |
 | `uc_schema` | `default` | Existing schema (do not create `bronze`) |
+| `source_dir` | ignored if `/Volumes` or DBFS | Landing is Workspace `data/` |
 
 3. If this first run fails with “cannot find `01_ingest_customers.py`”:
    - Set `src_root` to the **Workspace path of `src/`**, for example  
      `/Workspace/Users/<you>/DE-C1-project/databricks-medallion-pipeline/src`
    - Run all again.
 
-Do **not** set `source_dir` to `/FileStore/ecommerce`. The driver ignores that
-path and uses the volume.
+Do **not** set `source_dir` to `/FileStore` or `/Volumes/...`. Spark rewrites
+those to `dbfs:` and the read fails. The driver reads `data/*.csv` from this
+Workspace folder with Python.
 
 ---
 
-## Step 4 — How landing files get onto the volume
+## Step 4 — How Bronze tables are created (no DBFS, no Volumes)
 
-Free Edition Spark **cannot** read Workspace files or DBFS as CSV sources.
-The driver therefore:
+The CSVs already live in the Git/Workspace project:
 
-1. Runs `CREATE VOLUME IF NOT EXISTS workspace.default.ecommerce`
-2. Copies `data/*.csv` onto `/Volumes/workspace/default/ecommerce/`
-3. Runs `spark.read.csv` from that volume
+```
+.../Databricks-medallion-pipeline/data/customers.csv
+.../Databricks-medallion-pipeline/data/orders.csv
+.../Databricks-medallion-pipeline/data/products.csv
+```
 
-**If Git/`data/` is present** you do not upload anything by hand.
+The driver:
 
-**If copy fails** (volume permission, catalog name), upload by hand:
+1. Opens those files with **Python** (`csv` module) — not `spark.read.csv`
+2. Builds Spark DataFrames in memory
+3. Writes Delta tables in `workspace.default`:
+   - `bronze_customers`
+   - `bronze_orders`
+   - `bronze_products`
 
-1. Sidebar → **Catalog** → catalog `workspace` → schema `default`.
-2. **Create** → **Volume** named `ecommerce` (skip if it already exists).
-3. Open the volume → **Upload** `customers.csv`, `orders.csv`, `products.csv`.
-4. Set widget `source_dir` to `/Volumes/workspace/default/ecommerce` (or
-   `/Volumes/<your_catalog>/default/ecommerce` if the catalog is not `workspace`).
-5. Run all again.
+Silver and Gold then read those tables only. No FileStore, no `/Volumes`.
+
+If `data/` is missing, import the full project folder so `data/` sits next
+to `src/`.
 
 ---
 
@@ -118,8 +123,8 @@ Watch the notebook output. Layers are separated by `=======` banners.
 
 | Order | Layer | What runs | Writes |
 |---|---|---|---|
-| 1 | Landing | Copy CSVs to UC volume | Volume files only |
-| 2 | Bronze | `ingest_all.py` → `01` customers, `03` products, `02` orders | `workspace.default.bronze_customers` / `bronze_orders` / `bronze_products` |
+| 1 | Landing | Locate Workspace `data/*.csv` | none |
+| 2 | Bronze | Python CSV → Delta `workspace.default.bronze_*` | `bronze_customers` / `bronze_orders` / `bronze_products` |
 | 3 | Silver | Completeness, uniqueness, type, RI, business flags | `workspace.default.silver_*` + `silver_quality_metrics` |
 | 4 | Gold | SQL `01`, `02`, `04` (not `03_daily_weekly_trends.sql`) | `workspace.default.gold_sales_by_product`, `gold_revenue_by_customer`, `gold_customer_segmentation` |
 | 5 | Checks | Three Gold vs Silver spot-check queries | Displayed only |
@@ -213,10 +218,10 @@ Prefer `run_pipeline.py` for a clean end-to-end.
 | `PERMISSION_DENIED: User does not have CREATE SCHEMA` | Do not create `bronze` / `silver` / `gold` databases. Tables are `workspace.default.bronze_customers` etc. Re-run the updated `run_pipeline.py`. |
 | `NameError: __file__` | You pasted a layer script into a notebook. Use `run_pipeline.py` from the Git folder, or set `src_root`. |
 | Cannot find `01_ingest_customers.py` | Set widget `src_root` to the `src/` Workspace path. The notebook is not sitting next to `bronze/`. |
-| `/FileStore` or `dbfs:` error | Free Edition has no DBFS. Leave `source_dir` as `/Volumes/workspace/default/ecommerce`. |
-| `Volume not found` / `CREATE VOLUME` failed | Create volume `ecommerce` under `workspace.default` in Catalog Explorer, upload the three CSVs, re-run. |
-| Catalog is not `workspace` | Set `source_dir` to `/Volumes/<catalog>/default/ecommerce`. |
-| Bronze SUCCESS but row count 0 | Wrong CSV path or empty volume. Check the `[landing] copied ...` lines. |
+| `FAILED_READ_FILE` / `dbfs:/Volumes/...` | Old Spark CSV read. Sync the repo and re-run; Bronze now loads Workspace `data/` with Python. |
+| `/FileStore` or `dbfs:` error | Free Edition has no DBFS. Do not use FileStore or Volumes for Spark reads. |
+| Catalog is not `workspace` | Set `uc_catalog` / `uc_schema` to a schema you can write. |
+| Bronze SUCCESS but row count 0 | Workspace `data/` missing CSVs. Confirm `data/customers.csv` is next to `src/`. |
 | Silver row count ≠ Bronze | Silver must not drop rows. Re-run Silver; inspect `quality_check_result`. |
 | Gold empty | Silver flags are non-empty for every row, or tables missing. Check `size(quality_check_result) = 0`. |
 | `03_daily_weekly_trends` missing | Not implemented. The driver skips it on purpose. |

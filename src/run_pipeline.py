@@ -6,12 +6,12 @@ Run this notebook / file once. It executes:
     Bronze ingest  →  Silver quality flags  →  Gold aggregations  →  dashboard queries
 
 Widgets (optional):
-    source_dir   UC Volume landing folder
-                 default /Volumes/workspace/default/ecommerce
     src_root     this src/ folder    auto-detected from the notebook path
+    uc_catalog   workspace
+    uc_schema    default
 
-Databricks Free Edition has no DBFS. The driver copies repo data/*.csv
-onto that volume (or you upload the three CSVs in Catalog Explorer).
+Free Edition: Python reads Workspace data/*.csv (Spark file sources use
+dbfs: and fail). Bronze tables are written in workspace.default.
 """
 
 from __future__ import annotations

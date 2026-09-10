@@ -6,11 +6,9 @@ Null emails and duplicate customer_ids from the generator must survive
 this step so Silver can FLAG them.
 
 Databricks (notebook or Repo job):
-    Set widget `source_path` to the CSV on a Unity Catalog volume.
-    Databricks Free Edition has no DBFS / FileStore.
-
-    Default:
-        /Volumes/workspace/default/ecommerce/customers.csv
+    CSVs are read from the Workspace `data/` folder with Python.
+    Spark file sources are not used (Free Edition prefixes dbfs: and fails).
+    Tables: workspace.default.bronze_customers
 """
 
 from pyspark.sql import SparkSession
@@ -74,26 +72,21 @@ def ingest_customers(
     print(f"[bronze.customers] source_path = {source_path}")
     print(f"[bronze.customers] target_table = {target_table}")
 
-    # PERMISSIVE: keep rows that do not parse (do not drop them).
-    # nullValue="": our generator writes NULL as an empty CSV field.
-    # That is CSV encoding of null, not a Silver-layer cleanup.
-    raw_df = (
-        spark.read.format("csv")
-        .option("header", "true")
-        .option("mode", "PERMISSIVE")
-        .option("nullValue", "")
-        .schema(CUSTOMERS_SCHEMA)
-        .load(source_path)
-    )
+    # Python CSV read from the Workspace file. Spark.read.csv would rewrite
+    # the path to dbfs:/... which Free Edition cannot use.
+    try:
+        from databricks_runtime import read_csv_workspace
+
+        raw_df = read_csv_workspace(spark, source_path, CUSTOMERS_SCHEMA)
+    except ImportError:
+        raise ImportError("databricks_runtime.read_csv_workspace is required on Free Edition")
 
     rows_read = raw_df.count()
     print(f"[bronze.customers] rows read (before write) = {rows_read}")
 
-    # Lineage only — not business columns. _source_file is the CSV path Spark
-    # actually read; _ingested_at is the load timestamp.
-    bronze_df = raw_df.withColumn(
-        "_source_file", F.input_file_name()
-    ).withColumn("_ingested_at", F.current_timestamp())
+    bronze_df = raw_df.withColumn("_source_file", F.lit(source_path)).withColumn(
+        "_ingested_at", F.current_timestamp()
+    )
 
     # Free Edition cannot CREATE SCHEMA on catalog workspace. Write into
     # the existing default schema (workspace.default.bronze_customers).

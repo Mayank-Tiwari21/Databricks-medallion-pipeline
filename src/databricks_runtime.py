@@ -8,16 +8,28 @@ bronze / silver / gold / dashboard files from src/.
 
 from __future__ import annotations
 
+import csv
 import importlib.util
-import shutil
 import sys
+from datetime import date
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 from pyspark.sql import SparkSession
+from pyspark.sql.types import (
+    DateType,
+    DecimalType,
+    DoubleType,
+    IntegerType,
+    LongType,
+    StringType,
+    StructType,
+)
 
-# Databricks Free Edition disables DBFS root (/FileStore, /dbfs).
-# Spark reads landing CSVs from a Unity Catalog volume instead.
-DEFAULT_SOURCE_DIR = "/Volumes/workspace/default/ecommerce"
+# Databricks Free Edition: no DBFS. Spark.read.csv on /Volumes is rewritten
+# to dbfs:/Volumes/... and fails. Bronze reads Workspace data/*.csv with
+# Python and writes Delta tables in workspace.default.
+DEFAULT_SOURCE_DIR = "workspace-data"
 LANDING_CSV_NAMES = ("customers.csv", "orders.csv", "products.csv")
 
 # Free Edition: no CREATE SCHEMA on catalog `workspace`. Tables live in the
@@ -191,25 +203,28 @@ def read_text(relative: str) -> str:
 
 
 def normalize_source_dir(source_dir: str) -> str:
-    """Ignore leftover DBFS widget values from older notebooks."""
+    """Prefer Workspace data/. Ignore DBFS and Volume paths (Spark prefixes dbfs:)."""
     raw = (source_dir or "").strip().rstrip("/")
-    if (
+    data = repo_data_dir()
+    blocked = (
         not raw
+        or raw == "workspace-data"
         or raw.startswith("/FileStore")
         or raw.startswith("/dbfs")
         or raw.startswith("dbfs:")
-    ):
-        print(
-            f"[landing] ignoring DBFS path {source_dir!r}; "
-            f"using {DEFAULT_SOURCE_DIR}"
-        )
-        return DEFAULT_SOURCE_DIR
+        or raw.startswith("/Volumes")
+    )
+    if blocked and data is not None:
+        print(f"[landing] using Workspace CSVs at {data}")
+        return str(data)
+    if data is not None:
+        return str(data)
     return raw
 
 
 def repo_data_dir(src: Path | None = None) -> Path | None:
     """Repo `data/` folder (Workspace/Git files). Spark often cannot read these
-    on Free Edition; Python Path / shutil still can."""
+    on Free Edition; Python still can."""
     roots: list[Path] = []
     if src is not None:
         roots.append(Path(src))
@@ -224,16 +239,65 @@ def repo_data_dir(src: Path | None = None) -> Path | None:
     return None
 
 
-def ensure_uc_volume(spark: SparkSession, volume_dir: str) -> None:
-    """CREATE VOLUME IF NOT EXISTS for /Volumes/<catalog>/<schema>/<volume>/..."""
-    parts = [p for p in volume_dir.strip("/").split("/") if p]
-    if len(parts) < 4 or parts[0] != "Volumes":
-        return
-    catalog, schema, volume = parts[1], parts[2], parts[3]
-    spark.sql(
-        f"CREATE VOLUME IF NOT EXISTS `{catalog}`.`{schema}`.`{volume}`"
-    )
-    print(f"[landing] volume = {catalog}.{schema}.{volume}")
+def parse_csv_cell(raw: str | None, data_type):
+    """PERMISSIVE: unparsable values become None; the row is kept."""
+    if raw is None:
+        return None
+    text = str(raw).strip()
+    if text == "":
+        return None
+    try:
+        if isinstance(data_type, (IntegerType, LongType)):
+            return int(float(text))
+        if isinstance(data_type, DoubleType):
+            return float(text)
+        if isinstance(data_type, DecimalType):
+            return Decimal(text)
+        if isinstance(data_type, DateType):
+            return date.fromisoformat(text[:10])
+        if isinstance(data_type, StringType):
+            return text
+        return text
+    except (ValueError, InvalidOperation, TypeError):
+        return None
+
+
+def read_csv_workspace(spark: SparkSession, path: str, schema: StructType):
+    """Read a CSV with Python from a Workspace file. Do not use Spark file
+    sources — Free Edition rewrites /Volumes and /Workspace to dbfs: and fails.
+    """
+    csv_path = Path(path)
+    if not csv_path.is_file():
+        raise FileNotFoundError(f"Workspace CSV not found: {csv_path}")
+    print(f"[landing] Python CSV read (no Spark/DBFS): {csv_path}")
+
+    names = [field.name for field in schema.fields]
+    rows: list[tuple] = []
+    with csv_path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        for rec in reader:
+            rows.append(
+                tuple(
+                    parse_csv_cell(rec.get(name), schema[name].dataType)
+                    for name in names
+                )
+            )
+    print(f"[landing] parsed {len(rows):,} rows")
+    if not rows:
+        return spark.createDataFrame([], schema=schema)
+
+    # Spark Connect cannot take a Volume/DBFS file scan. Local createDataFrame
+    # in modest batches avoids a single huge RPC payload (orders.csv is 100k).
+    batch_size = 20_000
+    frames = []
+    for start in range(0, len(rows), batch_size):
+        chunk = rows[start : start + batch_size]
+        frames.append(spark.createDataFrame(chunk, schema=schema))
+        print(f"[landing] loaded rows {start + 1:,}–{start + len(chunk):,}")
+    out = frames[0]
+    for extra in frames[1:]:
+        out = out.unionByName(extra)
+    return out
 
 
 def stage_landing_csvs(
@@ -241,43 +305,26 @@ def stage_landing_csvs(
     source_dir: str,
     src: Path | None = None,
 ) -> str:
-    """Put the three CSVs on a UC Volume so Spark can ingest them.
-
-    Free Edition has no DBFS. Preferred sources, in order:
-      1. CSVs already in source_dir (Catalog Explorer upload)
-      2. Copy from this repo's data/ (Workspace/Git) into the volume
-    """
-    source_dir = normalize_source_dir(source_dir)
-    print(f"[landing] source_dir = {source_dir}")
-    try:
-        ensure_uc_volume(spark, source_dir)
-    except Exception as exc:
-        print(f"[landing] CREATE VOLUME skipped: {type(exc).__name__}: {exc}")
-
-    dest = Path(source_dir)
-    present = all((dest / name).is_file() for name in LANDING_CSV_NAMES)
+    """Return the Workspace `data/` folder. Never copy to Volumes or DBFS."""
     data_dir = repo_data_dir(src)
-
     if data_dir is not None:
-        dest.mkdir(parents=True, exist_ok=True)
-        for name in LANDING_CSV_NAMES:
-            shutil.copy2(data_dir / name, dest / name)
-            print(f"[landing] copied {name} → {dest / name}")
-        return source_dir
+        print(f"[landing] Workspace data dir = {data_dir}")
+        return str(data_dir)
 
-    if present:
-        print(f"[landing] using CSVs already in {source_dir}")
-        return source_dir
+    source_dir = (source_dir or "").rstrip("/")
+    candidate = Path(source_dir) if source_dir else None
+    if candidate is not None and all(
+        (candidate / name).is_file() for name in LANDING_CSV_NAMES
+    ):
+        print(f"[landing] using {candidate}")
+        return str(candidate)
 
     raise FileNotFoundError(
-        "Landing CSVs not found. Databricks Free Edition cannot use DBFS "
-        "(/FileStore). Either:\n"
-        "  1. Keep data/customers.csv, data/orders.csv, data/products.csv in "
-        "the Git/Workspace folder next to src/ (the driver copies them to the "
-        "volume), or\n"
-        "  2. Catalog → workspace → default → Create volume `ecommerce` → "
-        "Upload the three CSVs, then set widget source_dir to "
-        f"{DEFAULT_SOURCE_DIR}"
+        "Landing CSVs not found in the Workspace folder. Keep "
+        "data/customers.csv, data/orders.csv, data/products.csv next to src/ "
+        "(Git / Workspace import). Spark cannot read /Volumes or DBFS on "
+        "Free Edition — Bronze loads those files with Python and writes "
+        "workspace.default.bronze_* Delta tables."
     )
 
 

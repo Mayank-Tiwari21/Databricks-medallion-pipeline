@@ -6,11 +6,9 @@ The product file is the clean control dimension; we still use an explicit
 schema so types match orders.product_id (IntegerType, not inferred Long).
 
 Databricks (notebook or Repo job):
-    Set widget `source_path` to the CSV on a Unity Catalog volume.
-    Databricks Free Edition has no DBFS / FileStore.
-
-    Default:
-        /Volumes/workspace/default/ecommerce/products.csv
+    CSVs are read from the Workspace `data/` folder with Python.
+    Spark file sources are not used (Free Edition prefixes dbfs: and fails).
+    Tables: workspace.default.bronze_products
 """
 
 from pyspark.sql import SparkSession
@@ -70,21 +68,19 @@ def ingest_products(
     print(f"[bronze.products] source_path = {source_path}")
     print(f"[bronze.products] target_table = {target_table}")
 
-    raw_df = (
-        spark.read.format("csv")
-        .option("header", "true")
-        .option("mode", "PERMISSIVE")
-        .option("nullValue", "")
-        .schema(PRODUCTS_SCHEMA)
-        .load(source_path)
-    )
+    try:
+        from databricks_runtime import read_csv_workspace
+
+        raw_df = read_csv_workspace(spark, source_path, PRODUCTS_SCHEMA)
+    except ImportError:
+        raise ImportError("databricks_runtime.read_csv_workspace is required on Free Edition")
 
     rows_read = raw_df.count()
     print(f"[bronze.products] rows read (before write) = {rows_read}")
 
-    bronze_df = raw_df.withColumn(
-        "_source_file", F.input_file_name()
-    ).withColumn("_ingested_at", F.current_timestamp())
+    bronze_df = raw_df.withColumn("_source_file", F.lit(source_path)).withColumn(
+        "_ingested_at", F.current_timestamp()
+    )
 
     # Free Edition cannot CREATE SCHEMA on catalog workspace.
 

@@ -105,6 +105,17 @@ They **can** write tables in the existing `default` schema.
 `workspace.default.bronze_customers`, `silver_orders`, `gold_sales_by_product`,
 and so on. Widgets `uc_catalog` / `uc_schema` default to `workspace` / `default`.
 
+## 9. `FAILED_READ_FILE` / `dbfs:/Volumes/.../customers.csv`
+
+**Where:** `spark.read.csv("/Volumes/workspace/default/ecommerce/customers.csv")`.
+
+**Why:** Spark Connect on Free Edition prefixes the path with `dbfs:`. DBFS
+root is disabled, so the scan fails even after a Python copy onto the volume.
+
+**Fix:** Do not use Spark file sources for landing. Python reads
+`data/*.csv` from the Workspace Git folder and `saveAsTable` writes
+`workspace.default.bronze_*`. Silver/Gold only read those Delta tables.
+
 ## Open
 
 - `src/gold/03_daily_weekly_trends.sql` is a stub. Not a runtime failure; the

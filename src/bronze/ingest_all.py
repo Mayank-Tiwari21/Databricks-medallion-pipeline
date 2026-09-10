@@ -6,17 +6,9 @@ run. Bronze does not join or validate FKs; the sequence is only so a
 partial success still lands the other dimensions.
 
 Databricks:
-    Set widget `source_dir` to the Unity Catalog volume that holds the three
-    CSVs. Databricks Free Edition has no DBFS / FileStore.
-
-    Default:
-        /Volumes/workspace/default/ecommerce
-
-    Catalog Explorer: workspace → default → Create volume `ecommerce` →
-    upload customers.csv, orders.csv, products.csv.
-
-    If this repo's data/ folder is in the Workspace, ingest_all copies those
-    CSVs onto the volume before Spark reads them.
+    CSVs are read from Workspace `data/` with Python (not Spark.read.csv).
+    Free Edition rewrites /Volumes and DBFS paths to dbfs: and fails.
+    Writes workspace.default.bronze_* Delta tables.
 
     Preferred: run `src/run_pipeline.py` once. It loads this file from disk
     (so sibling 01/02/03 scripts resolve without __file__).
@@ -51,7 +43,7 @@ if _file_val:
     if _src_dir not in sys.path:
         sys.path.insert(0, _src_dir)
 
-DEFAULT_SOURCE_DIR = "/Volumes/workspace/default/ecommerce"
+DEFAULT_SOURCE_DIR = "workspace-data"
 
 logger = logging.getLogger("bronze.ingest_all")
 
@@ -287,13 +279,6 @@ def _print_summary_table(spark: SparkSession, results: list[dict]) -> None:
 def ingest_all(spark: SparkSession, source_dir: str) -> list[dict]:
     """Run all Bronze ingests. Returns one result dict per table."""
     source_dir = source_dir.rstrip("/")
-    if (
-        source_dir.startswith("/FileStore")
-        or source_dir.startswith("/dbfs")
-        or source_dir.startswith("dbfs:")
-    ):
-        print(f"[bronze] ignoring DBFS path {source_dir!r}")
-        source_dir = DEFAULT_SOURCE_DIR
     try:
         from databricks_runtime import src_root, stage_landing_csvs
 
