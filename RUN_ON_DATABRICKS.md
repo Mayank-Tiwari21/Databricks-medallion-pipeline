@@ -218,7 +218,7 @@ Prefer `run_pipeline.py` for a clean end-to-end.
 | `PERMISSION_DENIED: User does not have CREATE SCHEMA` | Do not create `bronze` / `silver` / `gold` databases. Tables are `workspace.default.bronze_customers` etc. Re-run the updated `run_pipeline.py`. |
 | `NameError: __file__` | You pasted a layer script into a notebook. Use `run_pipeline.py` from the Git folder, or set `src_root`. |
 | Cannot find `01_ingest_customers.py` | Set widget `src_root` to the `src/` Workspace path. The notebook is not sitting next to `bronze/`. |
-| `FAILED_READ_FILE` / `dbfs:/Volumes/...` | Old Spark CSV read. Sync the repo and re-run; Bronze now loads Workspace `data/` with Python. |
+| `NOT_SUPPORTED_WITH_SERVERLESS` / `PERSIST TABLE` | Sync the repo. Silver no longer calls `.persist()` on serverless. |
 | `/FileStore` or `dbfs:` error | Free Edition has no DBFS. Do not use FileStore or Volumes for Spark reads. |
 | Catalog is not `workspace` | Set `uc_catalog` / `uc_schema` to a schema you can write. |
 | Bronze SUCCESS but row count 0 | Workspace `data/` missing CSVs. Confirm `data/customers.csv` is next to `src/`. |

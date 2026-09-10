@@ -162,13 +162,23 @@ def _print_summary(spark: SparkSession, rows: list[dict]) -> DataFrame:
 
 
 def _write_silver(df: DataFrame, target_table: str) -> None:
+    """Materialize via a staging table so we never persist() (serverless)."""
     spark = df.sparkSession
+    staging = f"{target_table}_stg"
     (
         df.write.format("delta")
         .mode("overwrite")
         .option("overwriteSchema", "true")
+        .saveAsTable(staging)
+    )
+    (
+        spark.table(staging)
+        .write.format("delta")
+        .mode("overwrite")
+        .option("overwriteSchema", "true")
         .saveAsTable(target_table)
     )
+    spark.sql(f"DROP TABLE IF EXISTS {staging}")
 
 
 def run_business_logic_checks(
@@ -190,10 +200,8 @@ def run_business_logic_checks(
     print(f"[silver.business] customers rows in = {rows_c_before:,}")
     print(f"[silver.business] orders    rows in = {rows_o_before:,}")
 
-    customers_out = flag_customer_business_rules(customers_in).persist()
-    orders_out = flag_order_business_rules(orders_in).persist()
-    customers_out.count()
-    orders_out.count()
+    customers_out = flag_customer_business_rules(customers_in)
+    orders_out = flag_order_business_rules(orders_in)
 
     summary_rows = [
         _metric(
@@ -214,8 +222,6 @@ def run_business_logic_checks(
 
     _write_silver(customers_out, customers_target)
     _write_silver(orders_out, orders_target)
-    customers_out.unpersist()
-    orders_out.unpersist()
 
     rows_c_after = spark.table(customers_target).count()
     rows_o_after = spark.table(orders_target).count()

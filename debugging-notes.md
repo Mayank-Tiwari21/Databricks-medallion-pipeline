@@ -116,6 +116,16 @@ root is disabled, so the scan fails even after a Python copy onto the volume.
 `data/*.csv` from the Workspace Git folder and `saveAsTable` writes
 `workspace.default.bronze_*`. Silver/Gold only read those Delta tables.
 
+## 10. `NOT_SUPPORTED_WITH_SERVERLESS: PERSIST TABLE`
+
+**Where:** `DataFrame.persist()` in Silver (cache so metrics and write share
+one computation).
+
+**Why:** Serverless compute does not support `CACHE` / `PERSIST TABLE`.
+
+**Fix:** Write Silver Delta tables first, then compute `quality_metrics`
+by reading those tables. No persist/unpersist.
+
 ## Open
 
 - `src/gold/03_daily_weekly_trends.sql` is a stub. Not a runtime failure; the

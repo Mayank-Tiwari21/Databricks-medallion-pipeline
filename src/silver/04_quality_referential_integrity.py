@@ -223,13 +223,23 @@ def _print_summary(spark: SparkSession, rows: list[dict]) -> DataFrame:
 
 
 def _write_silver(df: DataFrame, target_table: str) -> None:
+    """Materialize via a staging table so we never persist() (serverless)."""
     spark = df.sparkSession
+    staging = f"{target_table}_stg"
     (
         df.write.format("delta")
         .mode("overwrite")
         .option("overwriteSchema", "true")
+        .saveAsTable(staging)
+    )
+    (
+        spark.table(staging)
+        .write.format("delta")
+        .mode("overwrite")
+        .option("overwriteSchema", "true")
         .saveAsTable(target_table)
     )
+    spark.sql(f"DROP TABLE IF EXISTS {staging}")
 
 
 def run_referential_integrity_checks(
@@ -255,9 +265,7 @@ def run_referential_integrity_checks(
         orders_in, customers, products
     )
 
-    # Persist before overwrite (silver.orders → silver.orders).
-    orders_out = orders_out.persist()
-    orders_out.count()
+    # Serverless: no persist(). Write via staging inside _write_silver.
 
     summary_rows = [
         _ri_metrics(
@@ -277,7 +285,6 @@ def run_referential_integrity_checks(
     ]
 
     _write_silver(orders_out, orders_target)
-    orders_out.unpersist()
 
     rows_after = spark.table(orders_target).count()
     print(f"[silver.ri] orders rows out = {rows_after:,}")

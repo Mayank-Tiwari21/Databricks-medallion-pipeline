@@ -192,13 +192,23 @@ def _print_summary(spark: SparkSession, rows: list[dict]) -> DataFrame:
 
 
 def _write_silver(df: DataFrame, target_table: str) -> None:
+    """Materialize via a staging table so we never persist() (serverless)."""
     spark = df.sparkSession
+    staging = f"{target_table}_stg"
     (
         df.write.format("delta")
         .mode("overwrite")
         .option("overwriteSchema", "true")
+        .saveAsTable(staging)
+    )
+    (
+        spark.table(staging)
+        .write.format("delta")
+        .mode("overwrite")
+        .option("overwriteSchema", "true")
         .saveAsTable(target_table)
     )
+    spark.sql(f"DROP TABLE IF EXISTS {staging}")
 
 
 def run_uniqueness_checks(
@@ -225,13 +235,6 @@ def run_uniqueness_checks(
     )
     orders_out = flag_duplicate_pk(orders_in, "order_id", FLAG_DUP_ORDER_ID)
 
-    # Persist before overwrite: default path is silver.* → silver.*, and
-    # Spark/Delta can fail if a query still reads the table it overwrites.
-    customers_out = customers_out.persist()
-    orders_out = orders_out.persist()
-    customers_out.count()
-    orders_out.count()
-
     summary_rows = [
         _uniqueness_metrics(
             customers_out, customers_target, "customer_id", FLAG_DUP_CUSTOMER_ID
@@ -243,8 +246,6 @@ def run_uniqueness_checks(
 
     _write_silver(customers_out, customers_target)
     _write_silver(orders_out, orders_target)
-    customers_out.unpersist()
-    orders_out.unpersist()
 
     rows_c_after = spark.table(customers_target).count()
     rows_o_after = spark.table(orders_target).count()

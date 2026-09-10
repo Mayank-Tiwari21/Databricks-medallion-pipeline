@@ -373,29 +373,16 @@ def create_silver_tables(
         business,
     )
 
-    customers_silver = customers_silver.persist()
-    orders_silver = orders_silver.persist()
-    products_silver = products_silver.persist()
-    customers_silver.count()
-    orders_silver.count()
-    products_silver.count()
-
-    metrics_df = build_quality_metrics(
-        spark,
-        {
-            "silver.customers": customers_silver,
-            "silver.orders": orders_silver,
-            "silver.products": products_silver,
-        },
-    )
-    metrics_df = metrics_df.persist()
-    metrics_df.count()
-
+    # Serverless does not support persist()/CACHE. Write Delta first, then
+    # build metrics from the tables so the flag logic is not recomputed.
     print("[silver] writing Delta tables (all rows, including flagged)")
     _write_delta(customers_silver, silver_customers)
     _write_delta(orders_silver, silver_orders)
     _write_delta(products_silver, silver_products)
-    _write_delta(metrics_df, metrics_table)
+
+    customers_silver = spark.table(silver_customers)
+    orders_silver = spark.table(silver_orders)
+    products_silver = spark.table(silver_products)
 
     for n_before, table in (
         (n_c, silver_customers),
@@ -410,12 +397,18 @@ def create_silver_tables(
                 "Silver must not drop rows — investigate."
             )
 
-    customers_silver.unpersist()
-    orders_silver.unpersist()
-    products_silver.unpersist()
+    metrics_df = build_quality_metrics(
+        spark,
+        {
+            "silver.customers": customers_silver,
+            "silver.orders": orders_silver,
+            "silver.products": products_silver,
+        },
+    )
+    print("[silver] writing quality_metrics")
+    _write_delta(metrics_df, metrics_table)
 
-    _print_metrics(metrics_df)
-    metrics_df.unpersist()
+    _print_metrics(spark.table(metrics_table))
     return spark.table(metrics_table)
 
 

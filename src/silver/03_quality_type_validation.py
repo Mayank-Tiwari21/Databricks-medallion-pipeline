@@ -140,13 +140,23 @@ def _print_summary(spark: SparkSession, rows: list[dict]) -> DataFrame:
 
 
 def _write_silver(df: DataFrame, target_table: str) -> None:
+    """Materialize via a staging table so we never persist() (serverless)."""
     spark = df.sparkSession
+    staging = f"{target_table}_stg"
     (
         df.write.format("delta")
         .mode("overwrite")
         .option("overwriteSchema", "true")
+        .saveAsTable(staging)
+    )
+    (
+        spark.table(staging)
+        .write.format("delta")
+        .mode("overwrite")
+        .option("overwriteSchema", "true")
         .saveAsTable(target_table)
     )
+    spark.sql(f"DROP TABLE IF EXISTS {staging}")
 
 
 def run_type_validation_checks(
@@ -161,8 +171,7 @@ def run_type_validation_checks(
     rows_before = orders_in.count()
     print(f"[silver.type] orders rows in = {rows_before:,}")
 
-    orders_out = flag_amount_identity(orders_in).persist()
-    orders_out.count()
+    orders_out = flag_amount_identity(orders_in)
 
     n_failed = orders_out.filter(
         F.array_contains(F.col("quality_check_result"), FLAG_AMOUNT_MISMATCH)
@@ -182,7 +191,6 @@ def run_type_validation_checks(
     ]
 
     _write_silver(orders_out, orders_target)
-    orders_out.unpersist()
 
     rows_after = spark.table(orders_target).count()
     print(f"[silver.type] orders rows out = {rows_after:,}")
