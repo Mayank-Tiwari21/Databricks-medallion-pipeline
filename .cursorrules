@@ -26,6 +26,7 @@ Rules for how you help me:
 9. repo structure:
     databricks-medallion-pipeline/
     ├── README.md
+    ├── RUN_ON_DATABRICKS.md
     ├── candidate-info.md
     ├── tool-workflow.md ├── requirements-analysis.md
     ├── design-notes.md

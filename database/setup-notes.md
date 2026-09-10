@@ -8,6 +8,11 @@ files go on a Unity Catalog volume. Spark then reads:
 /Volumes/workspace/default/ecommerce/<file>.csv
 ```
 
+**Full step-by-step (import, compute, widgets, verify, dashboard, troubleshooting):**
+see [`../RUN_ON_DATABRICKS.md`](../RUN_ON_DATABRICKS.md).
+
+The sections below are the short version of landing + cluster + table checks.
+
 ## 1. Landing CSVs (no DBFS)
 
 From the repo `data/` folder: `customers.csv`, `orders.csv`, `products.csv`.

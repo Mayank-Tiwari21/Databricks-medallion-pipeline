@@ -107,3 +107,42 @@ Expected overall pass (disjoint seeded defects):
 - customers: `10000 - 50 - 20 = 9930` → 99.30%
 - orders: `100000 - 100 - 200 - 40 - 50 - 30 = 99580` → 99.58%
 - products: `500 / 500` → 100%
+
+## How Gold uses these flags
+
+Gold never drops Silver rows itself; it **filters**:
+
+```sql
+WHERE size(quality_check_result) = 0
+```
+
+on every Silver table it reads. A customer with `uniqueness.customer_id_duplicate`
+is excluded entirely (both copies). Their orders still exist in Silver; they
+only enter Gold if the **order** row is clean and the join parent is clean.
+
+Cancelled is a **business filter in Gold**, not a Silver quality token.
+Pending orders stay in Gold revenue.
+
+## Running the checks
+
+`src/run_pipeline.py` runs all five Silver scripts via
+`create_silver_tables.py` after Bronze. On Databricks Free Edition that is the
+supported path (no DBFS; notebooks have no `__file__`).
+
+```sql
+SELECT table_name, check_name, failed_rows, pass_pct
+FROM silver.quality_metrics
+ORDER BY table_name, check_group, check_name;
+```
+
+If `failed_rows` for completeness / uniqueness / RI do not match the table
+above, the generator and Silver have drifted — re-run
+`src/data_generation/generate_sample_data.py` (seeded) and re-ingest.
+
+## Assumptions
+
+- One issue per dirty source row (disjoint injection).
+- Uniqueness flags **all** members of a duplicate PK group.
+- Type and business checks are live tripwires with expected 0 failures.
+- `current_date()` for business-date checks is the **cluster** date, not the
+  laptop date used when CSVs were generated.

@@ -8,8 +8,8 @@ dashboard with three charts and optional filters.
 `src/run_pipeline.py`, which materializes Gold and then `display()`s these
 three queries. You can also run `src/gold/create_gold_tables.py` alone.
 
-**Community Edition:** SQL Warehouses and SQL Dashboards are often **not**
-available. Use the [notebook fallback](#community-edition-notebook-fallback)
+**Free Edition:** SQL Warehouses and SQL Dashboards are often **not**
+available. Use the [notebook fallback](#free-edition-notebook-fallback)
 at the bottom. The field mappings are the same.
 
 ---
@@ -221,7 +221,7 @@ inside a date window from Silver (that would no longer be “Gold tables only”
 
 ---
 
-## Community Edition notebook fallback
+## Free Edition notebook fallback
 
 `src/run_pipeline.py` already `display()`s these three queries after Gold.
 Use the steps below to turn them into a SQL Dashboard (paid workspaces) or

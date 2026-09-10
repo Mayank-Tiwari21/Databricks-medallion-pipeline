@@ -217,3 +217,12 @@ For a bit-identical CSV, re-run on the same date with `SEED = 42`.
 9. Some products may have `stock_quantity < reorder_level` or `stock_quantity = 0` — that is stock state, not a seeded DQ issue.
 10. Duplicate-PK *injection* counts are the mutated rows (10 / 20); Silver uniqueness that flags every row in a duplicate group will see 20 / 40.
 11. Exact clean order count is **99,600**, not ~99,300.
+
+---
+
+## Databricks
+
+Do **not** run this generator on the cluster. Copy the CSVs in `data/` with
+the Git folder. `src/run_pipeline.py` copies them onto
+`/Volumes/workspace/default/ecommerce` (Free Edition has no DBFS).
+See `RUN_ON_DATABRICKS.md`.

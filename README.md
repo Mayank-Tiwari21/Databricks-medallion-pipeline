@@ -2,7 +2,9 @@
 
 Bronze → Silver → Gold → Dashboard pipeline for an e-commerce sales use case.
 
-**Stack:** PySpark, Delta Lake, SQL, Databricks Free Edition.
+**Stack:** PySpark, Delta Lake, SQL, Databricks Free Edition (Unity Catalog; no DBFS).
+
+**How to run:** follow **[RUN_ON_DATABRICKS.md](RUN_ON_DATABRICKS.md)** (step by step).
 
 ## Source data
 
@@ -36,21 +38,31 @@ Bronze → Silver → Gold → Dashboard pipeline for an e-commerce sales use ca
 - [x] Dashboard queries (`src/dashboard/dashboard_queries.sql`)
 - [x] Dashboard guide (`src/dashboard/DASHBOARD_GUIDE.md`)
 - [x] Databricks driver (`src/run_pipeline.py` + `src/databricks_runtime.py`)
+- [x] Databricks Free Edition landing (UC volume, not FileStore)
 - [ ] Gold daily/weekly trends
 
-## Run on Databricks
+## Documentation
 
-1. Generate CSVs locally (`src/data_generation/generate_sample_data.py`) if you need to refresh `data/`.
-2. Import this folder into the Databricks Workspace (Git) **or** upload the three CSVs to volume `workspace.default.ecommerce` (Catalog Explorer). Free Edition has no DBFS.
-3. Open `src/run_pipeline.py`, attach a cluster, and **Run all**.
+| Doc | Contents |
+|---|---|
+| [RUN_ON_DATABRICKS.md](RUN_ON_DATABRICKS.md) | Step-by-step run on Free Edition |
+| [design-notes.md](design-notes.md) | Architecture decisions |
+| [data-model.md](data-model.md) | Bronze / Silver / Gold columns |
+| [data-quality-strategy.md](data-quality-strategy.md) | Flags, tokens, expected counts |
+| [debugging-notes.md](debugging-notes.md) | `__file__`, DBFS, RI vs nulls |
+| [database/setup-notes.md](database/setup-notes.md) | Volume + cluster notes |
+| [src/dashboard/DASHBOARD_GUIDE.md](src/dashboard/DASHBOARD_GUIDE.md) | Chart field mappings |
 
-Widgets (created on first run):
+## Run on Databricks (short)
+
+1. Import this folder into the Workspace so `data/` sits next to `src/`.
+2. Open `src/run_pipeline.py`, attach compute, **Run all**.
+3. Landing CSVs are copied to `/Volumes/workspace/default/ecommerce` (no DBFS).
+4. Confirm counts in `RUN_ON_DATABRICKS.md` step 6.
+
+Widgets:
 
 | Widget | Default | Purpose |
 |---|---|---|
 | `source_dir` | `/Volumes/workspace/default/ecommerce` | UC Volume with the three CSVs |
-| `src_root` | (auto) | Path to this `src/` folder if auto-detect fails |
-
-That single run executes Bronze ingest → Silver flags → Gold tables → the three dashboard `SELECT`s (`display()` / `.display()`).
-
-If the notebook was pasted (no `__file__`) and is not sitting next to `bronze/`, set `src_root` to the Workspace path of `src/`. Details: `database/setup-notes.md`.
+| `src_root` | (auto) | Path to `src/` if auto-detect fails |
