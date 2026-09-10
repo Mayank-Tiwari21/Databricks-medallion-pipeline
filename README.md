@@ -2,7 +2,7 @@
 
 Bronze → Silver → Gold → Dashboard pipeline for an e-commerce sales use case.
 
-**Stack:** PySpark, Delta Lake, SQL, Databricks Community Edition.
+**Stack:** PySpark, Delta Lake, SQL, Databricks Free Edition.
 
 ## Source data
 
@@ -35,4 +35,22 @@ Bronze → Silver → Gold → Dashboard pipeline for an e-commerce sales use ca
 - [x] Gold orchestrator (`src/gold/create_gold_tables.py`)
 - [x] Dashboard queries (`src/dashboard/dashboard_queries.sql`)
 - [x] Dashboard guide (`src/dashboard/DASHBOARD_GUIDE.md`)
+- [x] Databricks driver (`src/run_pipeline.py` + `src/databricks_runtime.py`)
 - [ ] Gold daily/weekly trends
+
+## Run on Databricks
+
+1. Generate CSVs locally (`src/data_generation/generate_sample_data.py`) if you need to refresh `data/`.
+2. Import this folder into the Databricks Workspace (Git) **or** upload the three CSVs to volume `workspace.default.ecommerce` (Catalog Explorer). Free Edition has no DBFS.
+3. Open `src/run_pipeline.py`, attach a cluster, and **Run all**.
+
+Widgets (created on first run):
+
+| Widget | Default | Purpose |
+|---|---|---|
+| `source_dir` | `/Volumes/workspace/default/ecommerce` | UC Volume with the three CSVs |
+| `src_root` | (auto) | Path to this `src/` folder if auto-detect fails |
+
+That single run executes Bronze ingest → Silver flags → Gold tables → the three dashboard `SELECT`s (`display()` / `.display()`).
+
+If the notebook was pasted (no `__file__`) and is not sitting next to `bronze/`, set `src_root` to the Workspace path of `src/`. Details: `database/setup-notes.md`.

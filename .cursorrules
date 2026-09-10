@@ -1,7 +1,7 @@
 You are helping me build a Databricks Medallion Architecture pipeline (Bronze → Silver → Gold →
 Dashboard) for an e-commerce sales use case, as part of an AI-capability exercise.
 
-Stack: PySpark, Delta Lake, SQL, Databricks Community Edition.
+Stack: PySpark, Delta Lake, SQL, Databricks Free Edition.
 
 Source data: customers.csv (10,000 rows), orders.csv (100,000 rows), products.csv (500 rows).
 Schema:
@@ -54,9 +54,11 @@ Rules for how you help me:
     │ │ ├── 03_daily_weekly_trends.sql
     │ │ ├── 04_customer_segmentation.sql
     │ │ └── create_gold_tables.py
-    │ └── dashboard/
-    │ ├── dashboard_queries.sql
-    │ └── DASHBOARD_GUIDE.md
+    │ ├── dashboard/
+    │ │ ├── dashboard_queries.sql
+    │ │ └── DASHBOARD_GUIDE.md
+    │ ├── databricks_runtime.py
+    │ └── run_pipeline.py
     │
     ├── data/
     │ ├── customers.csv

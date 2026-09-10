@@ -42,4 +42,5 @@ SELECT
     (SELECT ROUND(SUM(total_revenue), 2) FROM gold.customer_segmentation) AS gold_segment_revenue,
     (SELECT ROUND(SUM(total_revenue), 2) FROM gold.revenue_by_customer) AS gold_customer_revenue;
 
--- spark.sql() call — statements are split on ;. The script needs __file__ (Repo .py). Not executed here.
+-- These SELECTs also run automatically at the end of src/gold/create_gold_tables.py
+-- (and therefore from src/run_pipeline.py). Paste here only for ad-hoc SQL notebooks.

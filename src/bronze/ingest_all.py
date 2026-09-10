@@ -6,17 +6,24 @@ run. Bronze does not join or validate FKs; the sequence is only so a
 partial success still lands the other dimensions.
 
 Databricks:
-    Set widget `source_dir` to the folder that holds the three CSVs
-    (DBFS / FileStore / Volume).
+    Set widget `source_dir` to the Unity Catalog volume that holds the three
+    CSVs. Databricks Free Edition has no DBFS / FileStore.
 
-    Example:
-        /FileStore/ecommerce
-        /Volumes/main/ecommerce/landing
+    Default:
+        /Volumes/workspace/default/ecommerce
 
-    Notebooks do not define __file__. Either:
+    Catalog Explorer: workspace → default → Create volume `ecommerce` →
+    upload customers.csv, orders.csv, products.csv.
+
+    If this repo's data/ folder is in the Workspace, ingest_all copies those
+    CSVs onto the volume before Spark reads them.
+
+    Preferred: run `src/run_pipeline.py` once. It loads this file from disk
+    (so sibling 01/02/03 scripts resolve without __file__).
+
+    If you paste this file into a notebook instead:
       - run 01/02/03 in earlier cells so ingest_*() already exist, or
-      - set widget `bronze_src_dir` to the folder that contains those .py files
-        (e.g. /Workspace/Users/<you>/.../src/bronze).
+      - set widget `bronze_src_dir` / `src_root` to the Workspace folder.
 """
 
 from __future__ import annotations
@@ -37,7 +44,14 @@ from pyspark.sql.types import (
     StructType,
 )
 
-DEFAULT_SOURCE_DIR = "/FileStore/ecommerce"
+# Repo src/ so `import databricks_runtime` works when this file is run as a .py
+_file_val = globals().get("__file__")
+if _file_val:
+    _src_dir = str(Path(_file_val).resolve().parent.parent)
+    if _src_dir not in sys.path:
+        sys.path.insert(0, _src_dir)
+
+DEFAULT_SOURCE_DIR = "/Volumes/workspace/default/ecommerce"
 
 logger = logging.getLogger("bronze.ingest_all")
 
@@ -99,7 +113,7 @@ def _scripts_dir() -> Path:
     if file_val:
         candidates.append(Path(file_val).resolve().parent)
 
-    widget_dir = _get_param("bronze_src_dir", "")
+    widget_dir = _get_param("bronze_src_dir", "") or _get_param("src_root", "")
     if widget_dir.strip():
         root = Path(widget_dir.strip())
         candidates.extend(
@@ -146,12 +160,20 @@ def _load_sibling(filename: str, module_name: str, function_name: str):
     """Load an ingest module. Names starting with a digit are not importable.
 
     Notebook: if ingest_customers() etc. were defined in an earlier cell, use
-    those. Otherwise import the sibling .py from disk.
+    those. Otherwise import the sibling .py from disk (Databricks-safe via
+    databricks_runtime when the driver injected it).
     """
     main = sys.modules.get("__main__")
     if main is not None and callable(getattr(main, function_name, None)):
         print(f"[bronze] using {function_name}() from the notebook kernel")
         return main
+
+    try:
+        from databricks_runtime import load_py
+
+        return load_py(f"bronze/{filename}", module_name)
+    except Exception:
+        pass
 
     path = _scripts_dir() / filename
     if not path.is_file():
@@ -255,6 +277,24 @@ def _print_summary_table(spark: SparkSession, results: list[dict]) -> None:
 def ingest_all(spark: SparkSession, source_dir: str) -> list[dict]:
     """Run all Bronze ingests. Returns one result dict per table."""
     source_dir = source_dir.rstrip("/")
+    if (
+        source_dir.startswith("/FileStore")
+        or source_dir.startswith("/dbfs")
+        or source_dir.startswith("dbfs:")
+    ):
+        print(f"[bronze] ignoring DBFS path {source_dir!r}")
+        source_dir = DEFAULT_SOURCE_DIR
+    try:
+        from databricks_runtime import src_root, stage_landing_csvs
+
+        src = None
+        try:
+            src = src_root()
+        except Exception:
+            pass
+        source_dir = stage_landing_csvs(spark, source_dir, src)
+    except ImportError:
+        print("[bronze] databricks_runtime not imported; reading source_dir as-is")
     print(f"[bronze] source_dir = {source_dir}")
     print("[bronze] raw ingest only — no cleaning, filtering, or dedupe")
     print("[bronze] per-table failures are logged; remaining tables still run")

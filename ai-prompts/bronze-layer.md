@@ -3,7 +3,7 @@
 ## Prompt 1 (ingest)
 
 Write 01_ingest_customers.py, 02_ingest_orders.py, 03_ingest_products.py for Databricks
-(PySpark). Each should: read the corresponding CSV from a DBFS/volume path (parameterize the path),
+(PySpark). Each should: read the corresponding CSV from a Unity Catalog volume path (parameterize the path),
 infer schema explicitly (define an explicit StructType rather than relying on inferSchema, since
 inferSchema is unreliable on nullable/duplicate-heavy data), write to a Bronze Delta table
 (bronze.customers / bronze.orders / bronze.products) with a `_ingested_at` timestamp and

@@ -6,13 +6,11 @@ The product file is the clean control dimension; we still use an explicit
 schema so types match orders.product_id (IntegerType, not inferred Long).
 
 Databricks (notebook or Repo job):
-    Set widget `source_path` to the CSV (DBFS, FileStore, or Volume).
-    Run this file.
+    Set widget `source_path` to the CSV on a Unity Catalog volume.
+    Databricks Free Edition has no DBFS / FileStore.
 
-Community Edition default:
-    /FileStore/ecommerce/products.csv
-Unity Catalog volume example:
-    /Volumes/main/ecommerce/landing/products.csv
+    Default:
+        /Volumes/workspace/default/ecommerce/products.csv
 """
 
 from pyspark.sql import SparkSession
@@ -46,7 +44,7 @@ PRODUCTS_SCHEMA = StructType(
     ]
 )
 
-DEFAULT_SOURCE_PATH = "/FileStore/ecommerce/products.csv"
+DEFAULT_SOURCE_PATH = "/Volumes/workspace/default/ecommerce/products.csv"
 DEFAULT_TARGET_TABLE = "bronze.products"
 
 

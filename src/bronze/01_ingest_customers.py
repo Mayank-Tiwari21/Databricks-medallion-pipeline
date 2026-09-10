@@ -6,13 +6,11 @@ Null emails and duplicate customer_ids from the generator must survive
 this step so Silver can FLAG them.
 
 Databricks (notebook or Repo job):
-    Set widget `source_path` to the CSV (DBFS, FileStore, or Volume).
-    Run this file.
+    Set widget `source_path` to the CSV on a Unity Catalog volume.
+    Databricks Free Edition has no DBFS / FileStore.
 
-Community Edition default:
-    /FileStore/ecommerce/customers.csv
-Unity Catalog volume example:
-    /Volumes/main/ecommerce/landing/customers.csv
+    Default:
+        /Volumes/workspace/default/ecommerce/customers.csv
 """
 
 from pyspark.sql import SparkSession
@@ -50,7 +48,7 @@ CUSTOMERS_SCHEMA = StructType(
     ]
 )
 
-DEFAULT_SOURCE_PATH = "/FileStore/ecommerce/customers.csv"
+DEFAULT_SOURCE_PATH = "/Volumes/workspace/default/ecommerce/customers.csv"
 DEFAULT_TARGET_TABLE = "bronze.customers"
 
 

@@ -6,13 +6,11 @@ Null FKs, orphan FKs, and duplicate order_ids from the generator must
 survive this step so Silver can FLAG them.
 
 Databricks (notebook or Repo job):
-    Set widget `source_path` to the CSV (DBFS, FileStore, or Volume).
-    Run this file.
+    Set widget `source_path` to the CSV on a Unity Catalog volume.
+    Databricks Free Edition has no DBFS / FileStore.
 
-Community Edition default:
-    /FileStore/ecommerce/orders.csv
-Unity Catalog volume example:
-    /Volumes/main/ecommerce/landing/orders.csv
+    Default:
+        /Volumes/workspace/default/ecommerce/orders.csv
 """
 
 from pyspark.sql import SparkSession
@@ -51,7 +49,7 @@ ORDERS_SCHEMA = StructType(
     ]
 )
 
-DEFAULT_SOURCE_PATH = "/FileStore/ecommerce/orders.csv"
+DEFAULT_SOURCE_PATH = "/Volumes/workspace/default/ecommerce/orders.csv"
 DEFAULT_TARGET_TABLE = "bronze.orders"
 
 

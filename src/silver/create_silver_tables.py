@@ -12,10 +12,10 @@ one `quality_check_result` array), writes:
 ALL rows are preserved, including flagged ones. Gold should filter
 `size(quality_check_result) = 0` rather than this script dropping them.
 
-Databricks:
-    Run after Bronze ingest. Widget overrides for bronze_*/silver_* names.
-
-    SELECT * FROM silver.quality_metrics ORDER BY table_name, check_name;
+    Databricks:
+        Run after Bronze ingest. Widget overrides for bronze_*/silver_* names.
+        Preferred: src/run_pipeline.py (loads this file from disk so 01–05
+        resolve without __file__). Standalone: set widget src_root.
 """
 
 from __future__ import annotations
@@ -146,9 +146,75 @@ def _get_param(name: str, default: str) -> str:
         return default
 
 
+def _scripts_dir() -> Path:
+    """Folder that contains 01_quality_completeness.py (notebook-safe)."""
+    try:
+        from databricks_runtime import layer_dir
+
+        return layer_dir("silver")
+    except Exception:
+        pass
+
+    marker = "01_quality_completeness.py"
+    candidates: list[Path] = []
+
+    file_val = globals().get("__file__")
+    if file_val:
+        candidates.append(Path(file_val).resolve().parent)
+
+    widget_dir = _get_param("src_root", "") or _get_param("silver_src_dir", "")
+    if widget_dir.strip():
+        root = Path(widget_dir.strip())
+        candidates.extend(
+            [
+                root,
+                root / "silver",
+                root / "src" / "silver",
+                root / "databricks-medallion-pipeline" / "src" / "silver",
+            ]
+        )
+
+    cwd = Path.cwd()
+    candidates.extend(
+        [
+            cwd,
+            cwd / "src" / "silver",
+            cwd / "databricks-medallion-pipeline" / "src" / "silver",
+        ]
+    )
+
+    seen: set[Path] = set()
+    for directory in candidates:
+        try:
+            directory = directory.resolve()
+        except OSError:
+            continue
+        if directory in seen:
+            continue
+        seen.add(directory)
+        if (directory / marker).is_file():
+            print(f"[silver] quality scripts dir = {directory}")
+            return directory
+
+    raise FileNotFoundError(
+        "Cannot find src/silver/01_quality_completeness.py. Databricks "
+        "notebooks have no __file__. Run src/run_pipeline.py, or set widget "
+        "src_root to the src folder."
+    )
+
+
 def _load_sibling(filename: str, module_name: str):
     """Load 01_*.py etc. by path — names starting with a digit are not importable."""
-    path = Path(__file__).resolve().parent / filename
+    try:
+        from databricks_runtime import load_py
+
+        return load_py(f"silver/{filename}", module_name)
+    except Exception:
+        pass
+
+    path = _scripts_dir() / filename
+    if not path.is_file():
+        raise FileNotFoundError(f"Quality script not found: {path}")
     spec = importlib.util.spec_from_file_location(module_name, path)
     if spec is None or spec.loader is None:
         raise ImportError(f"Cannot load {path}")

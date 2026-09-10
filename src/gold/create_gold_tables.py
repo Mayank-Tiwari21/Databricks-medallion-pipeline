@@ -9,7 +9,8 @@ Delta tables:
 Each file is executed as Spark SQL (Databricks SQL / Spark SQL). A failure
 in one file is logged; the others still run.
 
-Run after src/silver/create_silver_tables.py.
+Preferred: src/run_pipeline.py. This file no longer depends on __file__
+(notebooks do not set it). Pass sql_dir, or set widget src_root.
 
 03_daily_weekly_trends.sql is not in this pass (not written yet).
 """
@@ -125,6 +126,74 @@ SELECT
 ]
 
 
+def _get_param(name: str, default: str = "") -> str:
+    try:
+        dbutils.widgets.text(name, default)  # noqa: F821
+        return dbutils.widgets.get(name)  # noqa: F821
+    except Exception:
+        return default
+
+
+def _sql_dir(sql_dir: Path | None) -> Path:
+    if sql_dir is not None:
+        return Path(sql_dir)
+
+    try:
+        from databricks_runtime import layer_dir
+
+        return layer_dir("gold")
+    except Exception:
+        pass
+
+    file_val = globals().get("__file__")
+    if file_val:
+        here = Path(file_val).resolve().parent
+        if (here / "01_sales_by_product.sql").is_file():
+            return here
+
+    widget = _get_param("src_root", "") or _get_param("gold_src_dir", "")
+    candidates: list[Path] = []
+    if widget.strip():
+        root = Path(widget.strip())
+        candidates.extend(
+            [
+                root,
+                root / "gold",
+                root / "src" / "gold",
+                root / "databricks-medallion-pipeline" / "src" / "gold",
+            ]
+        )
+    cwd = Path.cwd()
+    candidates.extend(
+        [
+            cwd,
+            cwd / "src" / "gold",
+            cwd / "databricks-medallion-pipeline" / "src" / "gold",
+        ]
+    )
+    for directory in candidates:
+        try:
+            directory = directory.resolve()
+        except OSError:
+            continue
+        if (directory / "01_sales_by_product.sql").is_file():
+            print(f"[gold] sql dir = {directory}")
+            return directory
+
+    raise FileNotFoundError(
+        "Cannot find src/gold/01_sales_by_product.sql. Databricks notebooks "
+        "have no __file__. Run src/run_pipeline.py, or set widget src_root "
+        "to the src folder."
+    )
+
+
+def _display_or_show(df) -> None:
+    if hasattr(df, "display"):
+        df.display()
+        return
+    df.show(truncate=False)
+
+
 def _sql_statements(script: str) -> list[str]:
     """Split a .sql file into Spark SQL statements.
 
@@ -152,8 +221,12 @@ def _run_sql_file(spark: SparkSession, path: Path) -> None:
         spark.sql(stmt)
 
 
-def create_gold_tables(spark: SparkSession) -> None:
-    sql_dir = Path(__file__).resolve().parent
+def create_gold_tables(
+    spark: SparkSession,
+    sql_dir: Path | str | None = None,
+) -> None:
+    sql_dir = _sql_dir(Path(sql_dir) if sql_dir is not None else None)
+    print(f"[gold] sql_dir = {sql_dir}")
     spark.sql("CREATE DATABASE IF NOT EXISTS gold")
 
     results: list[tuple] = []
@@ -186,13 +259,20 @@ def create_gold_tables(spark: SparkSession) -> None:
 
     print()
     print("=" * 72)
-    print("Spot-check queries (run manually in a SQL notebook)")
+    print("Spot-check queries (executed against Gold + Silver)")
     print("=" * 72)
     for check in SPOT_CHECK_QUERIES:
         print()
         print(check["title"])
-        print(check["sql"].strip())
-        print()
+        statements = _sql_statements(check["sql"])
+        if not statements:
+            print(check["sql"].strip())
+            continue
+        try:
+            _display_or_show(spark.sql(statements[0]))
+        except Exception as exc:
+            print(f"[gold] spot-check failed: {type(exc).__name__}: {exc}")
+            print(check["sql"].strip())
 
 
 if __name__ == "__main__":

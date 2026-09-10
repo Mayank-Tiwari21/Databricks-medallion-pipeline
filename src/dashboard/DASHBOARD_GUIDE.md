@@ -4,8 +4,9 @@ How to turn `src/dashboard/dashboard_queries.sql` into a Databricks SQL
 dashboard with three charts and optional filters.
 
 **Prerequisite:** Gold tables exist (`gold.sales_by_product`,
-`gold.revenue_by_customer`, `gold.customer_segmentation`). Run
-`src/gold/create_gold_tables.py` first.
+`gold.revenue_by_customer`, `gold.customer_segmentation`). Prefer
+`src/run_pipeline.py`, which materializes Gold and then `display()`s these
+three queries. You can also run `src/gold/create_gold_tables.py` alone.
 
 **Community Edition:** SQL Warehouses and SQL Dashboards are often **not**
 available. Use the [notebook fallback](#community-edition-notebook-fallback)
@@ -221,6 +222,10 @@ inside a date window from Silver (that would no longer be “Gold tables only”
 ---
 
 ## Community Edition notebook fallback
+
+`src/run_pipeline.py` already `display()`s these three queries after Gold.
+Use the steps below to turn them into a SQL Dashboard (paid workspaces) or
+to re-chart them in extra notebook cells.
 
 1. In a notebook attached to the cluster:
 
